@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SerwisKomputerowy.Backend.DB;
+using SerwisKomputerowy.Backend.Repositories;
+using SerwisKomputerowy.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -31,3 +36,11 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+public class ProductService
+{
+}
+
+public interface IProductService
+{
+}
