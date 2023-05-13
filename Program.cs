@@ -1,12 +1,35 @@
 using Microsoft.EntityFrameworkCore;
 using SerwisKomputerowy.Backend.DB;
+using SerwisKomputerowy.Backend.Repositories;
+using SerwisKomputerowy.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Database connection
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
+// Unit of Work
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// Repositories
+builder.Services.AddScoped<IActionRepository, ActionRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+builder.Services.AddScoped<IPartRepository, PartRepository>();
+builder.Services.AddScoped<IRepairRepository, RepairRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+// Services
+builder.Services.AddScoped<IActionService, ActionService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IPartService, PartService>();
+builder.Services.AddScoped<IRepairService, RepairService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWorkerService, WorkerService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -31,3 +54,11 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
+public class ProductService
+{
+}
+
+public interface IProductService
+{
+}

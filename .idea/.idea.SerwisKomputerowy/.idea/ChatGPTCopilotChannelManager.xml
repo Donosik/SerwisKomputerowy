@@ -11,7 +11,18 @@
     <chatChannels>
       <chatChannel>
         <option name="model" value="gpt-3.5-turbo" />
-        <option name="messages" />
+        <option name="messages">
+          <Message>
+            <option name="content" value="Klasa kontrolera w c# dla usera z wykorzystaniem Unit of Work i repository pattern" />
+            <option name="id" value="1683925530923" />
+            <option name="role" value="user" />
+          </Message>
+          <Message>
+            <option name="content" value="Poniżej przedstawiam przykładową klasę kontrolera w C#, która obsługuje dane użytkownika oraz wykorzystuje wzorzec Unit of Work i Repository Pattern do komunikacji z bazą danych.&#10;&#10;```csharp&#10;public class UserController : Controller&#10;{&#10;    private readonly IUnitOfWork _unitOfWork;&#10;    &#10;    public UserController(IUnitOfWork unitOfWork)&#10;    {&#10;        _unitOfWork = unitOfWork;&#10;    }&#10;    &#10;    [HttpGet]&#10;    public IActionResult Index()&#10;    {&#10;        var users = _unitOfWork.Users.GetAll();&#10;        return View(users);&#10;    }&#10;    &#10;    [HttpGet]&#10;    public IActionResult Create()&#10;    {&#10;        var user = new User();&#10;        return View(user);&#10;    }&#10;    &#10;    [HttpPost]&#10;    public IActionResult Create(User user)&#10;    {&#10;        if (ModelState.IsValid)&#10;        {&#10;            _unitOfWork.Users.Add(user);&#10;            _unitOfWork.Commit();&#10;            &#10;            return RedirectToAction(nameof(Index));&#10;        }&#10;        return View(user);&#10;    }&#10;    &#10;    [HttpGet]&#10;    public IActionResult Edit(int id)&#10;    {&#10;        var user = _unitOfWork.Users.Get(id);&#10;        return View(user);&#10;    }&#10;    &#10;    [HttpPost]&#10;    public IActionResult Edit(User user)&#10;    {&#10;        if (ModelState.IsValid)&#10;        {&#10;            _unitOfWork.Users.Update(user);&#10;            _unitOfWork.Commit();&#10;            &#10;            return RedirectToAction(nameof(Index));&#10;        }&#10;        return View(user);&#10;    }&#10;    &#10;    [HttpPost]&#10;    public IActionResult Delete(int id)&#10;    {&#10;        _unitOfWork.Users.Delete(id);&#10;        _unitOfWork.Commit();&#10;        &#10;        return RedirectToAction(nameof(Index));&#10;    }&#10;}&#10;```&#10;&#10;W powyższym kodzie `UserController` obsługuje akcje związane z użytkownikami, takie jak wyświetlanie listy użytkowników, tworzenie, edycja i usuwanie użytkowników. Konstruktor kontrolera przyjmuje interfejs `IUnitOfWork`, który reprezentuje jednostkę pracy (Unit of Work) i jest odpowiedzialny za przetwarzanie wielu zadań związanych z bazą danych (np. pobieranie i zapisywanie danych).&#10;&#10;W akcji `Index` kontroler pobiera listę wszystkich użytkowników z repozytorium `Users` znajdującego się w jednostce pracy `unitOfWork` i zwraca je jako widok. W akcjach `Create` i `Edit`, kontroler tworzy nowy obiekt `User` i przekazuje go do widoku, a następnie obsługuje żądania POST, aby dodać lub zaktualizować dane użytkownika w bazie danych. Akcja `Delete` usuwa użytkownika z bazy danych i przekierowuje do widoku listy użytkowników.&#10;&#10;Dzięki wykorzystaniu Unit of Work i Repository Pattern kontroler może łatwo korzystać z różnych źródeł danych, np. bazy danych, plików lub usługi sieciowe, a jednocześnie zapewnić jednolite API do przetwarzania danych." />
+            <option name="id" value="1683925531125" />
+            <option name="role" value="assistant" />
+          </Message>
+        </option>
       </chatChannel>
     </chatChannels>
   </component>

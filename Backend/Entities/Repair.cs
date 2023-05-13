@@ -1,4 +1,6 @@
-﻿namespace SerwisKomputerowy.Backend.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SerwisKomputerowy.Backend.Entities;
 
 //TODO: Napisać rodzaje napraw
 public enum RepairType
@@ -16,7 +18,7 @@ public enum Status
 
 public class Repair
 {
-    public int Id { get; set; }
+    [Key] public int Id { get; set; }
     public RepairType Type { get; set; }
     public bool IsGuarantee { get; set; }
     public DateTime GuaranteeTime { get; set; }
@@ -28,4 +30,19 @@ public class Repair
     public List<Part> Parts { get; set; }
     public Equipment Equipment { get; set; }
     public List<Action> Actions { get; set; }
+
+    public Repair Update(Repair repair)
+    {
+        this.Type = repair.Type;
+        this.IsGuarantee = repair.IsGuarantee;
+        this.AcceptanceTime = repair.AcceptanceTime;
+        this.ReturnTime = repair.ReturnTime;
+        this.Status = repair.Status;
+        this.Client = repair.Client;
+        this.Messages = repair.Messages;
+        this.Parts = repair.Parts;
+        this.Equipment = repair.Equipment;
+        this.Actions = repair.Actions;
+        return this;
+    }
 }
