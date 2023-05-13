@@ -9,14 +9,28 @@ namespace SerwisKomputerowy.Controllers;
 [Route("[controller]")]
 public class TestController : ControllerBase
 {
+    public readonly IActionService actionService;
+    public readonly IClientService clientService;
+    public readonly IEquipmentService equipmentService;
+    public readonly IMessageService messageService;
+    public readonly IPartService partService;
+    public readonly IRepairService repairService;
     public readonly IUserService userService;
+    public readonly IWorkerService workerService;
 
-    public TestController(IUserService userService)
+    public TestController(IActionService actionService,IClientService clientService,IEquipmentService equipmentService,IMessageService messageService,IPartService partService,IRepairService repairService,IUserService userService,IWorkerService workerService)
     {
+        this.actionService = actionService;
+        this.clientService = clientService;
+        this.equipmentService = equipmentService;
+        this.messageService = messageService;
+        this.partService = partService;
+        this.repairService = repairService;
         this.userService = userService;
+        this.workerService = workerService;
     }
 
-    [HttpGet] 
+    [HttpPost("/user")] 
     public IActionResult Get()
     {
         User user = new User();

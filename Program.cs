@@ -22,7 +22,14 @@ builder.Services.AddScoped<IRepairRepository, RepairRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 // Services
+builder.Services.AddScoped<IActionService, ActionService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddScoped<IPartService, PartService>();
+builder.Services.AddScoped<IRepairService, RepairService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWorkerService, WorkerService>();
 
 builder.Services.AddControllersWithViews();
 
