@@ -38,8 +38,6 @@ public class UserService : IUserService
             int result = unitOfWork.Save();
             if (result > 0)
                 return true;
-            else
-                return false;
         }
 
         return false;
@@ -60,11 +58,6 @@ public class UserService : IUserService
                 int result = unitOfWork.Save();
                 if (result > 0)
                     return true;
-                else
-                    return false;
-            }
-            else
-            {
             }
         }
 
@@ -75,15 +68,13 @@ public class UserService : IUserService
     {
         if (id > 0)
         {
-            var user = unitOfWork.users.Get(id);
+            User user = unitOfWork.users.Get(id);
             if (user != null)
             {
                 unitOfWork.users.Delete(user);
                 int result = unitOfWork.Save();
                 if (result > 0)
                     return true;
-                else
-                    return false;
             }
         }
 
