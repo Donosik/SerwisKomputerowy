@@ -50,9 +50,7 @@ public class ActionService : IActionService
             Action oldAction = unitOfWork.actions.Get(action.Id);
             if (oldAction != null)
             {
-                oldAction.Description = action.Description;
-                oldAction.Repair = action.Repair;
-                oldAction.Worker = action.Worker;
+                oldAction.Update(action);
                 unitOfWork.actions.Update(oldAction);
                 int result = unitOfWork.Save();
                 if (result > 0)

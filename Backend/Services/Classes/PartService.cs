@@ -3,38 +3,37 @@ using SerwisKomputerowy.Backend.Repositories;
 
 namespace SerwisKomputerowy.Backend.Services;
 
-public class UserService : IUserService
+public class PartService : IPartService
 {
     public IUnitOfWork unitOfWork;
 
-    public UserService(IUnitOfWork unitOfWork)
+    public PartService(IUnitOfWork unitOfWork)
     {
         this.unitOfWork = unitOfWork;
     }
-
-    public IEnumerable<User> GetUsers()
+    public IEnumerable<Part> GetParts()
     {
-        IEnumerable<User> users = unitOfWork.users.GetAll();
-        return users;
+        IEnumerable<Part> parts = unitOfWork.parts.GetAll();
+        return parts;
     }
 
-    public User GetUser(int id)
+    public Part GetPart(int id)
     {
         if (id > 0)
         {
-            User user = unitOfWork.users.Get(id);
-            if (user != null)
-                return user;
+            Part part = unitOfWork.parts.Get(id);
+            if (part != null)
+                return part;
         }
 
         return null;
     }
 
-    public bool CreateUser(User user)
+    public bool CreatePart(Part part)
     {
-        if (user != null)
+        if (part != null)
         {
-            unitOfWork.users.Create(user);
+            unitOfWork.parts.Create(part);
             int result = unitOfWork.Save();
             if (result > 0)
                 return true;
@@ -43,15 +42,15 @@ public class UserService : IUserService
         return false;
     }
 
-    public bool EditUser(User user)
+    public bool EditPart(Part part)
     {
-        if (user != null)
+        if (part != null)
         {
-            User oldUser = unitOfWork.users.Get(user.Id);
-            if (oldUser != null)
+            Part oldPart = unitOfWork.parts.Get(part.SerialNumber);
+            if (oldPart != null)
             {
-                oldUser.Update(user);
-                unitOfWork.users.Update(oldUser);
+                oldPart.Update(part);
+                unitOfWork.parts.Update(oldPart);
                 int result = unitOfWork.Save();
                 if (result > 0)
                     return true;
@@ -61,14 +60,14 @@ public class UserService : IUserService
         return false;
     }
 
-    public bool DeleteUser(int id)
+    public bool DeletePart(int id)
     {
         if (id > 0)
         {
-            User user = unitOfWork.users.Get(id);
-            if (user != null)
+            Part part = unitOfWork.parts.Get(id);
+            if (part != null)
             {
-                unitOfWork.users.Delete(user);
+                unitOfWork.parts.Delete(part);
                 int result = unitOfWork.Save();
                 if (result > 0)
                     return true;

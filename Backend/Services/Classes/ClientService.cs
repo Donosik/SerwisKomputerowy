@@ -50,10 +50,7 @@ public class ClientService : IClientService
             Client oldClient = unitOfWork.clients.Get(client.Id);
             if (oldClient != null)
             {
-                oldClient.FirstName = client.FirstName;
-                oldClient.LastName = client.LastName;
-                oldClient.User = client.User;
-                oldClient.Repairs = client.Repairs;
+                oldClient.Update(client);
                 unitOfWork.clients.Update(oldClient);
                 int result = unitOfWork.Save();
                 if (result > 0)
