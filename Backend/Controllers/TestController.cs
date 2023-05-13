@@ -16,7 +16,7 @@ public class TestController : ControllerBase
         this.userService = userService;
     }
 
-    [HttpGet]
+    [HttpGet] 
     public IActionResult Get()
     {
         User user = new User();
