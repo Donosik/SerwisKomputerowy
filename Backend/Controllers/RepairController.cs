@@ -33,6 +33,16 @@ public class RepairController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("{id}/messages")]
+    public IActionResult GetMessagesOfRepair(int id)
+    {
+        IEnumerable<Message> messages = repairService.GetMessagesOfRepair(id);
+        if (messages != null)
+            return Ok(messages);
+        
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreateRepair(Repair repair)
     {

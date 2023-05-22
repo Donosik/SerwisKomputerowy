@@ -29,6 +29,12 @@ public class RepairService : IRepairService
 
         return null;
     }
+    
+    public IEnumerable<Message> GetMessagesOfRepair(int id)
+    {
+        IEnumerable<Message> messages = unitOfWork.repairs.GetMessages(id);
+        return messages;
+    }
 
     public bool CreateRepair(Repair repair)
     {
