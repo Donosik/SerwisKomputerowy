@@ -36,6 +36,16 @@ public class UserController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("{id}/messages")]
+    public IActionResult GetMessagesOfUser(int id)
+    {
+        IEnumerable<Message> messages = userService.GetMessagesOfUser(id);
+        if (messages != null)
+            return Ok(messages);
+        
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreateUser(User user)
     {

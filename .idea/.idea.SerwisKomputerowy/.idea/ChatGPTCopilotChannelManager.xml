@@ -24,6 +24,21 @@
           </Message>
         </option>
       </chatChannel>
+      <chatChannel>
+        <option name="model" value="gpt-3.5-turbo" />
+        <option name="messages">
+          <Message>
+            <option name="content" value="W entity framework jak zwrócić tylko jedną zmienną encji zamiast wszystkich?" />
+            <option name="id" value="1684792493523" />
+            <option name="role" value="user" />
+          </Message>
+          <Message>
+            <option name="content" value="Aby zwrócić tylko jedną zmienną encji zamiast wszystkich w Entity Framework, można użyć metody Select() i wybrać tylko potrzebną zmienną. Na przykład, jeśli chcemy zwrócić tylko imię użytkownika, można zrobić to w ten sposób:&#10;&#10;```&#10;var user = dbContext.Users&#10;    .Where(u =&gt; u.Id == userId)&#10;    .Select(u =&gt; u.FirstName)&#10;    .SingleOrDefault();&#10;```&#10;&#10;W tym przypadku metoda Select() wybiera tylko zmienną FirstName z encji Users, a metoda SingleOrDefault() zwraca tylko jedno imię użytkownika, który pasuje do określonego identyfikatora użytkownika." />
+            <option name="id" value="1684792493729" />
+            <option name="role" value="assistant" />
+          </Message>
+        </option>
+      </chatChannel>
     </chatChannels>
   </component>
 </project>

@@ -30,6 +30,12 @@ public class UserService : IUserService
         return null;
     }
 
+    public IEnumerable<Message> GetMessagesOfUser(int id)
+    {
+        IEnumerable<Message> messages = unitOfWork.users.GetMessages(id);
+        return messages;
+    }
+
     public bool CreateUser(User user)
     {
         if (user != null)
