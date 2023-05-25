@@ -230,3 +230,13 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/.idea/.idea.SerwisKomputerowy/.idea/efCoreCommonOptions.xml
+/.idea/.idea.SerwisKomputerowy/.idea/efCoreDialogsState.xml
+/.idea/.idea.SerwisKomputerowy/.idea/vcs.xml
+/.idea/config/applicationhost.config
+/Migrations/20230513073317_Initial.cs
+/Migrations/20230513073317_Initial.Designer.cs
+/Migrations/DatabaseContextModelSnapshot.cs
+/skryptyBazy.txt
+/TAB.drawio
+/Migrations/
