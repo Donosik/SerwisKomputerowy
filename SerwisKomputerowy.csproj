@@ -34,6 +34,7 @@
     <ItemGroup>
       <Folder Include="Backend\DB\" />
       <Folder Include="Backend\Entities\" />
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
