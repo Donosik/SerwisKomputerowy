@@ -30,7 +30,7 @@ public class TestController : ControllerBase
         this.workerService = workerService;
     }
 
-    [HttpPost("/user")] 
+    [HttpPost("/usertest")] 
     public IActionResult Get()
     {
         User user = new User();
