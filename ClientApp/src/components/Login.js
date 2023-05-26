@@ -34,11 +34,14 @@ const handleSubmit = (login, password) => {
 export function Login() {
     return (
         <>
+           
             <div className="auth-page">
+                <div className="navBar">
+                <h1 className="text-welcome">KompuTralala.pl</h1>
+                </div>
                 <div className="container page d-flex justify-content-center align-items-center min-vh-100">
                     <div className="row">
                         <div className="login-box">
-                            <h1 className="text-login">SERWIS XYZ</h1>
                             <h2 className="text-login">LOGOWANIE</h2>
                             <form onSubmit={handleSubmit}>
                                 <fieldset>
@@ -51,7 +54,7 @@ export function Login() {
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <input
-                                            placeholder="Password"
+                                            placeholder="Hasło"
                                             className="form-control form-control-lg"
                                             type="password"/>
                                     </fieldset>
