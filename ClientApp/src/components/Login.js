@@ -37,7 +37,7 @@ export function Login() {
            
             <div className="auth-page">
                 <div className="navBar">
-                <h1 className="text-welcome">KompuTralala.pl</h1>
+                <h1 className="text-welcome">WWW.KOMPUTEROWO.PL</h1>
                 </div>
                 <div className="container page d-flex justify-content-center align-items-center min-vh-100">
                     <div className="row">
