@@ -32,11 +32,11 @@ public class TestController : ControllerBase
         this.workerService = workerService;
     }
 
-    [HttpPost("/usertest")] 
+    [HttpGet] 
     public IActionResult Get()
     {
         User user = new User();
-        user.Login = "lg";
+        user.Login = "log";
         user.Password = "123";
         user.Role = Role.User;
         user.Messages = null;
