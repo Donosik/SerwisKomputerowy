@@ -87,7 +87,7 @@
         cursor: pointer;
         background-color: #FA9884;
         letter-spacing: 5px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+        /*box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;*/
     }
     /*może jakoś ciekawie będzie się to dało wykorzystać*/
 /*@media screen and (max-width: 1000px){
