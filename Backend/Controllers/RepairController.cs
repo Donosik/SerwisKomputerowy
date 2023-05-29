@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
 
 namespace SerwisKomputerowy.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class RepairController : ControllerBase

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Services;
 using Action = SerwisKomputerowy.Backend.Entities.Action;
 
 namespace SerwisKomputerowy.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class ActionController : ControllerBase

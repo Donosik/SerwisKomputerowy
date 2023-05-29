@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
 
 namespace SerwisKomputerowy.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
