@@ -35,7 +35,6 @@
 
     <ItemGroup>
       <Folder Include="Backend\DB\" />
-      <Folder Include="Backend\Entities\" />
       <Folder Include="Migrations\" />
     </ItemGroup>
 

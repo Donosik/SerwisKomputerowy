@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Database connection
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase")));
+builder.Services.AddHttpContextAccessor();
 // Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Repositories

@@ -1,19 +1,40 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
 
 namespace SerwisKomputerowy.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    public readonly IUserService userService;
+    private readonly IUserService userService;
 
     public UserController(IUserService userService)
     {
         this.userService = userService;
+    }
+    
+    [AllowAnonymous]
+    [HttpPost("Register")]
+    public IActionResult Register(RegisterUser registerUser)
+    {
+        if (userService.Register(registerUser))
+            return Ok();
+        return BadRequest();
+    }
+
+    [AllowAnonymous]
+    [HttpPost("Login")]
+    public IActionResult Login(LoginUser loginUser)
+    {
+        User user = userService.Login(loginUser);
+        if (user!=null)
+            return Ok(userService.GenerateJwtToken(user));
+        return NotFound();
     }
 
     [HttpGet]
@@ -42,7 +63,7 @@ public class UserController : ControllerBase
         IEnumerable<Message> messages = userService.GetMessagesOfUser(id);
         if (messages != null)
             return Ok(messages);
-        
+
         return NotFound();
     }
 
