@@ -2,7 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login"
-import {Naprawy} from "./components/Naprawy";
+import {Repair} from "./components/Repair";
 
 
 const AppRoutes = [
@@ -24,7 +24,7 @@ const AppRoutes = [
   },
   {
     path: '/naprawy',
-    element: <Naprawy/>
+    element: <Repair/>
   }
 ];
 

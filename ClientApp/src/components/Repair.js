@@ -1,18 +1,16 @@
 ﻿import {NavMenu} from "./NavMenu";
 import {useState} from "react";
-import "./naprawy.css"
+import "./repair.css"
 
-export function Naprawy()
+export function Repair()
 {
     const [renderBool,setRenderBool]=useState(true)
     function szukajHandler()
     {
-        console.log("szukaj")
         setRenderBool(true)
     }
     function dodajHandler()
     {
-        console.log("dodaj")
         setRenderBool(false)
     }
     
@@ -36,7 +34,6 @@ function SzukajRender()
 {
     return(
         <>
-          
             <div>
                 <form>
                     <label>
