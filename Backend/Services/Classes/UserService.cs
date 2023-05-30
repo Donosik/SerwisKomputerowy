@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -24,8 +25,8 @@ public class UserService : IUserService
     public bool Register(RegisterUser registerUser)
     {
         User user = new User();
-        user.Login = registerUser.login;
-        user.Password = registerUser.password;
+        user.Login = registerUser.Login;
+        user.Password = registerUser.Password;
         return CreateUser(user);
     }
 
@@ -33,7 +34,7 @@ public class UserService : IUserService
     {
         foreach (User user in GetUsers())
         {
-            if ((user.Login == loginUser.login) && (user.Password == loginUser.password))
+            if ((user.Login == loginUser.Login) && (user.Password == loginUser.Password))
             {
                 return user;
             }
@@ -51,8 +52,7 @@ public class UserService : IUserService
 
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(ClaimTypes.Name, user.Id.ToString())
         };
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -67,24 +67,6 @@ public class UserService : IUserService
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
-    }
-
-    public User GetCurrentUser()
-    {
-        if (httpContextAccessor.HttpContext != null)
-        {
-            try
-            {
-                User user = GetUser(Int32.Parse(ClaimTypes.Name));
-                return user;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
-
-        return null;
     }
 
     public IEnumerable<User> GetUsers()

@@ -34,6 +34,7 @@ builder.Services.AddScoped<IPartService, PartService>();
 builder.Services.AddScoped<IRepairService, RepairService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
+builder.Services.AddScoped<IIdentityService,IdentityService>();
 //Autenthentication
 builder.Services.AddAuthentication(x =>
 {

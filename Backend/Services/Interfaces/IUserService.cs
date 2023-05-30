@@ -4,14 +4,14 @@ namespace SerwisKomputerowy.Backend.Services;
 
 public class RegisterUser
 {
-    public string login;
-    public string password;
+    public required string Login { get; set; }
+    public required string Password { get; set; }
 }
 
 public class LoginUser
 {
-    public string login;
-    public string password;
+    public required string Login { get; set; }
+    public required string Password { get; set; }
 }
 
 public interface IUserService
@@ -19,7 +19,6 @@ public interface IUserService
     bool Register(RegisterUser registerUser);
     User Login(LoginUser loginUser);
     string GenerateJwtToken(User user);
-    public User GetCurrentUser();
     IEnumerable<User> GetUsers();
     User GetUser(int id);
     IEnumerable<Message> GetMessagesOfUser(int id);

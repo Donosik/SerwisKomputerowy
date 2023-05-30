@@ -12,10 +12,12 @@ namespace SerwisKomputerowy.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService userService;
-
-    public UserController(IUserService userService)
+    private readonly IIdentityService identityService;
+    
+    public UserController(IUserService userService,IIdentityService identityService)
     {
         this.userService = userService;
+        this.identityService = identityService;
     }
     
     [AllowAnonymous]
@@ -34,7 +36,7 @@ public class UserController : ControllerBase
         User user = userService.Login(loginUser);
         if (user!=null)
             return Ok(userService.GenerateJwtToken(user));
-        return NotFound();
+        return NotFound(loginUser);
     }
 
     [HttpGet]
@@ -44,6 +46,16 @@ public class UserController : ControllerBase
         if (users != null)
             return Ok(users);
 
+        return NotFound();
+    }
+
+    //TODO: Testowy
+    [HttpGet("me")]
+    public IActionResult GetMe()
+    {
+        User user = identityService.GetCurrentUser();
+        if (user != null)
+            return Ok(user);
         return NotFound();
     }
 
