@@ -34,6 +34,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="ClientApp\src\components\NewFile.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="Backend\DB\" />
       <Folder Include="Migrations\" />
     </ItemGroup>

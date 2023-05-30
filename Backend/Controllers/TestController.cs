@@ -19,8 +19,11 @@ public class TestController : ControllerBase
     public readonly IRepairService repairService;
     public readonly IUserService userService;
     public readonly IWorkerService workerService;
+    private readonly IIdentityService identityService;
 
-    public TestController(IActionService actionService,IClientService clientService,IEquipmentService equipmentService,IMessageService messageService,IPartService partService,IRepairService repairService,IUserService userService,IWorkerService workerService)
+    public TestController(IActionService actionService, IClientService clientService,
+        IEquipmentService equipmentService, IMessageService messageService, IPartService partService,
+        IRepairService repairService, IUserService userService, IWorkerService workerService,IIdentityService identityService)
     {
         this.actionService = actionService;
         this.clientService = clientService;
@@ -30,10 +33,11 @@ public class TestController : ControllerBase
         this.repairService = repairService;
         this.userService = userService;
         this.workerService = workerService;
+        this.identityService = identityService;
     }
 
-    [HttpGet] 
-    public IActionResult Get()
+    [HttpGet("user")]
+    public IActionResult NewUser()
     {
         User user = new User();
         user.Login = "log";
@@ -44,4 +48,39 @@ public class TestController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("eq")]
+    public IActionResult NewEquipment()
+    {
+        Equipment equipment = new Equipment();
+        equipment.Type = "Typ";
+        equipment.Name = "Nazwa";
+        equipment.ProductionDate=DateTime.Now;
+        equipmentService.CreateEquipment(equipment);
+        return Ok();
+    }
+
+    [HttpGet("repair")]
+    public IActionResult NewRepair()
+    {
+        Repair repair = new Repair();
+        repair.Type = RepairType.Zwykla;
+        repair.IsGuarantee = true;
+        repair.GuaranteeTime=DateTime.Now;
+        repair.AcceptanceTime=DateTime.Now;
+        repair.ReturnTime = DateTime.Now;
+        repair.Status = Status.Skonoczone;
+        repair.Equipment = equipmentService.GetEquipment(1);
+        repairService.CreateRepair(repair);
+        equipmentService.GetEquipment(1).Repairs.Add(repair);
+        equipmentService.EditEquipment(equipmentService.GetEquipment(1));
+        return Ok();
+    }
+
+    [HttpGet]
+    public IActionResult Test()
+    {
+        return Ok(repairService.GetRepair(4).Equipment);
+    }
 }
+

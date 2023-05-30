@@ -11,9 +11,6 @@ const setAuthToken = token => {
         delete axios.defaults.headers.common["Authorization"];
 }
 
-//TODO: endpoint dla tego axiosa
-
-
 export function Login() {
 
     const [login, setLogin] = useState('');
@@ -26,6 +23,9 @@ export function Login() {
             const response = await axios.post('/user/login', { login, password })
             const token = response.data
             console.log(token)
+
+            localStorage.setItem("token", token)
+            
             
         } catch (error) {
             console.log(error)
