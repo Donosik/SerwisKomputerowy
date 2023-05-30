@@ -1,4 +1,5 @@
 ﻿import axios from "axios"
+import { useState } from "react"
 
 import "./login.css"
 
@@ -11,27 +12,27 @@ const setAuthToken = token => {
 }
 
 //TODO: endpoint dla tego axiosa
-const handleSubmit = (login, password) => {
-    const loginPayload = {
-        login: "admin",
-        password: "123"
-    }
 
-    axios.post("/user", loginPayload)
-        .then(response => {
-            const token = response.data.token;
-
-            localStorage.setItem("token", token)
-
-            setAuthToken(token)
-            console.log(token)
-            console.log("DHUIDHAWOUIDAWFD")
-
-            window.location.href = "/"
-        }).catch(console.log("duhiafbae"))
-}
 
 export function Login() {
+
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const response = await axios.post('/user/login', { login, password })
+            const token = response.data
+            console.log(token)
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    
     return (
         <>
            
@@ -43,24 +44,29 @@ export function Login() {
                     <div className="row">
                         <div className="login-box">
                             <h2 className="text-login">LOGOWANIE</h2>
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <fieldset>
                                     <fieldset className="form-group">
                                         <input
                                             placeholder="Login"
                                             className="form-control form-control-lg"
                                             type="text"
+                                            value={ login }
+                                            onChange={ e => setLogin(e.target.value) }
                                         />
                                     </fieldset>
                                     <fieldset className="form-group">
-                                        <input
+                                        <input   
                                             placeholder="Hasło"
                                             className="form-control form-control-lg"
-                                            type="password"/>
+                                            type="password"
+                                            value={ password }
+                                            onChange={e => setPassword(e.target.value)}
+                                        />
                                     </fieldset>
 
                                     <div className="d-flex justify-content-center align-items-center">
-                                        <button className="button-login btn btn-lg pull-xs-right" type="submit">
+                                        <button className="button-login btn btn-lg pull-xs-right" onClick={handleSubmit}>
                                             Zaloguj
                                         </button>
 
