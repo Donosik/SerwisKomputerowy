@@ -6,7 +6,6 @@ using SerwisKomputerowy.Backend.Services;
 
 namespace SerwisKomputerowy.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
@@ -80,7 +79,7 @@ public class TestController : ControllerBase
     [HttpGet]
     public IActionResult Test()
     {
-        return Ok(repairService.GetRepair(4).Equipment);
+        return Ok(repairService.GetRepair(1).Equipment);
     }
 }
 

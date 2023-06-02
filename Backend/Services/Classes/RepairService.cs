@@ -1,4 +1,5 @@
-﻿using SerwisKomputerowy.Backend.Entities;
+﻿using System.Collections;
+using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Repositories;
 
 namespace SerwisKomputerowy.Backend.Services;
@@ -11,7 +12,7 @@ public class RepairService : IRepairService
     {
         this.unitOfWork = unitOfWork;
     }
-    
+
     public IEnumerable<Repair> GetRepairs()
     {
         IEnumerable<Repair> repairs = unitOfWork.repairs.GetAll();
@@ -28,12 +29,6 @@ public class RepairService : IRepairService
         }
 
         return null;
-    }
-    
-    public IEnumerable<Message> GetMessagesOfRepair(int id)
-    {
-        IEnumerable<Message> messages = unitOfWork.repairs.GetMessages(id);
-        return messages;
     }
 
     public bool CreateRepair(Repair repair)
@@ -82,5 +77,17 @@ public class RepairService : IRepairService
         }
 
         return false;
+    }
+
+    public IEnumerable<Repair> GetRepairsForTable()
+    {
+        IEnumerable<Repair> repairs = unitOfWork.repairs.GetRepairsForTable();
+        return repairs;
+    }
+    
+    public IEnumerable<Message> GetMessagesOfRepair(int id)
+    {
+        IEnumerable<Message> messages = unitOfWork.repairs.GetMessages(id);
+        return messages;
     }
 }

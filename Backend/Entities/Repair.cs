@@ -26,10 +26,10 @@ public class Repair
     public DateTime ReturnTime { get; set; }
     public Status Status { get; set; }
     public Client? Client { get; set; }
-    public List<Message> Messages { get; set; }
-    public List<Part> Parts { get; set; }
+    public IEnumerable<Message> Messages { get; set; }
+    public IEnumerable<Part> Parts { get; set; }
     public Equipment Equipment { get; set; }
-    public List<Action> Actions { get; set; }
+    public IEnumerable<Action> Actions { get; set; }
 
     public Repair Update(Repair repair)
     {
