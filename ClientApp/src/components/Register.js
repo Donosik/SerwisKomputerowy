@@ -12,50 +12,48 @@ const setAuthToken = token => {
         delete axios.defaults.headers.common["Authorization"];
 }
 
-export function Login() {
+export function Register() {
 
     const navigate = useNavigate()
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const [isLoginFailed, setIsLoginFailed] = useState(false)
-
-    const checkRole = async () => {
-        const result=await axios.get('/user/me')
-        localStorage.setItem("role", result.data.role)
-    }
+    const [isRegisterFailed, setIsRegisterFailed] = useState(false)
     
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const response = await axios.post('/user/login', { login, password })
-            const token = response.data
+            if (login.length >= 3 && password.length >= 3) {
 
-            localStorage.setItem("token", token)
-            setAuthToken(token)
-            checkRole()
+                const response = await axios.post('/user/register', { login, password })
 
-            navigate("/naprawy")
-            setIsLoginFailed(false)
-            
+                navigate("/logowanie")
+                setIsRegisterFailed(false)
+            }
+            else {
+                setIsRegisterFailed(true)
+            }
+
         } catch (error) {
-            setIsLoginFailed(true)
+            setIsRegisterFailed(true)
             console.log(error)
         }
     }
 
     
+
     return (
         <>
-           
+
             <div className="auth-page">
                 <div className="navBar">
-                <h1 className="text-welcome">WWW.KOMPUTEROWO.PL</h1>
+                    <h1 className="text-welcome">WWW.KOMPUTEROWO.PL</h1>
                 </div>
                 <div className="container page d-flex justify-content-center align-items-center min-vh-100">
                     <div className="row">
                         <div className="login-box">
-                            <h2 className="text-login">LOGOWANIE</h2>
+                            <h2 className="text-login">REJESTRACJA</h2>
                             <form>
                                 <fieldset>
                                     <fieldset className="form-group">
@@ -63,31 +61,31 @@ export function Login() {
                                             placeholder="Login"
                                             className="form-control form-control-lg"
                                             type="text"
-                                            value={ login }
-                                            onChange={ e => setLogin(e.target.value) }
+                                            value={login}
+                                            onChange={e => setLogin(e.target.value)}
                                         />
                                     </fieldset>
                                     <fieldset className="form-group">
-                                        <input   
+                                        <input
                                             placeholder="Hasło"
                                             className="form-control form-control-lg"
                                             type="password"
-                                            value={ password }
+                                            value={password}
                                             onChange={e => setPassword(e.target.value)}
                                         />
                                     </fieldset>
 
                                     <div className="d-flex justify-content-center align-items-center">
                                         <button className="button-login btn btn-lg pull-xs-right" onClick={handleSubmit}>
-                                            Zaloguj
+                                            Zarejestruj się
                                         </button>
 
                                     </div>
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
-                                        <a href="/rejestracja"> Nie posiadasz konta?</a>
+                                        <a href="/logowanie"> Masz już konto?</a>
                                     </div>
-                                    {isLoginFailed ?
-                                        <div className="login-failed d-flex justify-content-center align-items-center">Login failed</div>
+                                    {isRegisterFailed ?
+                                        <div className="login-failed d-flex justify-content-center align-items-center">Register failed</div>
                                         : null}
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
                                     </div>

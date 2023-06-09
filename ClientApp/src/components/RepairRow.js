@@ -12,9 +12,9 @@ export function RepairRow ({ repair }) {
             <td>{ repair.client.lastName ?? "-" }</td>
             <td>{ repair.equipment.name ?? "-" }</td>
             <td>
-                <button className='label-button'>EDYTUJ</button>
+                {localStorage.getItem("role") > 0 && <button className='label-button'>EDYTUJ</button>}
                 <button className='label-button'>SZCZEGÓŁY</button>
-                <button className='label-button'>USUŃ</button>
+                {localStorage.getItem("role") > 0 && <button className='label-button'>USUŃ</button>}
             </td>
         </tr>
     )

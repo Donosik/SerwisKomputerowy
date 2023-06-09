@@ -39,9 +39,9 @@ public class TestController : ControllerBase
     public IActionResult NewUser()
     {
         User user = new User();
-        user.Login = "log";
-        user.Password = "123";
-        user.Role = Role.User;
+        user.Login = "test";
+        user.Password = "admin";
+        user.Role = Role.Admin;
         user.Messages = null;
         userService.CreateUser(user);
 

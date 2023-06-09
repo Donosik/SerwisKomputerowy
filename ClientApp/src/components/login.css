@@ -48,6 +48,12 @@
         background-color: #E74646;
 }
 
+.login-failed {
+    text-align: center;
+    margin-top: 20px;
+    color:red;
+}
+
 .forgot-pass{
     text-align: center;
     margin-top:20px;

@@ -27,6 +27,12 @@ public class UserService : IUserService
         User user = new User();
         user.Login = registerUser.Login;
         user.Password = registerUser.Password;
+        IEnumerable<User> users = GetUsers();
+        foreach(User u in users)
+        {
+            if (user.Login == u.Login)
+                return false;
+        }
         return CreateUser(user);
     }
 

@@ -2,7 +2,8 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login"
-import {Repair} from "./components/Repair";
+import { Register } from "./components/Register";
+import { Repair } from "./components/Repair";
 
 
 const AppRoutes = [
@@ -11,17 +12,13 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
-    element: <Counter />
-  },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
-  },
-  {
-    path: '/login',
+    path: '/logowanie',
     element: <Login />
-  },
+    },
+    {
+        path: '/rejestracja',
+        element: <Register/>
+    },
   {
     path: '/naprawy',
     element: <Repair/>
