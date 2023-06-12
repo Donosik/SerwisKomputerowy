@@ -22,6 +22,18 @@ export function SearchRenderer() {
         setData(result.data)
     }
 
+    function removeFromData(index)
+    {
+        const newData=data.filter((_,i)=>i!==index)
+        setData(newData)
+        console.log("cyce")
+        console.log(index)
+    }
+    
+    useEffect(()=>{
+        console.log("r")
+    },[data])
+    
     useEffect(() => {
         fetchRepairs()
         setRole(Number(localStorage.getItem("role")))
@@ -93,7 +105,7 @@ export function SearchRenderer() {
                             </td>
                         </tr>
                         {data.filter(filterBySearchQuery).map((repair, id) => (
-                            <RepairRow repair={repair} key={id} />
+                            <RepairRow repair={repair} key={repair.id} removeFromData={removeFromData}/>
                         ))}
                     </tbody>
                 </table>
