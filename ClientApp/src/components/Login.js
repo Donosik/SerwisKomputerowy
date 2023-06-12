@@ -33,7 +33,7 @@ export function Login() {
 
             localStorage.setItem("token", token)
             setAuthToken(token)
-            checkRole()
+            await checkRole()
 
             navigate("/naprawy")
             setIsLoginFailed(false)

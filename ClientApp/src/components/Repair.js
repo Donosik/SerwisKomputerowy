@@ -15,19 +15,26 @@ export function Repair() {
     function createHandler() {
         setRenderBool(false)
     }
- 
+
+    const [role, setRole] = useState(0)
+
+    useEffect(() => {
+            setRole(Number(localStorage.getItem("role")))
+        }
+        , [])
     return (
         <>
             <NavMenu />
-
+,
             <p className='services-title'> NAPRAWY </p>
             <button className='button-add' onClick={searchHandler}>SZUKAJ</button>
-            { (Number(localStorage.getItem("role")) > 0) && <button className='button-add' onClick={createHandler}>DODAJ</button>}
+            { (role > 0) && <button className='button-add' onClick={createHandler}>DODAJ</button>}
             <button className='button-add' onClick={searchHandler}>WYŚWIETL WSZYSTKIE</button>
 
 
             <br /><br />
             {renderBool ? <SearchRenderer /> : <CreateRenderer />}
         </>
+    
     );
 }
