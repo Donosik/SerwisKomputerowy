@@ -11,6 +11,25 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
     {
     }
 
+    /*public IEnumerable<Repair> GetAll()
+    {
+        return dbContext.Set<Repair>().Select(r=>new Repair 
+        { 
+            Id=r.Id,
+            Type=r.Type,
+            IsGuarantee=r.IsGuarantee,
+            GuaranteeTime=r.GuaranteeTime,
+            AcceptanceTime=r.AcceptanceTime,
+            ReturnTime=r.ReturnTime,
+            Status=r.Status,
+            Client=new Client
+            {
+                FirstName = r.Client.FirstName,
+                LastName=r.Client.LastName,
+            }
+        }).ToList();
+    }*/
+
     public IEnumerable<Repair> GetRepairsForTable()
     {
         return dbContext.Set<Repair>().Select(r => new Repair

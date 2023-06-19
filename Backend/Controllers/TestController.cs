@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
+using Action = SerwisKomputerowy.Backend.Entities.Action;
 
 namespace SerwisKomputerowy.Controllers;
 
+[AllowAnonymous]
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
@@ -35,51 +37,146 @@ public class TestController : ControllerBase
         this.identityService = identityService;
     }
 
-    [HttpGet("user")]
-    public IActionResult NewUser()
-    {
-        User user = new User();
-        user.Login = "test";
-        user.Password = "admin";
-        user.Role = Role.Admin;
-        user.Messages = null;
-        userService.CreateUser(user);
 
+    private void createdb1()
+    {
+        //ADMIN
+        User admin = new User();
+        admin.Login = "admin";
+        admin.Password = "admin";
+        admin.Role = Role.Admin;
+        admin.Messages = new List<Message>();
+        userService.CreateUser(admin);
+
+        //Pracownik1
+        User worker1 = new User();
+        worker1.Login = "worker1";
+        worker1.Password = "123";
+        worker1.Role = Role.Worker;
+        worker1.Messages = new List<Message>();
+        userService.CreateUser(worker1);
+
+        //Pracownik2
+        User worker2 = new User();
+        worker2.Login = "worker2";
+        worker2.Password = "123";
+        worker2.Role = Role.Worker;
+        worker2.Messages = new List<Message>();
+        userService.CreateUser(worker2);
+
+        //User1
+        User user1 = new User();
+        user1.Login = "user1";
+        user1.Password = "123";
+        user1.Role = Role.User;
+        user1.Messages = new List<Message>();
+        userService.CreateUser(user1);
+
+        //User2
+        User user2 = new User();
+        user2.Login = "user2";
+        user2.Password = "123";
+        user2.Role = Role.User;
+        user2.Messages = new List<Message>();
+        userService.CreateUser(user2);
+
+        //Klient1 with no repairs
+        Client client1 = new Client();
+        client1.User = user1;
+        client1.FirstName = "Jacek";
+        client1.LastName = "Jaworek";
+        client1.Repairs = new List<Repair>();
+        clientService.CreateClient(client1);
+
+        //Klient2 with one repair
+        Client client2 = new Client();
+        client2.User = user2;
+        client2.FirstName = "Krzysztof";
+        client2.LastName = "Kononowicz";
+        client2.Repairs = new List<Repair>();
+        clientService.CreateClient(client2);
+
+        //Equipment dla repair1
+        Equipment equipment1 = new Equipment();
+        equipment1.Type = "typ";
+        equipment1.Name = "nazwa";
+        equipment1.ProductionDate = DateTime.Now;
+        equipment1.Repairs = new List<Repair>();
+        equipmentService.CreateEquipment(equipment1);
+        
+        //Naprawa dla klienta2
+        Repair repair1 = new Repair();
+        repair1.Type = RepairType.Zwykla;
+        repair1.IsGuarantee = false;
+        repair1.GuaranteeTime = DateTime.Now;
+        repair1.AcceptanceTime = DateTime.Now;
+        repair1.ReturnTime = DateTime.Now;
+        repair1.Status = Status.Przyjete;
+        repair1.Client = client2;
+        repair1.Messages = new List<Message>();
+        repair1.Parts = new List<Part>();
+        repair1.Equipment = equipment1;
+        repair1.Actions = new List<Action>();
+        repairService.CreateRepair(repair1);
+
+    }
+
+    [HttpGet("createDB")]
+    public IActionResult CreateDBTest()
+    {
+        createdb1();
         return Ok();
     }
 
-    [HttpGet("eq")]
-    public IActionResult NewEquipment()
+    private void deletedb1()
     {
-        Equipment equipment = new Equipment();
-        equipment.Type = "Typ";
-        equipment.Name = "Nazwa";
-        equipment.ProductionDate=DateTime.Now;
-        equipmentService.CreateEquipment(equipment);
-        return Ok();
+        var eqs = equipmentService.GetEquipments();
+        foreach(var eq in eqs)
+        {
+            equipmentService.DeleteEquipment(eq.Id);
+        }
+        var repairs = repairService.GetRepairs();
+        foreach(var repair in repairs)
+        {
+            repairService.DeleteRepair(repair.Id);
+        }
+        var parts=partService.GetParts();
+        foreach(var part in parts)
+        {
+            partService.DeletePart(part.SerialNumber);
+        }
+        var actions = actionService.GetActions();
+        foreach (var action in actions)
+        {
+            actionService.DeleteAction(action.Id);
+        }
+        var msgs = messageService.GetMessages();
+        foreach (var msg in msgs)
+        {
+            messageService.DeleteMessage(msg.Id);
+        }
+        var workers = workerService.GetWorkers();
+        foreach(var worker in workers)
+        {
+            workerService.DeleteWorker(worker.Id);
+        }
+        var clients = clientService.GetClients();
+        foreach(var client in clients)
+        {
+            clientService.DeleteClient(client.Id);
+        }
+        var users=userService.GetUsers();
+        foreach(var user in users)
+        {
+            userService.DeleteUser(user.Id);
+        }
     }
 
-    [HttpGet("repair")]
-    public IActionResult NewRepair()
+    [HttpGet("deleteDB")]
+    public IActionResult DeleteDBTest()
     {
-        Repair repair = new Repair();
-        repair.Type = RepairType.Zwykla;
-        repair.IsGuarantee = true;
-        repair.GuaranteeTime=DateTime.Now;
-        repair.AcceptanceTime=DateTime.Now;
-        repair.ReturnTime = DateTime.Now;
-        repair.Status = Status.Skonoczone;
-        repair.Equipment = equipmentService.GetEquipment(1);
-        repairService.CreateRepair(repair);
-        equipmentService.GetEquipment(1).Repairs.Add(repair);
-        equipmentService.EditEquipment(equipmentService.GetEquipment(1));
+        deletedb1();
         return Ok();
-    }
-
-    [HttpGet]
-    public IActionResult Test()
-    {
-        return Ok(repairService.GetRepair(1).Equipment);
     }
 }
 

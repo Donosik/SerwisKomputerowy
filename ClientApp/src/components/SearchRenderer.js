@@ -20,19 +20,15 @@ export function SearchRenderer() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/table')
         setData(result.data)
+        console.log(result.data)
     }
 
     function removeFromData(index)
     {
         const newData=data.filter((_,i)=>i!==index)
         setData(newData)
-        console.log("cyce")
-        console.log(index)
+        window.location.reload()
     }
-    
-    useEffect(()=>{
-        console.log("r")
-    },[data])
     
     useEffect(() => {
         fetchRepairs()
@@ -55,8 +51,6 @@ export function SearchRenderer() {
         }
     }
 
-
-
     return (
         <>
 
@@ -67,7 +61,6 @@ export function SearchRenderer() {
                         <input type="text" onChange={handleSearchQueryChange} />
                     </label>
                 </form>
-
                 <table>
                     <thead>
                         <tr>
@@ -80,30 +73,6 @@ export function SearchRenderer() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>00000</td>
-                            <td>Gotowe do odbioru</td>
-                            <td>Jan</td>
-                            <td>Kowalski</td>
-                            <td>Komputerek xyz</td>
-                            <td>
-                                {role > 0 && <button className='label-button'>EDYTUJ</button>}
-                                <button className='label-button'>SZCZEGÓŁY</button>
-                                {role > 0 && <button className='label-button'>USUŃ</button>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>00000</td>
-                            <td>Gotowe do odbioru</td>
-                            <td>Jan</td>
-                            <td>Kowalski</td>
-                            <td>Komputerek xyz</td>
-                            <td>
-                                {(role > 0) ? <button className='label-button'>EDYTUJ</button>:null}
-                                <button className='label-button'>SZCZEGÓŁY</button>
-                                {role > 0 && <button className='label-button'>USUŃ</button>}
-                            </td>
-                        </tr>
                         {data.filter(filterBySearchQuery).map((repair, id) => (
                             <RepairRow repair={repair} key={repair.id} removeFromData={removeFromData}/>
                         ))}

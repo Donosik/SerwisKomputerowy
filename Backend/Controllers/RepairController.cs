@@ -46,7 +46,7 @@ public class RepairController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult EditRepair(Repair repair)
+    public IActionResult EditRepair([FromBody]Repair repair)
     {
         bool isRepairEdited = repairService.EditRepair(repair);
         if (isRepairEdited)

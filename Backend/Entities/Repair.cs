@@ -10,6 +10,7 @@ public enum RepairType
 }
 
 //TODO: Napisać statusy naprawy
+// Pamietac ze na frontendzie tez to jest repairRow.js
 public enum Status
 {
     Skonoczone,
