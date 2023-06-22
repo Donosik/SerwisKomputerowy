@@ -1,4 +1,5 @@
-﻿using SerwisKomputerowy.Backend.DB;
+﻿using Microsoft.EntityFrameworkCore;
+using SerwisKomputerowy.Backend.DB;
 using SerwisKomputerowy.Backend.Entities;
 
 namespace SerwisKomputerowy.Backend.Repositories;
@@ -27,7 +28,7 @@ public class ClientRepository : GenericRepository<Client>, IClientRepository
 
     public Client Get(int id)
     {
-        return dbContext.Set<Client>().Where(c=>c.Id==id).Select(c => new Client
+        /*return dbContext.Set<Client>().Where(c=>c.Id==id).Select(c => new Client
         {
             Id=c.Id,
             FirstName = c.FirstName,
@@ -38,6 +39,7 @@ public class ClientRepository : GenericRepository<Client>, IClientRepository
                 Password = c.User.Password,
                 Role=c.User.Role
             }
-        }).First();
+        }).First();*/
+        return dbContext.Set<Client>().Where(c => c.Id == id).Include(c=>c.User).FirstOrDefault();
     }
 }

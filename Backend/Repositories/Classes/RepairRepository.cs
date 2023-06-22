@@ -11,9 +11,9 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
     {
     }
 
-    /*public IEnumerable<Repair> GetAll()
+    public IEnumerable<Repair> GetAll()
     {
-        return dbContext.Set<Repair>().Select(r=>new Repair 
+        /*return dbContext.Set<Repair>().Select(r=>new Repair 
         { 
             Id=r.Id,
             Type=r.Type,
@@ -27,8 +27,9 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
                 FirstName = r.Client.FirstName,
                 LastName=r.Client.LastName,
             }
-        }).ToList();
-    }*/
+        }).ToList();*/
+        return dbContext.Set<Repair>().Include(r => r.Client).Include(r => r.Equipment).ToList();
+    }
 
     public IEnumerable<Repair> GetRepairsForTable()
     {

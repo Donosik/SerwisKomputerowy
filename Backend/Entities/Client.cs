@@ -8,8 +8,8 @@ public class Client
     [Key] public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public User User { get; set; }
-    public List<Repair> Repairs { get; set; }
+    public virtual User User { get; set; }
+    public virtual List<Repair> Repairs { get; set; }
 
     public Client Update(Client client)
     {
