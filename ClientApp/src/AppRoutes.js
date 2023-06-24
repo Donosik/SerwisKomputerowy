@@ -5,6 +5,7 @@ import { Login } from "./components/Login"
 import { Register } from "./components/Register";
 import { Repair } from "./components/Repair";
 import { EditRepair } from "./components/EditRepair"
+import { Raport } from "./components/Raport"
 import Chatbox from "./components/Chatbox";
 
 
@@ -30,8 +31,12 @@ const AppRoutes = [
       element: <EditRepair/>
   },
   {
-    path: '/chat',
-    element: <Chatbox/>
+      path: '/chat',
+      element: <Chatbox />
+  },
+  {
+      path: '/raport',
+      element: <Raport/>
   }
 ];
 

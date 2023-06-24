@@ -13,7 +13,8 @@ const context = [
     "/part",
     "/repair",
     "/user",
-    "/worker"
+    "/worker",
+    "/raport"
 ];
 
 const onError = (err, req, resp, target) =>
