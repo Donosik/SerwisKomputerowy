@@ -12,7 +12,7 @@ import Chatbox from "./components/Chatbox";
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    element: <Login />
   },
   {
     path: '/logowanie',

@@ -11,6 +11,11 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
     {
     }
 
+    public Repair Get(int id)
+    {
+        return dbContext.Set<Repair>().Where(r=>r.Id==id).Include(r => r.Client).Include(r => r.Equipment).FirstOrDefault();
+    }
+
     public IEnumerable<Repair> GetAll()
     {
         /*return dbContext.Set<Repair>().Select(r=>new Repair 

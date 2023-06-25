@@ -1,38 +1,35 @@
-import { useNavigate, useParams } from "react-router-dom"
-import { useState, useEffect } from "react"
+import {useNavigate, useParams} from "react-router-dom"
+import {useState, useEffect} from "react"
 import axios from "../../../node_modules/axios/index"
 
 export function EditRepair() {
 
     const [inputs, setInputs] = useState({})
-    
-    let { id}=useParams()
+
+    let {id} = useParams()
     const navigate = useNavigate()
     const [repairData, setRepairData] = useState()
-    const [clients, setClients] = useState()
+    const [clients, setClients] = useState([])
 
     const setAuthToken = token => {
         if (token) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        }
-        else
+        } else
             delete axios.defaults.headers.common["Authorization"];
     }
 
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/repair/'+id)
+        const result = await axios.get('/repair/' + id)
         setRepairData(result.data)
-        console.log(result.data)
     }
 
     async function getClients() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/client')
         setClients(result.data)
-        console.log(result.data)
     }
-    
+
     async function editRepair() {
         await axios.put('/repair', repairData)
     }
@@ -40,62 +37,77 @@ export function EditRepair() {
     useEffect(() => {
         getRepair()
         getClients()
-        //editRepair()
+
     }, [])
+
+    useEffect(() => {
+        if (repairData === undefined)
+            return
+        console.log(repairData)
+        const name1 = "clientId"
+        const value1 = repairData.client.id
+        setInputs(values => ({...values, [name1]: value1}))
+        const name2 = "status"
+        const value2 = repairData.status
+        setInputs(values => ({...values, [name2]: value2}))
+        const name3 = "acceptanceTime"
+        const value3 = repairData.acceptanceTime.substring(0, 10)
+        setInputs(values => ({...values, [name3]: value3}))
+        const name4 = "guaranteeTime"
+        const value4 = repairData.guaranteeTime.substring(0, 10)
+        setInputs(values => ({...values, [name4]: value4}))
+    }, [repairData])
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(inputs)
     }
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        setInputs(values => ({ ...values, [name]: value }))
+        setInputs(values => ({...values, [name]: value}))
+        console.log(inputs)
     }
-    
+
     return (
         <div>
-            <div>
-                DUPAAAA
-            </div>    
             <form>
                 <label>
                     Klient:
-                    <select name="clientId" value={inputs.ClientId || ""} onChange={handleChange}>
+                    <select name="clientId" value={inputs.clientId || ""} onChange={handleChange}>
                         {clients.map((client, id) => (
-                            <option value={client.Id}>{client.FirstName + ' ' + client.LastName}</option>
+                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
                         ))}
                     </select>
                 </label>
                 <label>
                     Status:
-                    <select name="Status" value={inputs.Status || ""} onChange={ handleChange }>
+                    <select name="status" value={inputs.status || ""} onChange={handleChange}>
                         <option value="0">skonczone</option>
                         <option value="1">przyjete</option>
                     </select>
                 </label>
                 <label>
-                    Data przyjêcia:
+                    Data przyjÄ™cia:
                     <input
                         type="date"
-                        name="AcceptanceTime"
-                        value={inputs.AcceptanceTime || ""}
+                        name="acceptanceTime"
+                        value={inputs.acceptanceTime || ""}
                         onChange={handleChange}
-                        
+
                     />
                 </label>
                 <label>
                     Koniec gwarancji:
                     <input
                         type="date"
-                        name="GuaranteeTime"
-                        value={inputs.GuaranteeTime || ""}
+                        name="guaranteeTime"
+                        value={inputs.guaranteeTime || ""}
                         onChange={handleChange}
-                        
+
                     />
                 </label>
-                <button onClick={ handleSubmit }>Zapisz zmiany</button>
+                <button onClick={handleSubmit}>Zapisz zmiany</button>
             </form>
         </div>
     )
