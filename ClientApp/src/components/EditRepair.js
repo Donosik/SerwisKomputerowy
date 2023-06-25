@@ -66,49 +66,56 @@ export function EditRepair() {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
-        console.log(inputs)
     }
 
     return (
         <div>
-            <form>
-                <label>
-                    Klient:
-                    <select name="clientId" value={inputs.clientId || ""} onChange={handleChange}>
-                        {clients.map((client, id) => (
-                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
-                        ))}
-                    </select>
-                </label>
-                <label>
-                    Status:
-                    <select name="status" value={inputs.status || ""} onChange={handleChange}>
-                        <option value="0">skonczone</option>
-                        <option value="1">przyjete</option>
-                    </select>
-                </label>
-                <label>
-                    Data przyjęcia:
-                    <input
-                        type="date"
-                        name="acceptanceTime"
-                        value={inputs.acceptanceTime || ""}
-                        onChange={handleChange}
+            <div>
+                <form>
+                    <label>
+                        Klient:
+                        <select name="clientId" value={inputs.clientId || ""} onChange={handleChange}>
+                            {clients.map((client, id) => (
+                                <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <label>
+                        Status:
+                        <select name="status" value={inputs.status || ""} onChange={handleChange}>
+                            <option value="0">skonczone</option>
+                            <option value="1">przyjete</option>
+                        </select>
+                    </label>
+                    <label>
+                        Data przyjęcia:
+                        <input
+                            type="date"
+                            name="acceptanceTime"
+                            value={inputs.acceptanceTime || ""}
+                            onChange={handleChange}
 
-                    />
-                </label>
-                <label>
-                    Koniec gwarancji:
-                    <input
-                        type="date"
-                        name="guaranteeTime"
-                        value={inputs.guaranteeTime || ""}
-                        onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        Koniec gwarancji:
+                        <input
+                            type="date"
+                            name="guaranteeTime"
+                            value={inputs.guaranteeTime || ""}
+                            onChange={handleChange}
 
-                    />
-                </label>
-                <button onClick={handleSubmit}>Zapisz zmiany</button>
-            </form>
+                        />
+                    </label>
+                    <button onClick={handleSubmit}>Zapisz zmiany</button>
+                </form>
+            </div>
+            <div>
+                Osoby odpowiedzialne:
+            </div>
+            <div>
+                Części wymienne:
+            </div>
         </div>
     )
 }
