@@ -25,8 +25,6 @@ export function EditRepair() {
         {
             repairData.status=status
         }
-        console.log(inputs)
-        console.log(repairData)
     }
 
     async function getRepair() {
@@ -43,6 +41,8 @@ export function EditRepair() {
 
     async function editRepair() {
         await axios.put('/repair/'+repairData.id+'/'+inputs.clientId)
+        repairData.client=null;
+        await axios.put('/repair',repairData)
     }
 
     useEffect(() => {
@@ -73,10 +73,10 @@ export function EditRepair() {
         const fun = async()=>
         {
             await editRepair()
-            //navigate('/naprawy')
+            navigate('/naprawy')
         }
-        fun()
         inputsToRepairData()
+        fun()
     }
 
     const handleChange = (event) => {
