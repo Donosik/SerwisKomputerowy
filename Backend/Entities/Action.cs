@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SerwisKomputerowy.Backend.Entities;
 
-public class Action
+public class Action : IEntity
 {
     [Key] public int Id { get; set; }
     public String Description { get; set; }

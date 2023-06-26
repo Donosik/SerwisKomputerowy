@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SerwisKomputerowy.Backend.Entities;
 
-public class Client
+public class Client : IEntity
 {
     [Key] public int Id { get; set; }
     public string FirstName { get; set; }

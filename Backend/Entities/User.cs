@@ -10,7 +10,7 @@ public enum Role
     Admin
 }
 
-public class User
+public class User : IEntity
 {
     [Key] public int Id { get; set; }
     public string Login { get; set; }

@@ -4,7 +4,7 @@ using SerwisKomputerowy.Backend.Entities;
 
 namespace SerwisKomputerowy.Backend.Repositories;
 
-public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+public abstract class GenericRepository<T> : IGenericRepository<T> where T : class,IEntity
 {
     protected readonly DatabaseContext dbContext;
 
@@ -13,14 +13,19 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         this.dbContext = dbContext;
     }
 
+    public IQueryable<T> GetQuery()
+    {
+        return dbContext.Set<T>();
+    }
+
     public IEnumerable<T> GetAll()
     {
-        return dbContext.Set<T>().ToList();
+        return GetQuery().ToList();
     }
 
     public T Get(int id)
     {
-        return dbContext.Set<T>().Find(id);
+        return GetQuery().FirstOrDefault(t=>t.Id==id);
     }
 
     public bool Create(T entity)

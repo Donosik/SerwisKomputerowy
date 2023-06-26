@@ -11,7 +11,7 @@ public enum Specialization
     Printers
 }
 
-public class Worker
+public class Worker : IEntity
 {
     [Key] public int Id { get; set; }
     public string FirstName { get; set; }

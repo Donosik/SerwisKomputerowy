@@ -2,7 +2,7 @@
 
 namespace SerwisKomputerowy.Backend.Entities;
 
-public class Message
+public class Message : IEntity
 {
     [Key] public int Id { get; set; }
     public String Content { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using SerwisKomputerowy.Backend.DB;
 using SerwisKomputerowy.Backend.Entities;
 using Action = SerwisKomputerowy.Backend.Entities.Action;
@@ -11,36 +12,20 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
     {
     }
 
-    public Repair Get(int id)
+    private IQueryable<Repair> GetQuery()
     {
-        return dbContext.Set<Repair>().Where(r=>r.Id==id).Include(r => r.Client).Include(r => r.Equipment).Include(r=>r.Actions).FirstOrDefault();
-    }
-
-    public IEnumerable<Repair> GetAll()
-    {
-        /*return dbContext.Set<Repair>().Select(r=>new Repair 
-        { 
-            Id=r.Id,
-            Type=r.Type,
-            IsGuarantee=r.IsGuarantee,
-            GuaranteeTime=r.GuaranteeTime,
-            AcceptanceTime=r.AcceptanceTime,
-            ReturnTime=r.ReturnTime,
-            Status=r.Status,
-            Client=new Client
-            {
-                FirstName = r.Client.FirstName,
-                LastName=r.Client.LastName,
-            }
-        }).ToList();*/
-        return dbContext.Set<Repair>().Include(r => r.Client).Include(r=>r.Client.User).Include(r => r.Equipment).ToList();
+        return dbContext.Set<Repair>().
+            Include(r => r.Client).
+            Include(r => r.Client.User).
+            Include(r => r.Equipment).
+            Include(r=>r.Parts);
     }
 
     public IEnumerable<Repair> GetRepairsForTable()
     {
         return dbContext.Set<Repair>().Select(r => new Repair
         {
-            Id=r.Id,
+            Id = r.Id,
             Status = r.Status,
             Client = new Client
             {

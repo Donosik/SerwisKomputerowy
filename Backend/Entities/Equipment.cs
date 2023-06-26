@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace SerwisKomputerowy.Backend.Entities;
 
-public class Equipment
+public class Equipment : IEntity
 {
     [Key] public int Id { get; set; }
     public String Type { get; set; }

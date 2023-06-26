@@ -17,7 +17,7 @@ public enum Status
     Przyjete
 }
 
-public class Repair
+public class Repair :IEntity
 {
     [Key] public int Id { get; set; }
     public RepairType Type { get; set; }

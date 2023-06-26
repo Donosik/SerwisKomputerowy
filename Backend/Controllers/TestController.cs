@@ -119,6 +119,14 @@ public class TestController : ControllerBase
         repair1.Actions = new List<Action>();
         repairService.CreateRepair(repair1);
 
+        // Part1 for repair1
+        Part part1 = new Part();
+        part1.PartName = "czesc1";
+        part1.Cost = 100;
+        part1.CostOfWork = 10;
+        part1.Repair = repair1;
+        partService.CreatePart(part1);
+
     }
 
     [HttpGet("createDB")]
