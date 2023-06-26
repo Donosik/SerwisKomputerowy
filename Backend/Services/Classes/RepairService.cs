@@ -62,6 +62,20 @@ public class RepairService : IRepairService
         return false;
     }
 
+    public bool EditClientId(int idrepair,int idclient)
+    {
+        Client client = unitOfWork.clients.Get(idclient);
+        if (client != null)
+        {
+            Repair repair = unitOfWork.repairs.Get(idrepair);
+            repair.Client = client;
+            unitOfWork.repairs.Update(repair);
+            int result = unitOfWork.Save();
+            if (result > 0)
+                return true;
+        }
+        return false;
+    }
     public bool DeleteRepair(int id)
     {
         if (id > 0)

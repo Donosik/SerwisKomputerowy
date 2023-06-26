@@ -53,6 +53,15 @@ public class RepairController : ControllerBase
             return Ok();
         return BadRequest();
     }
+    
+    [HttpPut("{idrepair}/{idclient}")]
+    public IActionResult EditClientId(int idrepair,int idclient)
+    {
+        bool isRepairEdited = repairService.EditClientId(idrepair,idclient);
+        if (isRepairEdited)
+            return Ok();
+        return NotFound();
+    }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteRepair(int id)

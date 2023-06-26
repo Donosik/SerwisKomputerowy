@@ -27,23 +27,24 @@ public class Repair
     public DateTime ReturnTime { get; set; }
     public Status Status { get; set; }
     public virtual Client? Client { get; set; }
-    public IEnumerable<Message> Messages { get; set; }
-    public IEnumerable<Part> Parts { get; set; }
-    public virtual Equipment Equipment { get; set; }
-    public IEnumerable<Action> Actions { get; set; }
+    public IEnumerable<Message>? Messages { get; set; }
+    public IEnumerable<Part>? Parts { get; set; }
+    public virtual Equipment? Equipment { get; set; }
+    public IEnumerable<Action>? Actions { get; set; }
 
     public Repair Update(Repair repair)
     {
         this.Type = repair.Type;
         this.IsGuarantee = repair.IsGuarantee;
+        this.GuaranteeTime = repair.GuaranteeTime;
         this.AcceptanceTime = repair.AcceptanceTime;
         this.ReturnTime = repair.ReturnTime;
         this.Status = repair.Status;
-        this.Client = repair.Client;
-        this.Messages = repair.Messages;
-        this.Parts = repair.Parts;
-        this.Equipment = repair.Equipment;
-        this.Actions = repair.Actions;
+        //this.Client = repair.Client;
+        //this.Messages = repair.Messages;
+        //this.Parts = repair.Parts;
+        //this.Equipment = repair.Equipment;
+        //this.Actions = repair.Actions;
         return this;
     }
 }

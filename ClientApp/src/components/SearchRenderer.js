@@ -20,7 +20,6 @@ export function SearchRenderer() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/table')
         setData(result.data)
-        console.log(result.data)
     }
 
     function removeFromData(index)

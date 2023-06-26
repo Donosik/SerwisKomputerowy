@@ -17,6 +17,17 @@ export function EditRepair() {
         } else
             delete axios.defaults.headers.common["Authorization"];
     }
+    
+    function inputsToRepairData()
+    {
+        const status=parseInt(inputs.status)
+        if(!isNaN(status))
+        {
+            repairData.status=status
+        }
+        console.log(inputs)
+        console.log(repairData)
+    }
 
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
@@ -31,7 +42,7 @@ export function EditRepair() {
     }
 
     async function editRepair() {
-        await axios.put('/repair', repairData)
+        await axios.put('/repair/'+repairData.id+'/'+inputs.clientId)
     }
 
     useEffect(() => {
@@ -43,7 +54,6 @@ export function EditRepair() {
     useEffect(() => {
         if (repairData === undefined)
             return
-        console.log(repairData)
         const name1 = "clientId"
         const value1 = repairData.client.id
         setInputs(values => ({...values, [name1]: value1}))
@@ -60,6 +70,13 @@ export function EditRepair() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        const fun = async()=>
+        {
+            await editRepair()
+            //navigate('/naprawy')
+        }
+        fun()
+        inputsToRepairData()
     }
 
     const handleChange = (event) => {

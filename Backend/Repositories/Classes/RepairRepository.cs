@@ -33,7 +33,7 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
                 LastName=r.Client.LastName,
             }
         }).ToList();*/
-        return dbContext.Set<Repair>().Include(r => r.Client).Include(r => r.Equipment).ToList();
+        return dbContext.Set<Repair>().Include(r => r.Client).Include(r=>r.Client.User).Include(r => r.Equipment).ToList();
     }
 
     public IEnumerable<Repair> GetRepairsForTable()
