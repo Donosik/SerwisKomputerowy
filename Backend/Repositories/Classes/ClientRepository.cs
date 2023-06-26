@@ -10,36 +10,10 @@ public class ClientRepository : GenericRepository<Client>, IClientRepository
     {
     }
 
-    public IEnumerable<Client> GetAll()
+    public override IQueryable<Client> GetQuery()
     {
-        return dbContext.Set<Client>().Select(c => new Client
-        {
-            Id=c.Id,
-            FirstName = c.FirstName,
-            LastName = c.LastName,
-            User=new User
-            {
-                Login = c.User.Login,
-                Password = c.User.Password,
-                Role=c.User.Role
-            }
-        }).ToList();
-    }
-
-    public Client Get(int id)
-    {
-        /*return dbContext.Set<Client>().Where(c=>c.Id==id).Select(c => new Client
-        {
-            Id=c.Id,
-            FirstName = c.FirstName,
-            LastName = c.LastName,
-            User=new User
-            {
-                Login = c.User.Login,
-                Password = c.User.Password,
-                Role=c.User.Role
-            }
-        }).First();*/
-        return dbContext.Set<Client>().Where(c => c.Id == id).Include(c=>c.User).FirstOrDefault();
+        return dbContext.Set<Client>().
+            Include(c => c.User).
+            Include(c => c.Repairs);
     }
 }

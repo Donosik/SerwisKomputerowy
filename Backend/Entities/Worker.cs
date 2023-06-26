@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using SerwisKomputerowy.Backend.Repositories;
 
 namespace SerwisKomputerowy.Backend.Entities;
 
@@ -18,8 +16,8 @@ public class Worker : IEntity
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }
     public Specialization Specialization { get; set; }
-    public User User { get; set; }
-    public List<Action> Actions { get; set; }
+    public User? User { get; set; }
+    public List<Action>? Actions { get; set; }
 
     public Worker Update(Worker worker)
     {
@@ -27,8 +25,6 @@ public class Worker : IEntity
         this.LastName = worker.LastName;
         this.BirthDate = worker.BirthDate;
         this.Specialization = worker.Specialization;
-        this.User = worker.User;
-        this.Actions = worker.Actions;
         return this;
     }
 }

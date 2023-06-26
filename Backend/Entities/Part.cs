@@ -15,11 +15,11 @@ public class Part : IEntity
 
     public Part Update(Part part)
     {
+        this.SerialNumber = part.SerialNumber;
         this.PartName = part.PartName;
         this.Cost = part.Cost;
         this.IsUsed = part.IsUsed;
         this.CostOfWork = part.CostOfWork;
-        this.Repair = part.Repair;
         return this;
     }
 }

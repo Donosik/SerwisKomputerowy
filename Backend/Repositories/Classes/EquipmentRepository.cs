@@ -9,15 +9,10 @@ public class EquipmentRepository : GenericRepository<Equipment>, IEquipmentRepos
     public EquipmentRepository(DatabaseContext dbContext) : base(dbContext)
     {
     }
-    
-    public IEnumerable<Equipment> GetAll()
+
+    public override IQueryable<Equipment> GetQuery()
     {
-        return dbContext.Set<Equipment>().Select(e=>new Equipment
-        {
-            Id=e.Id,
-            Type = e.Type,
-            Name=e.Name,
-            ProductionDate =e.ProductionDate
-        }).ToList();
+        return dbContext.Set<Equipment>().
+            Include(e => e.Repairs);
     }
 }

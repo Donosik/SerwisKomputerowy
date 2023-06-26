@@ -12,13 +12,14 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
     {
     }
 
-    private IQueryable<Repair> GetQuery()
+    public override IQueryable<Repair> GetQuery()
     {
         return dbContext.Set<Repair>().
             Include(r => r.Client).
-            Include(r => r.Client.User).
+            Include(r=>r.Messages).
+            Include(r => r.Parts).
             Include(r => r.Equipment).
-            Include(r=>r.Parts);
+            Include(r=>r.Actions);
     }
 
     public IEnumerable<Repair> GetRepairsForTable()
