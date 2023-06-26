@@ -25,6 +25,8 @@ export function EditRepair() {
         {
             repairData.status=status
         }
+        repairData.acceptanceTime=inputs.acceptanceTime
+        repairData.guaranteeTime=inputs.guaranteeTime
     }
 
     async function getRepair() {
@@ -48,7 +50,6 @@ export function EditRepair() {
     useEffect(() => {
         getRepair()
         getClients()
-
     }, [])
 
     useEffect(() => {
