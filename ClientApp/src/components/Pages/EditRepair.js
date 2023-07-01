@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom"
 import {useState, useEffect} from "react"
-import axios from "../../../node_modules/axios/index"
+import axios from "axios";
 
 export function EditRepair() {
 

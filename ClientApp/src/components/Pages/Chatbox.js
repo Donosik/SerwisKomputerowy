@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Chatbox.css';
+import '../Css/Chatbox.css';
+import {NavMenu} from "../Components/NavMenu";
 
 
 
@@ -26,6 +27,8 @@ function Chatbox() {
     };
 
     return (
+        <>
+            <NavMenu />
         <div className="chatbox">
             <div className="messages">
                 {messages.map((message) => (
@@ -44,6 +47,7 @@ function Chatbox() {
                 <button onClick={handleSendMessage}>Send</button>
             </div>
         </div>
+            </>
     );
 }
 

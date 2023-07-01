@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import {NavMenu} from "../Components/NavMenu";
 
 
 const setAuthToken = token => {
@@ -13,10 +14,13 @@ const setAuthToken = token => {
 
 export function Raport() {
     return (
-        <div>
+        <>
+            <NavMenu />
+            <div>
             <h2>
                 Dupsko
             </h2>
         </div>    
+            </>
     );
 }

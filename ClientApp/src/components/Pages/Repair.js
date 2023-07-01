@@ -1,10 +1,10 @@
-﻿import { NavMenu } from "./NavMenu";
+﻿import { NavMenu } from "../Components/NavMenu";
 import { useState, useEffect } from "react";
 import axios from "axios"
 
-import { CreateRenderer } from "./CreateRenderer"
-import { SearchRenderer } from "./SearchRenderer"
-import "./repair.css"
+import { CreateRenderer } from "../Components/CreateRenderer"
+import { SearchRenderer } from "../Components/SearchRenderer"
+import "../Css/repair.css"
 
 export function Repair() {
     const [renderBool, setRenderBool] = useState(true)

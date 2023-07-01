@@ -1,12 +1,11 @@
-import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
-import { Login } from "./components/Login"
-import { Register } from "./components/Register";
-import { Repair } from "./components/Repair";
-import { EditRepair } from "./components/EditRepair"
-import { Raport } from "./components/Raport"
-import Chatbox from "./components/Chatbox";
+import { Login } from "./components/Pages/Login"
+import { Register } from "./components/Pages/Register";
+import { Repair } from "./components/Pages/Repair";
+import { EditRepair } from "./components/Pages/EditRepair"
+import { Raport } from "./components/Pages/Raport"
+import Chatbox from "./components/Pages/Chatbox";
+import {Profile} from "./components/Pages/Profile";
+import {Magazine} from "./components/Pages/Magazine";
 
 
 const AppRoutes = [
@@ -37,7 +36,15 @@ const AppRoutes = [
   {
       path: '/raport',
       element: <Raport/>
-  }
+  },
+    {
+        path: '/profil',
+        element: <Profile/>
+    },
+    {
+        path: '/magazyn',
+        element: <Magazine/>
+    }
 ];
 
 export default AppRoutes;

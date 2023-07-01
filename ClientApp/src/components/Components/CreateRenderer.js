@@ -1,4 +1,4 @@
-﻿import "./repair.css"
+﻿import "../Css/repair.css"
 
 export function CreateRenderer() {
     return (

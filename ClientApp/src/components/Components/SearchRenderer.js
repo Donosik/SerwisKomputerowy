@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import axios from "axios"
 import { RepairRow } from "./RepairRow"
-import "./repair.css"
+import "../Css/repair.css"
 
 export function SearchRenderer() {
     const [data, setData] = useState([])
