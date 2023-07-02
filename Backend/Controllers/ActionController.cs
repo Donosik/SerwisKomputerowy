@@ -40,7 +40,7 @@ public class ActionController : ControllerBase
     {
         bool isActionCreated = actionService.CreateAction(action);
         if (isActionCreated)
-            return Ok();
+            return Ok(action.Id);
         return BadRequest();
     }
 

@@ -85,7 +85,7 @@ public class UserController : ControllerBase
     {
         bool isUserCreated = userService.CreateUser(user);
         if (isUserCreated)
-            return Ok();
+            return Ok(user.Id);
         return BadRequest();
     }
 

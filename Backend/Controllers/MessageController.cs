@@ -40,7 +40,7 @@ public class MessageController : ControllerBase
     {
         bool isMessageCreated = messageService.CreateMessage(message);
         if (isMessageCreated)
-            return Ok();
+            return Ok(message.Id);
         return BadRequest();
     }
 

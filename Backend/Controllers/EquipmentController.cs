@@ -40,7 +40,7 @@ public class EquipmentController : ControllerBase
     {
         bool isEquipmentCreated = equipmentService.CreateEquipment(equipment);
         if (isEquipmentCreated)
-            return Ok();
+            return Ok(equipment.Id);
         return BadRequest();
     }
 

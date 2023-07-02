@@ -40,7 +40,7 @@ public class PartController : ControllerBase
     {
         bool isPartCreated = partService.CreatePart(part);
         if (isPartCreated)
-            return Ok();
+            return Ok(part.Id);
         return BadRequest();
     }
 

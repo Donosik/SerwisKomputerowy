@@ -40,7 +40,7 @@ public class ClientController : ControllerBase
     {
         bool isClientCreated = clientServive.CreateClient(client);
         if (isClientCreated)
-            return Ok();
+            return Ok(client.Id);
         return BadRequest();
     }
 

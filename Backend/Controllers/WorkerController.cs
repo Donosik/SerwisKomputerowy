@@ -40,7 +40,7 @@ public class WorkerController : ControllerBase
     {
         bool isWorkerCreated = workerService.CreateWorker(worker);
         if (isWorkerCreated)
-            return Ok();
+            return Ok(worker.Id);
         return BadRequest();
     }
 
