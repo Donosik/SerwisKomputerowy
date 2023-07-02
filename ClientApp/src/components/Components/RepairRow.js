@@ -45,9 +45,9 @@ export function RepairRow ({ repair,removeFromData }) {
             <td>{ repair.client.lastName ?? "-" }</td>
             <td>{ repair.equipment.name ?? "-" }</td>
             <td>
-                {localStorage.getItem("role") > 0 && <button className='label-button' onClick={editElement}>EDYTUJ</button>}
-                <button className='label-button'>SZCZEGÓŁY</button>
-                {localStorage.getItem("role") > 0 && <button className='label-button' onClick={deleteElement}>USUŃ</button>}
+                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={editElement}>EDYTUJ</button>}
+                <button className='button-class'>SZCZEGÓŁY</button>
+                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={deleteElement}>USUŃ</button>}
             </td>
         </tr>
     )
