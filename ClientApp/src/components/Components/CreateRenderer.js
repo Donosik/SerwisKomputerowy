@@ -1,26 +1,49 @@
 ﻿import "../Css/repair.css"
 import {useEffect, useState} from "react";
+import axios, {get} from "axios";
 
 export function CreateRenderer() {
 
     const [inputs, setInputs] = useState({})
-    
-    useEffect(()=>
-    {
-        setInputs(values => ({...values, ["type"]: "0"}))
-        setInputs(values => ({...values, ["isGuarantee"]: "off"}))
-        setInputs(values => ({...values, ["guaranteeTime"]: "2000-01-01"}))
-        setInputs(values => ({...values, ["acceptanceTime"]: "2000-01-01"}))
-        setInputs(values => ({...values, ["returnTime"]: "2000-01-01"}))
-        setInputs(values => ({...values, ["status"]: "1"}))
+    const [clients, setClients] = useState([])
+    const [choosenClient, setChoosenClient] = useState("")
+
+    const setAuthToken = token => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        } else
+            delete axios.defaults.headers.common["Authorization"];
     }
-        ,[])
+
+    useEffect(() => {
+            setInputs(values => ({...values, ["type"]: "0"}))
+            setInputs(values => ({...values, ["isGuarantee"]: "off"}))
+            setInputs(values => ({...values, ["guaranteeTime"]: "2000-01-01"}))
+            setInputs(values => ({...values, ["acceptanceTime"]: "2000-01-01"}))
+            setInputs(values => ({...values, ["returnTime"]: "2000-01-01"}))
+            setInputs(values => ({...values, ["status"]: "1"}))
+            getClients()
+        }
+        , [])
+
+    async function getClients() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/client');
+        await setClients(result.data)
+        setChoosenClient(result.data[0].id.toString()??"")
+    }
+
+    
+    function changeClient(event) {
+        setChoosenClient(event.target.value)
+    }
+
     function handleChange(event) {
         let name = event.target.name
         let value = event.target.value
         if (name === "isGuarantee")
-            if(inputs.isGuarantee==="on")
-                value="off"
+            if (inputs.isGuarantee === "on")
+                value = "off"
         setInputs(values => ({...values, [name]: value}))
     }
 
@@ -28,7 +51,9 @@ export function CreateRenderer() {
         event.preventDefault()
         console.log("Wysyłam")
         console.log(inputs)
+        console.log(choosenClient)
     }
+
     //TODO: Pamietac że tu też są typy napraw i statusy
     return (
         <>
@@ -79,6 +104,14 @@ export function CreateRenderer() {
                     <select name="status" value={inputs.status || ""} onChange={handleChange}>
                         <option value="0">skonczone</option>
                         <option value="1">przyjete</option>
+                    </select>
+                </label>
+                <label>
+                    Wybierz klienta:
+                    <select name="clientId" value={choosenClient || ""} onChange={changeClient}>
+                        {clients.map((client, id) => (
+                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
+                        ))}
                     </select>
                 </label>
                 <button onClick={handleSubmit}>Stwórz naprawę</button>
