@@ -1,11 +1,23 @@
-import React, {Component} from 'react';
-import {Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Navbar, NavbarBrand, NavItem, NavLink} from 'reactstrap';
+import {Link, useNavigate} from 'react-router-dom';
 import '../Css/NavMenu.css';
+import axios from "axios";
+import {useEffect} from "react";
 
 export function NavMenu() {
+    const navigate = useNavigate()
+    
+    function checkIfLogged()
+    {
+        if(localStorage.getItem("token")===null)
+            navigate('/')
+    }
+    //TODO: zakomentowane, żeby inni bez bazy dali rade coś tu robić xD
+    //useEffect(checkIfLogged,[])
     function logoutHandler() {
-
+        delete axios.defaults.headers.common["Authorization"];
+        localStorage.removeItem("token")
+        navigate('/')
     }
 
     return (
