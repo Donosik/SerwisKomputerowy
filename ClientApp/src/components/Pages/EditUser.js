@@ -1,12 +1,12 @@
 import {NavMenu} from "../Components/NavMenu";
-
+import "../Css/EditUser.css"
 export function EditUser()
 {
     return(
         <>
             <NavMenu/>
 
-            Szukaj po Nawzisku:<input/> <button>Szukaj</button>
+            Szukaj po Nawzisku:<input/> <button className="button-class">Szukaj</button>
             <table>
                 <thead>
                 <tr>
@@ -31,7 +31,7 @@ export function EditUser()
                         </select>
                     </td>
                     <td>
-                        <button>USUŃ</button>
+                        <button class="button-class">USUŃ</button>
                     </td>
                 </tr>
                 <tr>
@@ -46,13 +46,13 @@ export function EditUser()
                         </select>
                     </td>
                     <td>
-                        <button>USUŃ</button>
+                        <button className="button-class">USUŃ</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <br/>
-            <button>ZAPISZ ZMIANY</button>
+            <button className="button-class">ZAPISZ ZMIANY</button>
         </>
     )
 }
