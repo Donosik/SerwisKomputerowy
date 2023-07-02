@@ -6,6 +6,7 @@ import { Raport } from "./components/Pages/Raport"
 import Chatbox from "./components/Pages/Chatbox";
 import {Profile} from "./components/Pages/Profile";
 import {Magazine} from "./components/Pages/Magazine";
+import {EditUser} from "./components/Pages/EditUser";
 
 
 const AppRoutes = [
@@ -44,6 +45,10 @@ const AppRoutes = [
     {
         path: '/magazyn',
         element: <Magazine/>
+    },
+    {
+        path: '/edytuj',
+        element: <EditUser/>
     }
 ];
 

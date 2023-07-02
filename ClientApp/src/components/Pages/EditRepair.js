@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom"
 import {useState, useEffect} from "react"
 import axios from "axios";
+import {NavMenu} from "../Components/NavMenu";
 
 export function EditRepair() {
 
@@ -87,7 +88,9 @@ export function EditRepair() {
     }
 
     return (
-        <div>
+        <>
+            <NavMenu/>
+            <div>
             <div>
                 <form>
                     <label>
@@ -135,5 +138,6 @@ export function EditRepair() {
                 Części wymienne:
             </div>
         </div>
+            </>
     )
 }
