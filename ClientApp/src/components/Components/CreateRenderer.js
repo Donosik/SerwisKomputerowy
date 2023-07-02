@@ -47,11 +47,14 @@ export function CreateRenderer() {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    async function createRepair()
+    {
+        const response= await axios.post('/repair',{inputs})
+        await axios.put('/repair/'+response.data+'/'+choosenClient)
+    }
     function handleSubmit(event) {
         event.preventDefault()
-        console.log("Wysyłam")
-        console.log(inputs)
-        console.log(choosenClient)
+        createRepair()
     }
 
     //TODO: Pamietac że tu też są typy napraw i statusy

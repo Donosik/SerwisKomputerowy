@@ -5,15 +5,15 @@ export function EditUser()
     return(
         <>
             <NavMenu/>
-
-            Szukaj po Nawzisku:<input/> <button className="button-class">Szukaj</button>
+            
+            Szukaj po Loginie:<input/> <button className="button-class">Szukaj</button>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Imię</th>
                     <th>Nazwisko</th>
-                    <th>Stara Rola</th>
+                    <th>Aktualna Rola</th>
                     <th>Nowa Rola</th>
                     <th>AKCJA</th>
                 </tr>
