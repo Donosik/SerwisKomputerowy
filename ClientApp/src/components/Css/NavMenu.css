@@ -16,3 +16,39 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.navbar {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  background-color:  #FFE5CA;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.navbar li {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.color1 {
+  color: #5f2640;
+}
+
+.color2 {
+  color: #823650;
+}
+
+.color3 {
+  color: #b4546b;
+}
+
+.color4 {
+  color: #f17c8c;
+}
+
+.color5 {
+  color: #f6aca7;
+}

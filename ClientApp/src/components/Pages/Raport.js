@@ -17,9 +17,7 @@ export function Raport() {
         <>
             <NavMenu />
             <div>
-            <h2>
-                Dupsko
-            </h2>
+                <p className='services-title'> RAPORTY </p>
         </div>    
             </>
     );

@@ -25,29 +25,32 @@ export class NavMenu extends Component {
         return (
             <header>
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-                    <NavbarBrand tag={Link} to="/">SerwisKomputerowy</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/" className="color1">SerwisKomputerowy</NavbarBrand>
                     <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                     <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                         <ul className="navbar-nav flex-grow">
+                          
+                            
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/profil">Profil</NavLink>
+                                <NavLink tag={Link} className="text-dark color4" to="/raport">Raporty</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/chat">Czat</NavLink>
+                                <NavLink tag={Link} className="text-dark color5" to="/naprawy">Naprawy</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/raport">Raporty</NavLink>
+                                <NavLink tag={Link} className="text-dark color1" to="/magazyn">Magazyn częsci</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/naprawy">Naprawy</NavLink>
+                                <NavLink tag={Link} className="text-dark color3" to="/chat">Wiadomości</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/magazyn">Magazyn</NavLink>
+                                <NavLink tag={Link} className="text-dark color2" to="/profil">Profil</NavLink>
                             </NavItem>
                         </ul>
                     </Collapse>
                 </Navbar>
             </header>
+
         );
     }
 }
