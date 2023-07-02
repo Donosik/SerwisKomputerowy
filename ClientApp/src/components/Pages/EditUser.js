@@ -6,14 +6,14 @@ export function EditUser()
         <>
             <NavMenu/>
 
-            Szukaj po Nawzisku:<input/> <button>Szukaj</button>
+            Szukaj po Loginie:<input/> <button>Szukaj</button>
             <table>
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Imię</th>
                     <th>Nazwisko</th>
-                    <th>Stara Rola</th>
+                    <th>Aktualna Rola</th>
                     <th>Nowa Rola</th>
                     <th>AKCJA</th>
                 </tr>
