@@ -31,7 +31,7 @@ export function EditUser()
                         </select>
                     </td>
                     <td>
-                        <button class="button-class">USUŃ</button>
+                        <button className="button-class">USUŃ</button>
                     </td>
                 </tr>
                 <tr>
