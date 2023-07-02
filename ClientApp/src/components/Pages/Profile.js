@@ -5,7 +5,6 @@ export function Profile()
     return(
         <>
             <NavMenu />
-            <body>
             <p className='services-title'> JESTEŚ ZALOGOWAY JAKO: </p>
             <div className="profile-frame">
                 <div className="profile-info">
@@ -15,7 +14,6 @@ export function Profile()
                     <p className="color2">Ilość napraw: 6</p>
                 </div>
             </div>
-            </body>
         </>
     );
 }

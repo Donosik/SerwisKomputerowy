@@ -6,13 +6,11 @@ export function Magazine()
         <>
             <NavMenu />
             <p className='services-title'> MAGAZYN CZĘŚCI </p>
-            <body>
             <label>
                 Nazwa części:   
                 <input type="text" />
             </label><button className='button-add' >SZUKAJ</button>
             <button className='button-add' >DODAJ</button>
-            <button className='button-add'>WYŚWIETL WSZYSTKIE</button>
           
             <table>
                 <thead>
@@ -48,9 +46,6 @@ export function Magazine()
                 
                 </tbody>
             </table>
-            
-            
-            </body>
         </>
     );
 }
