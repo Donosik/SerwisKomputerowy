@@ -47,6 +47,10 @@ export function CreateRenderer() {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    async function createRepair()
+    {
+        await axios.post('/repair',inputs)
+    }
     function handleSubmit(event) {
         event.preventDefault()
         console.log("Wysyłam")

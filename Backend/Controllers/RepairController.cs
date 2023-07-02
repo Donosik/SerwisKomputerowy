@@ -41,7 +41,7 @@ public class RepairController : ControllerBase
     {
         bool isRepairCreated = repairService.CreateRepair(repair);
         if (isRepairCreated)
-            return Ok();
+            return Ok(repair.Id);
         return BadRequest();
     }
 
