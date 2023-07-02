@@ -129,7 +129,7 @@ export function EditRepair() {
 
                         />
                     </label>
-                    <button onClick={handleSubmit}>Zapisz zmiany</button>
+                    <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                 </form>
             </div>
             <div>
