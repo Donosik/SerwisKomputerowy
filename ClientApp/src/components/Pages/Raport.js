@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {NavMenu} from "../Components/NavMenu";
-
+import "../Css/EditUser.css"
 
 const setAuthToken = token => {
     if (token) {
@@ -69,7 +69,7 @@ export function Raport() {
                     </tr>
                     </tbody>
                 </table> <br/>
-                <button>Pobierz PDF</button>
+                <button className="button-class">Pobierz PDF</button>
         </div>    
             </>
     );

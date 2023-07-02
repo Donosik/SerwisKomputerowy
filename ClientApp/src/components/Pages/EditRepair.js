@@ -2,6 +2,7 @@ import {useNavigate, useParams} from "react-router-dom"
 import {useState, useEffect} from "react"
 import axios from "axios";
 import {NavMenu} from "../Components/NavMenu";
+import "../Css/login.css"
 
 export function EditRepair() {
 
