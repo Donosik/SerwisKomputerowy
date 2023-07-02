@@ -20,6 +20,9 @@ export class NavMenu extends Component {
             collapsed: !this.state.collapsed
         });
     }
+    logoutHandler() {
+        
+    }
 
     render() {
         return (
@@ -48,9 +51,7 @@ export class NavMenu extends Component {
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark color2" to="/profil">Profil</NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} className="text-dark color2" to="/profil">|   WYLOGUJ</NavLink>
-                            </NavItem>
+                            <button className="button-class" onClick={this.logoutHandler}>Wyloguj</button>
                         </ul>
                     </Collapse>
                 </Navbar>
