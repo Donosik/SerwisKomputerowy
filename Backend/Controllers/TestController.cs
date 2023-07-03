@@ -82,7 +82,7 @@ public class TestController : ControllerBase
         worker21.LastName = "Frontendowski";
         worker21.BirthDate = DateTime.Now;
         worker21.Specialization = Specialization.Printers;
-        worker21.User = worker1;
+        worker21.User = worker2;
         workerService.CreateWorker(worker21);
 
         //User1
