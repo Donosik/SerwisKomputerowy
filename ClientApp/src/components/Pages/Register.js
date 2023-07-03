@@ -16,6 +16,8 @@ export function Register() {
 
     const navigate = useNavigate()
     const [login, setLogin] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
     const [isRegisterFailed, setIsRegisterFailed] = useState(false)
     
@@ -64,6 +66,23 @@ export function Register() {
                                             value={login}
                                             onChange={e => setLogin(e.target.value)}
                                         />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <input
+                                            placeholder="Imię"
+                                            className="form-control form-control-lg"
+                                            type="text"
+                                            value={firstName}
+                                            onChange={e => setFiestName(e.target.value)}
+                                        />
+                                        <fieldset className="form-group">
+                                            <input
+                                                placeholder="Nazwisko"
+                                                className="form-control form-control-lg"
+                                                type="text"
+                                                value={lastName}
+                                                onChange={e => setLastName(e.target.value)}
+                                            />
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <input
