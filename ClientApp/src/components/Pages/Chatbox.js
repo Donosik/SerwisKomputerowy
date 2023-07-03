@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import '../Css/Chatbox.css';
-import {NavMenu} from "../Components/NavMenu";
-
-
-
-
+import '../Css/EditUser.css';
+import { NavMenu } from "../Components/NavMenu";
 
 function Chatbox() {
     const [messages, setMessages] = useState([]);
@@ -26,10 +23,44 @@ function Chatbox() {
         }
     };
 
+    const tableData = [
+        { id: 1, data1: 'Data1', data2: 'Data2', data3: 'Data3' },
+        { id: 2, data1: 'Data4', data2: 'Data5', data3: 'Data6' },
+    ];
+
+    const handleRowButtonClick = (rowId) => {
+        console.log('Button pressed for ID: ', rowId);
+    }
+
     return (
         <>
             <NavMenu />
-        <div className="chatbox">
+            <div className="chatbox-container">
+                <div className="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Header1</th>
+                                <th>Header2</th>
+                                <th>Header3</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tableData.map((row) => (
+                                <tr key={row.id}>
+                                    <td>{row.data1}</td>
+                                    <td>{row.data2}</td>
+                                    <td>{row.data3}</td>
+                                    <td>
+                                        <button class="button-class" onClick={() => handleRowButtonClick(row.id)}>Przycisk</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            <div className="chatbox">
             <div className="messages">
                 {messages.map((message) => (
                     <div key={message.id} className="message">
@@ -45,7 +76,8 @@ function Chatbox() {
                     placeholder="Type your message..."
                 />
                 <button onClick={handleSendMessage}>Send</button>
-            </div>
+                </div>
+                </div>
         </div>
             </>
     );

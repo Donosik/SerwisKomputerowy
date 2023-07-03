@@ -1,4 +1,14 @@
-﻿.chatbox {
+﻿.chatbox-container{
+    display:flex;
+}
+
+.table-container{
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.chatbox {
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 300px;
