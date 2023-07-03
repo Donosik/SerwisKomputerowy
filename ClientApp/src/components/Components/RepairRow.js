@@ -16,6 +16,11 @@ export function RepairRow({repair, removeFromData}) {
         navigate('/naprawy/edycja/' + repair.id)
     }
 
+    function detailsElement()
+    {
+        navigate('/naprawy/szczegoly/'+repair.id)
+    }
+    
     async function deleteElement() {
         setAuthToken(localStorage.getItem("token"))
         await axios.delete('/repair/' + repair.id)
@@ -46,7 +51,7 @@ export function RepairRow({repair, removeFromData}) {
             <td>
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={editElement}>EDYTUJ</button>}
-                <button className='button-class'>SZCZEGÓŁY</button>
+                <button className='button-class' onClick={detailsElement} >SZCZEGÓŁY</button>
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={deleteElement}>USUŃ</button>}
                 {localStorage.getItem("role") > 0 && <button className='button-class'>FAKTURA PDF</button>}
