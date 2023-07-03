@@ -6,12 +6,12 @@ import {useEffect} from "react";
 
 export function NavMenu() {
     const navigate = useNavigate()
-    
-    function checkIfLogged()
-    {
-        if(localStorage.getItem("token")===null)
+
+    function checkIfLogged() {
+        if (localStorage.getItem("token") === null)
             navigate('/')
     }
+
     //TODO: zakomentowane, żeby inni bez bazy dali rade coś tu robić xD
     //useEffect(checkIfLogged,[])
     function logoutHandler() {
@@ -25,18 +25,18 @@ export function NavMenu() {
             <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container
                     light>
                 <NavbarBrand tag={Link} to="/" className="color1">SerwisKomputerowy</NavbarBrand>
-                <NavItem>
+                {localStorage.getItem("role") > 1 && <NavItem>
                     <NavLink tag={Link} className="text-dark color4" to="/edytuj">Zarządzaj użytkownikami</NavLink>
-                </NavItem>
-                <NavItem>
+                </NavItem>}
+                {localStorage.getItem("role") > 1 &&<NavItem>
                     <NavLink tag={Link} className="text-dark color4" to="/raport">Raporty</NavLink>
-                </NavItem>
+                </NavItem>}
                 <NavItem>
                     <NavLink tag={Link} className="text-dark color5" to="/naprawy">Naprawy</NavLink>
                 </NavItem>
-                <NavItem>
+                {localStorage.getItem("role") > 0 &&<NavItem>
                     <NavLink tag={Link} className="text-dark color1" to="/magazyn">Magazyn częsci</NavLink>
-                </NavItem>
+                </NavItem>}
                 <NavItem>
                     <NavLink tag={Link} className="text-dark color3" to="/chat">Wiadomości</NavLink>
                 </NavItem>
