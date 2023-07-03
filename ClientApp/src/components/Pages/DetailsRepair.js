@@ -9,6 +9,7 @@ export function DetailsRepair()
     return(
         <>
             <NavMenu/>
+            <br/>
             <hr/>
             <p>INFORMACJE O NAPRAWIE <br/></p>
             <hr/>
@@ -26,6 +27,7 @@ export function DetailsRepair()
                     <td>Zakończona</td>
                 </tr>
             </table>
+            <br/>
             <hr/>
             <p> INFORMACJE O SPRZĘCIE <br/></p>
             <hr/>
@@ -47,6 +49,8 @@ export function DetailsRepair()
                     <td>Tak</td>
                 </tr>
             </table>
+            
+            <br/>
             <hr/>
             <p> INFORMACJE O KLIENCIE <br/></p>
             <hr/>
@@ -63,6 +67,8 @@ export function DetailsRepair()
                     <td>Kowalski</td>
                 </tr>
             </table>
+            
+            <br/>
             <hr/>
             <p> INFORMACJE O PRACOWNIKACH <br/></p>
             <hr/>
@@ -84,6 +90,8 @@ export function DetailsRepair()
                     <td>200 zł</td>
                 </tr>
             </table>
+            <br/>
+            
             <hr/>
             <p> INFORMACJE O KOSZTACH <br/></p>
             <hr/>
@@ -99,6 +107,9 @@ export function DetailsRepair()
                     <td>1150 zł</td>
                 </tr>
             </table>
+            
+            <br/>
+            <br/>
         </>
     )
 }
