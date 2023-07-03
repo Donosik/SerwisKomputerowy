@@ -35,6 +35,10 @@ html {
   font-weight: bold;
 }
 
+.navbar li:hover {
+ background-color: #FA9884;
+}
+
 .color1 {
   color: #5f2640;
 }
