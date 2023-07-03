@@ -47,6 +47,13 @@ public class TestController : ControllerBase
         admin.Role = Role.Admin;
         admin.Messages = new List<Message>();
         userService.CreateUser(admin);
+        Worker worker = new Worker();
+        worker.FirstName = "Admin";
+        worker.LastName = "Adminowski";
+        worker.BirthDate=DateTime.Now;
+        worker.Specialization = Specialization.Electronics;
+        worker.User = admin;
+        workerService.CreateWorker(worker);
 
         //Pracownik1
         User worker1 = new User();
@@ -55,6 +62,13 @@ public class TestController : ControllerBase
         worker1.Role = Role.Worker;
         worker1.Messages = new List<Message>();
         userService.CreateUser(worker1);
+        Worker worker11 = new Worker();
+        worker11.FirstName = "Damian";
+        worker11.LastName = "Backendowski";
+        worker11.BirthDate = DateTime.Now;
+        worker11.Specialization = Specialization.Printers;
+        worker11.User = worker1;
+        workerService.CreateWorker(worker11);
 
         //Pracownik2
         User worker2 = new User();
@@ -63,6 +77,13 @@ public class TestController : ControllerBase
         worker2.Role = Role.Worker;
         worker2.Messages = new List<Message>();
         userService.CreateUser(worker2);
+        Worker worker21 = new Worker();
+        worker21.FirstName = "Paweł";
+        worker21.LastName = "Frontendowski";
+        worker21.BirthDate = DateTime.Now;
+        worker21.Specialization = Specialization.Printers;
+        worker21.User = worker1;
+        workerService.CreateWorker(worker21);
 
         //User1
         User user1 = new User();
