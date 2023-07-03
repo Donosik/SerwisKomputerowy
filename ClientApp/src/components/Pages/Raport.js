@@ -25,15 +25,15 @@ export function Raport() {
             try {
 
                 // Pobierz pracowników z bazy danych
-                const workersResponse = await axios.get("/workers");
+                const workersResponse = await axios.get("/worker");
                 setWorkers(workersResponse.data);
 
                 // Pobierz ID napraw z bazy danych
-                const repairIDsResponse = await axios.get("/repairIDs");
+                const repairIDsResponse = await axios.get("/repair");
                 setRepairIDs(repairIDsResponse.data);
 
                 // Pobierz ID klientów z bazy danych
-                const clientIDsResponse = await axios.get("/clientIDs");
+                const clientIDsResponse = await axios.get("/client");
                 setClientIDs(clientIDsResponse.data);
             } catch (error) {
                 console.log(error);
@@ -109,17 +109,17 @@ export function Raport() {
                     Wybierz pracownika:
                     <select name="workerID">
                         <option value="-1">Wszyscy</option>
-                        {workers.map((worker) => (
+                        {workers.map((worker,id) => (
                             <option key={worker.id} value={worker.id}>
-                                {worker.name}
+                                {worker.firstName}
                             </option>
                         ))}
                     </select>
                     ID naprawy:
                     <select name="repairID">
                         <option value="-1">Wszystkie</option>
-                        {repairIDs.map((id) => (
-                            <option key={id} value={id}>
+                        {repairIDs.map((repair,id) => (
+                            <option key={repair.id} value={repair.id}>
                                 {id}
                             </option>
                         ))}
@@ -127,9 +127,9 @@ export function Raport() {
                     ID klienta / Imię + Nazwisko:
                     <select name="clientID">
                         <option value="-1">Wszyscy</option>
-                        {clientIDs.map((id) => (
-                            <option key={id} value={id}>
-                                {id}
+                        {clientIDs.map((client,id) => (
+                            <option key={client.id} value={client.id}>
+                                {client.firstName+" "+client.lastName}
                             </option>
                         ))}
                     </select>

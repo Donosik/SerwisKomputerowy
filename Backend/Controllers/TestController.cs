@@ -148,6 +148,12 @@ public class TestController : ControllerBase
         part1.Repair = repair1;
         partService.CreatePart(part1);
 
+        Action action=new Action();
+        action.Description = "TEST";
+        action.Worker = worker21;
+        action.Repair = repair1;
+        actionService.CreateAction(action);
+
     }
 
     [HttpGet("createDB")]
