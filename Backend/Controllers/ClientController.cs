@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
@@ -30,6 +31,15 @@ public class ClientController : ControllerBase
     public IActionResult GetClient(int id)
     {
         Client client = clientServive.GetClient(id);
+        if (client != null)
+            return Ok(client);
+        return NotFound();
+    }
+
+    [HttpGet("me/{clientId}")]
+    public IActionResult GetMeAsClient(int clientId)
+    {
+        Client client = clientServive.GetMeAsClient(clientId);
         if (client != null)
             return Ok(client);
         return NotFound();

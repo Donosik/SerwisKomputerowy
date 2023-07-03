@@ -30,6 +30,19 @@ public class ClientService : IClientService
         return null;
     }
 
+    public Client GetMeAsClient(int userId)
+    {
+        foreach (var client in GetClients())
+        {
+            if (client.User.Id == userId)
+            {
+                return client;
+            }
+        }
+
+        return null;
+    }
+
     public bool CreateClient(Client client)
     {
         if (client != null)

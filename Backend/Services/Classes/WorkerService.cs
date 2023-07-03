@@ -32,6 +32,19 @@ public class WorkerService : IWorkerService
         return null;
     }
 
+    public Worker GetMeAsWorker(int userId)
+    {
+        foreach (var worker in GetWorkers())
+        {
+            if (worker.User.Id == userId)
+            {
+                return worker;
+            }
+        }
+        
+        return null;
+    }
+
     public bool CreateWorker(Worker worker)
     {
         if (worker != null)
