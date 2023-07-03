@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
@@ -30,6 +31,15 @@ public class WorkerController : ControllerBase
     public IActionResult GetWorker(int id)
     {
         Worker worker = workerService.GetWorker(id);
+        if (worker != null)
+            return Ok(worker);
+        return NotFound();
+    }
+
+    [HttpGet("me/{userId}")]
+    public IActionResult GetMeAsWorker(int userId)
+    {
+        Worker worker = workerService.GetMeAsWorker(userId);
         if (worker != null)
             return Ok(worker);
         return NotFound();
