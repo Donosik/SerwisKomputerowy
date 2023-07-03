@@ -7,11 +7,25 @@ import { useState, useEffect } from "react"
 export function EditUser() {
     const [data, setData] = useState([])
     const [role, setRole] = useState(0)
+    const [searchQuery, setSearchQuery] = useState("")
+
+    const handleSearchQueryChange = (event) => {
+        setSearchQuery(event.currentTarget.value)
+    }
 
     const fetchWorkers = async () => {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/worker')
         setData(result.data)
+    }
+
+    const filterBySearchQuery = (repair) => {
+        if (searchQuery === "") {
+            return repair
+        }
+        else if (repair.id.toString().includes(searchQuery)) {
+            return repair
+        }
     }
 
     const setAuthToken = token => {
@@ -21,7 +35,7 @@ export function EditUser() {
         else
             delete axios.defaults.headers.common["Authorization"];
     }
-
+    
     //async function deleteWorker(workerId) {
     //    setAuthToken(localStorage.getItem("token"))
     //    await axios.delete('/worker/' + workerId)
@@ -43,7 +57,7 @@ export function EditUser() {
         <>
             <NavMenu />
 
-            Szukaj po Loginie:<input /> <button className="button-class">Szukaj</button>
+            Szukaj po Loginie:<input onChange={handleSearchQueryChange} /> <button className="button-class">Szukaj</button>
             <table>
                 <thead>
                     <tr>
@@ -58,7 +72,7 @@ export function EditUser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((worker, id) => (
+                    {data.filter(filterBySearchQuery).map((worker, id) => (
                         <UserRow worker={worker} key={worker.id} removeFromData={removeFromData} />
                     ))}
                 </tbody>
