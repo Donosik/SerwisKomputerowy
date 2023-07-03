@@ -13,7 +13,12 @@ namespace SerwisKomputerowy.Controllers;
 [Route("[controller]")]
 public class RaportController : ControllerBase
 {
-    public DatabaseContext dbContext;
+    public IUnitOfWork unitOfWork;
+
+    public RaportController(IUnitOfWork unitOfWork)
+    {
+        this.unitOfWork = unitOfWork;
+    }
 
     [HttpGet]
     public IActionResult GetReport(
@@ -24,7 +29,7 @@ public class RaportController : ControllerBase
     [FromQuery(Name = "clientID")] int clientID = -1)
     {
 
-        IQueryable<Backend.Entities.Action> repairQuery = dbContext.Actions;
+        IEnumerable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetAll();
 
 
         // Dodaj warunek na daty początkową i końcową
@@ -45,7 +50,7 @@ public class RaportController : ControllerBase
         // Dodaj warunek na numer klienta
         if (clientID != -1)
         {
-            repairQuery = repairQuery.Where(r => r.Repair.Client.Id== clientID);
+            repairQuery = repairQuery.Where(r => r.Repair.Client.Id == clientID);
         }
 
         List<Backend.Entities.Action> reportData = repairQuery.ToList();
