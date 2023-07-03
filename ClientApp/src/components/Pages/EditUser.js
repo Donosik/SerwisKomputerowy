@@ -48,6 +48,7 @@ export function EditUser() {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Login</th>
                         <th>Imię</th>
                         <th>Nazwisko</th>
                         <th>Aktualna Specjalizacja</th>

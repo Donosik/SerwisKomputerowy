@@ -45,7 +45,9 @@ export function UserRow({worker, removeFromData}) {
 
     return (
         <tr>
+            
             <td>{worker.id ?? ""}</td>
+            <td>{worker.user.login ?? ""}</td>
             <td>{worker.firstName ?? ""}</td>
             <td>{worker.lastName ?? ""}</td>
             <td>{(() => {
