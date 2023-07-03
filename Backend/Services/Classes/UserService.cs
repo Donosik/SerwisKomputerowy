@@ -33,7 +33,19 @@ public class UserService : IUserService
             if (user.Login == u.Login)
                 return false;
         }
-        return CreateUser(user);
+
+        if (CreateUser(user))
+        {
+            Client client = new Client();
+            client.User = user;
+            client.FirstName = registerUser.FirstName;
+            client.LastName = registerUser.LastName;
+            unitOfWork.clients.Create(client);
+            int result = unitOfWork.Save();
+            if (result > 0)
+                return true;
+        }
+        return false;
     }
 
     public User Login(LoginUser loginUser)
