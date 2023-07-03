@@ -54,7 +54,7 @@ export function Register() {
                 </div>
                 <div className="container page d-flex justify-content-center align-items-center min-vh-100">
                     <div className="row">
-                        <div className="login-box">
+                        <div className="reg-box">
                             <h2 className="text-login">REJESTRACJA</h2>
                             <form>
                                 <fieldset>
