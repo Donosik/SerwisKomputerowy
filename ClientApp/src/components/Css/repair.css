@@ -99,3 +99,18 @@ th {
 tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+.button-class:hover {
+    background-color: #fc7458;
+}
+.button-class{
+    background-color: #FA9884;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}

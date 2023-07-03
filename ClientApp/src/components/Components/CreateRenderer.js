@@ -118,7 +118,7 @@ export function CreateRenderer() {
                         ))}
                     </select>
                 </label>
-                <button onClick={handleSubmit}>Stwórz naprawę</button>
+                <button className="button-class" onClick={handleSubmit}>Stwórz naprawę</button>
             </form>
         </>
     )
