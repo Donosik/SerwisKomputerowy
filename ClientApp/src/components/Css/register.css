@@ -1,0 +1,103 @@
+body {
+    background-color: #FFF3E2;
+
+}
+
+.login-box {
+    width: 350px;
+    height: 420px;
+    background-color: #FFE5CA;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.auth-page{
+    background-color: #FFF3E2;
+    /*height: 100vh;*/
+}
+
+.text-login{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.form-group {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.form-control {
+    background-color: #FFF3E2;
+}
+
+
+.button-login {
+    background-color: #FA9884;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 10px;
+
+
+}
+.button-login:hover {
+    background-color: #fc7458;
+}
+
+.login-failed {
+    text-align: center;
+    margin-top: 20px;
+    color:red;
+}
+
+.forgot-pass{
+    text-align: center;
+    margin-top:20px;
+}
+.forgot-pass:hover {
+    color: #E74646;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.napis{
+    text-align:center;
+}
+.navBar {
+    background-color: #FFE5CA;
+    height: 70px;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    position: sticky;
+    top: 0;
+}
+.text-welcome {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 5px;
+    border-radius: 10px;
+    transition: all 1.5s;
+}
+.text-welcome:hover {
+    cursor: pointer;
+    background-color: #FA9884;
+    letter-spacing: 5px;
+    /*box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;*/
+}
+/*może jakoś ciekawie będzie się to dało wykorzystać*/
+/*@media screen and (max-width: 1000px){
+    .navBar{
+        background-color: black;
+    }
+}*/

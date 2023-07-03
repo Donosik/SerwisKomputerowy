@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import "../Css/login.css"
+import "../Css/register.css"
 
 const setAuthToken = token => {
     if (token) {
@@ -73,8 +73,9 @@ export function Register() {
                                             className="form-control form-control-lg"
                                             type="text"
                                             value={firstName}
-                                            onChange={e => setFiestName(e.target.value)}
+                                            onChange={e => setFirstName(e.target.value)}
                                         />
+                                    </fieldset>
                                         <fieldset className="form-group">
                                             <input
                                                 placeholder="Nazwisko"
@@ -104,7 +105,7 @@ export function Register() {
                                         <a href="/logowanie"> Masz już konto?</a>
                                     </div>
                                     {isRegisterFailed ?
-                                        <div className="login-failed d-flex justify-content-center align-items-center">Register failed</div>
+                                      <div className="login-failed d-flex justify-content-center align-items-center"><br/> Register failed</div>
                                         : null}
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
                                     </div>
