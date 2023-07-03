@@ -19,18 +19,25 @@ export function UserRow({ worker, removeFromData }) {
         removeFromData(worker.id)
     }
 
+    async function saveChanges() {
+        console.log(inputs)
+        //fetch1: put zapisujacy specjalizacje
+        //fetch2: zmiana czy jest adminem
+    }
+
     function handleChange(event) {
         let name = event.target.name
         let value = event.target.value
         if (name === "isAdmin")
-            if (inputs.isAdmin === "on" && worker.user.role !== 2)
+            if (inputs.isAdmin === "on")
                 value = "off"
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    //useEffect(() => {
-    //    setInputs(values => ({ ...values, ["isAdmin"]: "off" }))
-    //})
+    useEffect(() => {
+        setInputs(values => ({ ...values, ["isAdmin"]: worker.user.role === 2 ? "on" : "off" }))
+        setInputs(values => ({ ...values, ["specialization"]: worker.specialization }))
+    }, [])
 
     return (
         <tr>
@@ -44,17 +51,20 @@ export function UserRow({ worker, removeFromData }) {
                 }
             })()}</td>
             <td>
-                <select name="specjalizacja">
-                    <option value={0}>electronics</option>
-                    <option value={1}>printers</option>
+                <select name="specialization" value={inputs.specialization || ""} onChange={handleChange}>
+                    <option value="0">electronics</option>
+                    <option value="1">printers</option>
                 </select>
             </td>
             <td>
-                <input type="checkbox" name="isAdmin" onChange={handleChange} />
+                {worker.user.role === 2 ?
+                    <input type="checkbox" name="isAdmin" onChange={handleChange} checked />
+                    : <input type="checkbox" name="isAdmin" onChange={handleChange} />}    
+                
             </td>
             <td>
-                {localStorage.getItem("role") > 0 && <button className='button-class'>ZAPISZ ZMIANY</button>}
-                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={deleteElement}>USUÑ</button>}
+                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={saveChanges}>ZAPISZ ZMIANY</button>}
+                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={deleteElement}>USUÅƒ</button>}
             </td>
         </tr>
     )

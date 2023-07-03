@@ -49,6 +49,7 @@ export function CreateRenderer() {
 
     async function createRepair()
     {
+        console.log(inputs)
         const response= await axios.post('/repair',{inputs})
         await axios.put('/repair/'+response.data+'/'+choosenClient)
     }
