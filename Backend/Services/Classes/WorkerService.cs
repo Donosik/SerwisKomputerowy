@@ -63,6 +63,40 @@ public class WorkerService : IWorkerService
         return false;
     }
 
+    public bool EditSpecialization(int id, int newSpecialization)
+    {
+        Worker worker = unitOfWork.workers.Get(id);
+        if (worker != null)
+        {
+            worker.Specialization = (Specialization)newSpecialization;
+            unitOfWork.workers.Update(worker);
+            int result = unitOfWork.Save();
+            if(result>0)
+                return true;
+        }
+        return false;
+    }
+    public bool EditWorkerToAdmin(int id, bool isAdmin)
+    {
+        Worker worker = unitOfWork.workers.Get(id);
+        if (worker != null)
+        {
+            User user = worker.User;
+            if (user != null)
+            {
+                if (isAdmin)
+                    user.Role = Role.Admin;
+                else
+                    user.Role = Role.Worker;
+                unitOfWork.users.Update(user);
+                int result = unitOfWork.Save();
+                if (result > 0)
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public bool DeleteWorker(int id)
     {
         if (id > 0)

@@ -53,6 +53,25 @@ public class WorkerController : ControllerBase
         return BadRequest();
     }
 
+    [HttpPut("{id}/{newSpecialization}")]
+    public IActionResult EditSpecialization(int id,int newSpecialization)
+    {
+        bool isWorkerEdited = workerService.EditSpecialization(id, newSpecialization);
+        if (isWorkerEdited)
+            return Ok();
+        return BadRequest();
+    }
+
+    [HttpPut("{id}/{isAdmin}")]
+    public IActionResult EditWorkerToAdmin(int id, bool isAdmin)
+    {
+        bool isWorkerEdited = workerService.EditWorkerToAdmin(id, isAdmin);
+        if (isWorkerEdited)
+            return Ok();
+        return BadRequest();
+    }
+
+    [HttpDelete("{id}")]
     public IActionResult DeleteWorker(int id)
     {
         bool isWorkerDeleted = workerService.DeleteWorker(id);
