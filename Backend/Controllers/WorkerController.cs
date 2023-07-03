@@ -53,7 +53,7 @@ public class WorkerController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("{id}/{newSpecialization}")]
+    [HttpPut("{id}/specialization/{newSpecialization}")]
     public IActionResult EditSpecialization(int id,int newSpecialization)
     {
         bool isWorkerEdited = workerService.EditSpecialization(id, newSpecialization);
@@ -62,7 +62,7 @@ public class WorkerController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("{id}/{isAdmin}")]
+    [HttpPut("{id}/admin/{isAdmin}")]
     public IActionResult EditWorkerToAdmin(int id, bool isAdmin)
     {
         bool isWorkerEdited = workerService.EditWorkerToAdmin(id, isAdmin);

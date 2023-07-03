@@ -89,6 +89,7 @@ public class WorkerService : IWorkerService
                 else
                     user.Role = Role.Worker;
                 unitOfWork.users.Update(user);
+                unitOfWork.workers.Update(worker);
                 int result = unitOfWork.Save();
                 if (result > 0)
                     return true;
