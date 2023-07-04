@@ -74,6 +74,7 @@ function Chatbox() {
 
     return (
         <>
+            <RepairTable/>
             <div className="chatbox">
                 <div className="messages">
                     {messages.map((message) => (
