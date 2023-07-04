@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 
 export function AddWorker() {
     const [login, setLogin] = useState("");
@@ -8,22 +8,61 @@ export function AddWorker() {
     const [password, setPassword] = useState("");
     const [birthdate, setBirthdate] = useState("");
     const [specialization, setSpecialization] = useState("0");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const spec = parseInt(specialization)
+        const spec = parseInt(specialization);
 
-        await axios.post('/worker', {
-            firstName,
-            lastName,
-            birthdate,
-            "specialization": spec,
-            "user": {
-                login,
-                password,
-                "role": 1
+        if (
+            firstName.length < 3 ||
+            lastName.length < 3 ||
+            !/^[a-zA-Z]+$/.test(firstName) ||
+            !/^[a-zA-Z]+$/.test(lastName)
+        ) {
+            setErrorMessage(
+                "Imię i nazwisko powinny zawierać minimum 3 litery (bez liczb i znaków specjalnych)."
+            );
+            return;
+        }
+
+        if (login.length < 3 || password.length < 3) {
+            setErrorMessage("Login i hasło powinny zawierać minimum 3 znaki.");
+            return;
+        }
+
+        try {
+            // Sprawdzenie unikalności loginu
+            const response = await axios.get(`/worker?login=${login}`);
+            if (response.data.length > 0) {
+                setErrorMessage("Podany login jest już zajęty.");
+                return;
             }
-        })
+
+            await axios.post("/worker", {
+                firstName,
+                lastName,
+                birthdate,
+                specialization: spec,
+                user: {
+                    login,
+                    password,
+                    role: 1,
+                },
+            });
+
+            // Pomyślnie dodano pracownika
+            setLogin("");
+            setFirstName("");
+            setLastName("");
+            setPassword("");
+            setBirthdate("");
+            setSpecialization("0");
+            setErrorMessage("");
+        } catch (error) {
+            setErrorMessage("Wystąpił błąd podczas dodawania pracownika.");
+            console.log(error);
+        }
     };
 
     // Define the styles as JavaScript objects
@@ -45,13 +84,22 @@ export function AddWorker() {
         width: "100%",
     };
 
+    const errorStyle = {
+        textAlign: "center",
+        color: "red",
+    };
+
     return (
         <>
             <form style={formStyle} onSubmit={handleFormSubmit}>
-                <p className='services-title'> DODAWANIE PRACOWNIKA </p>
-                <span>1. Imię i nazwisko min 3 litery (nie dopuszcza się liczb i znaków) <br />
-                    2. Hasło i login minimum 3 znaki<br />
-                    3.Login musi być unikalny <br /><br /></span>
+                <p className="services-title"> DODAWANIE PRACOWNIKA </p>
+                <span>
+          1. Imię i nazwisko min 3 litery (nie dopuszcza się liczb i znaków) <br />
+          2. Hasło i login minimum 3 znaki<br />
+          3. Login musi być unikalny <br />
+          <br />
+        </span>
+                {errorMessage && <div style={errorStyle}>{errorMessage}</div>}
                 <div>
                     <label style={{ display: "block", marginBottom: "5px" }}>Login:</label>
                     <input
@@ -120,8 +168,11 @@ export function AddWorker() {
                     </select>
                 </div>
                 <br />
-                <button className="button-class" type="submit">DODAJ DO BAZY</button>
+                <button className="button-class" type="submit">
+                    DODAJ DO BAZY
+                </button>
             </form>
         </>
     );
 }
+
