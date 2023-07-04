@@ -54,9 +54,19 @@ export function UserRow({worker, removeFromData}) {
             <td>{(() => {
                 switch (worker.specialization) {
                     case 0:
-                        return "electronics"
+                        return "elektronik"
                     case 1:
-                        return "printers"
+                        return "drukarki"
+                    case 2:
+                        return "AGD"
+                    case 3:
+                        return "telefony"
+                    case 4:
+                        return "oprogramowanie"
+                    case 5:
+                        return "sieci komputerowe"
+                    case 6:
+                        return "odzyskiwanie danych"
                 }
             })()}</td>
             <td>
