@@ -61,8 +61,13 @@ export function UserRow({worker, removeFromData}) {
             })()}</td>
             <td>
                 <select name="specialization" value={inputs.specialization || ""} onChange={handleChange}>
-                    <option value="0">electronics</option>
-                    <option value="1">printers</option>
+                    <option value="0">elektronik</option>
+                    <option value="1">drukarki</option>
+                    <option value="2">AGD</option>
+                    <option value="3">telefony</option>
+                    <option value="4">oprogramowanie</option>
+                    <option value="5">sieci komputerowe</option>
+                    <option value="6">odzyskiwanie danych</option>
                 </select>
             </td>
             <td>

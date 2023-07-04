@@ -2,11 +2,15 @@
 
 namespace SerwisKomputerowy.Backend.Entities;
 
-//TODO: Opisać lepiej specjalizacje pracowników
 public enum Specialization
 {
-    Electronics,
-    Printers
+    Elektronik,
+    Drukarki,
+    AGD,
+    Telefony,
+    Oprogramowanie,
+    SieciKomputerowe,
+    OdzyskiwanieDanych
 }
 
 public class Worker : IEntity

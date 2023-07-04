@@ -65,10 +65,13 @@ export function AddWorker() {
                         onChange={(e) => setSpecialization(e.target.value)}
                         required
                     >
-                        <option value="">Wybierz specjalizację</option>
-                        <option value="Specjalizacja 1">Specjalizacja 1</option>
-                        <option value="Specjalizacja 2">Specjalizacja 2</option>
-                        <option value="Specjalizacja 3">Specjalizacja 3</option>
+                        <option value="0">elektronik</option>
+                        <option value="1">drukarki</option>
+                        <option value="2">AGD</option>
+                        <option value="3">telefony</option>
+                        <option value="4">oprogramowanie</option>
+                        <option value="5">sieci komputerowe</option>
+                        <option value="6">odzyskiwanie danych</option>
                     </select>
                 </div>
                 <br/>

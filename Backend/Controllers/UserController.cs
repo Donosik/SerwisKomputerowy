@@ -49,8 +49,7 @@ public class UserController : ControllerBase
 
         return NotFound();
     }
-
-    //TODO: Testowy
+    
     [HttpGet("me")]
     public IActionResult GetMe()
     {
