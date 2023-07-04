@@ -87,7 +87,7 @@ export function AddWorker() {
                     </select>
                 </div>
                 <br/>
-                <button class="button-class" type="submit">DODAJ DO BAZY</button>
+                <button className="button-class" type="submit">DODAJ DO BAZY</button>
             </form>
         </>
     );
