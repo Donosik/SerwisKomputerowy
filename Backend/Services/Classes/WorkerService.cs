@@ -49,6 +49,17 @@ public class WorkerService : IWorkerService
     {
         if (worker != null)
         {
+            if (worker.User != null)
+            {
+                foreach (var user in unitOfWork.users.GetAll())
+                {
+                    if (worker.User.Login == user.Login)
+                    {
+                        return false;
+                    }
+                }
+            }
+            
             unitOfWork.workers.Create(worker);
             int result = unitOfWork.Save();
             if (result > 0)

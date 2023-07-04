@@ -33,13 +33,8 @@ export function AddWorker() {
 
         try {
             // Sprawdzenie unikalności loginu
-            const response = await axios.get(`/worker?login=${login}`);
-            if (response.data.length > 0) {
-                setErrorMessage("Podany login jest już zajęty.");
-                return;
-            }
 
-            await axios.post("/worker", {
+            const response = await axios.post("/worker", {
                 firstName,
                 lastName,
                 birthdate,
@@ -50,6 +45,8 @@ export function AddWorker() {
                     role: 1,
                 },
             });
+            if (response.status=== 400) {
+            setErrorMessage("Podany login jest już zajęty.");}
 
             // Pomyślnie dodano pracownika
             setLogin("");
@@ -60,8 +57,7 @@ export function AddWorker() {
             setSpecialization("0");
             setErrorMessage("");
         } catch (error) {
-            setErrorMessage("Wystąpił błąd podczas dodawania pracownika.");
-            console.log(error);
+            setErrorMessage("Pracownik o podanym loginie juz istnieje");
         }
     };
 
