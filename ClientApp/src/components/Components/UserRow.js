@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom"
 export function UserRow({worker, removeFromData}) {
     const navigate = useNavigate()
     const [inputs, setInputs] = useState({})
+    const [checked,setChecked] = useState(false)
 
     const setAuthToken = token => {
         if (token) {
@@ -34,13 +35,20 @@ export function UserRow({worker, removeFromData}) {
         let name = event.target.name
         let value = event.target.value
         if (name === "isAdmin")
-            if (inputs.isAdmin === "on")
+        {
+            setChecked(true)
+            if (inputs.isAdmin === "on") 
+            {
                 value = "off"
+                setChecked(false)
+            }
+        }
         setInputs(values => ({...values, [name]: value}))
     }
 
     useEffect(() => {
         setInputs(values => ({...values, ["isAdmin"]: worker.user.role === 2 ? "on" : "off"}))
+        worker.user.role === 2 ? setChecked(true) : setChecked(false)
         setInputs(values => ({...values, ["specialization"]: worker.specialization}))
     }, [])
 
@@ -81,7 +89,7 @@ export function UserRow({worker, removeFromData}) {
                 </select>
             </td>
             <td>
-                <input type="checkbox" name="isAdmin" onChange={handleChange} checked={worker.user.role === 2}/>
+                <input type="checkbox" name="isAdmin" onChange={handleChange} checked={checked === true}/>
             </td>
             <td>
                 {localStorage.getItem("role") > 0 &&
