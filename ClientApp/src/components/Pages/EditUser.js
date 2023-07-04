@@ -56,7 +56,7 @@ export function EditUser() {
     return (
         <>
             <NavMenu />
-
+            <p className='services-title'> ZARZĄDZAJ UŻYTKOWNIKAMI </p>
             Szukaj po Loginie:<input onChange={handleSearchQueryChange} /> <button className="button-class">Szukaj</button> 
             <button className="button-class">Dodaj pracownika</button>
             <table>
