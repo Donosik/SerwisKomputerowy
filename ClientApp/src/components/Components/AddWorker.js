@@ -1,5 +1,4 @@
 import { useState } from "react";
-import '../Css/addWorker.css';
 export function AddWorker() {
     const [login, setLogin] = useState("");
     const [firstName, setFirstName] = useState("");
