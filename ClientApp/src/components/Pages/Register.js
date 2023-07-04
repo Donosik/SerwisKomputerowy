@@ -26,12 +26,16 @@ export function Register() {
         e.preventDefault()
 
         try {
-            if (login.length >= 3 && password.length >= 3) {
-
+            if (login.length >= 3 && password.length >= 3 && firstName.length >= 1 && lastName.length >= 1)
+            {
                 const response = await axios.post('/user/register', { login, password, firstName, lastName })
 
                 navigate("/logowanie")
                 setRegisterFailed('')
+            }
+            else if (firstName.length <= 1 || lastName.length <= 1)
+            {
+                setRegisterFailed('Pola imię i nazwisko muszą być wypełnione')
             }
             else {
                 setRegisterFailed('Login i hasło muszą mieć minimum 3 znaki')
