@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
+using Action = System.Action;
 
 namespace SerwisKomputerowy.Controllers;
 
@@ -33,6 +34,25 @@ public class RepairController : ControllerBase
         Repair repair = repairService.GetRepair(id);
         if (repair != null)
             return Ok(repair);
+        return NotFound();
+    }
+    
+    [HttpGet("table")]
+    public IActionResult GetRepairsForTable()
+    {
+        IEnumerable<Repair> repairs = repairService.GetRepairsForTable();
+        if (repairs != null)
+            return Ok(repairs);
+        return NotFound();
+    }
+    
+    [HttpGet("{id}/messages")]
+    public IActionResult GetMessagesOfRepair(int id)
+    {
+        IEnumerable<Message> messages = repairService.GetMessagesOfRepair(id);
+        if (messages != null)
+            return Ok(messages);
+        
         return NotFound();
     }
 
@@ -69,25 +89,6 @@ public class RepairController : ControllerBase
         bool isRepairDeleted = repairService.DeleteRepair(id);
         if (isRepairDeleted)
             return Ok();
-        return NotFound();
-    }
-
-    [HttpGet("table")]
-    public IActionResult GetRepairsForTable()
-    {
-        IEnumerable<Repair> repairs = repairService.GetRepairsForTable();
-        if (repairs != null)
-            return Ok(repairs);
-        return NotFound();
-    }
-    
-    [HttpGet("{id}/messages")]
-    public IActionResult GetMessagesOfRepair(int id)
-    {
-        IEnumerable<Message> messages = repairService.GetMessagesOfRepair(id);
-        if (messages != null)
-            return Ok(messages);
-        
         return NotFound();
     }
 }

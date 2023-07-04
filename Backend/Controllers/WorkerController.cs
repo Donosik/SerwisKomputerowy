@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
@@ -45,6 +46,15 @@ public class WorkerController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("repair/{repairId}")]
+    public IActionResult GetWorkersFromRepair(int repairId)
+    {
+        IEnumerable<Worker> workers = workerService.GetWorkersFromRepair(repairId);
+        if (workers != null)
+            return Ok(workers);
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreateWorker(Worker worker)
     {
@@ -64,7 +74,7 @@ public class WorkerController : ControllerBase
     }
 
     [HttpPut("{id}/specialization/{newSpecialization}")]
-    public IActionResult EditSpecialization(int id,int newSpecialization)
+    public IActionResult EditSpecialization(int id, int newSpecialization)
     {
         bool isWorkerEdited = workerService.EditSpecialization(id, newSpecialization);
         if (isWorkerEdited)
