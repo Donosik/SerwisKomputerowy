@@ -13,6 +13,7 @@ export function EditRepair() {
     const navigate = useNavigate()
     const [repairData, setRepairData] = useState()
     const [clients, setClients] = useState([])
+    const [workers, setWorkers] = useState([])
 
     const setAuthToken = token => {
         if (token) {
@@ -42,6 +43,12 @@ export function EditRepair() {
         setClients(result.data)
     }
 
+    async function getWorkers() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/worker')
+        setWorkers(result.data)
+    }
+
     async function editRepair() {
         await axios.put('/repair/' + repairData.id + '/' + inputs.clientId)
         repairData.client = null;
@@ -51,6 +58,7 @@ export function EditRepair() {
     useEffect(() => {
         getRepair()
         getClients()
+        getWorkers()
     }, [])
 
     useEffect(() => {
@@ -99,12 +107,6 @@ export function EditRepair() {
                                     <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
                                 ))}
                             </select>
-                            <Select
-                                isSearchable={true}
-                                options={clients}
-                                onChange={handleChange}
-                                name="clientId"
-                            />
                         </label>
                         <label>
                             Status:
@@ -134,18 +136,36 @@ export function EditRepair() {
                             />
                         </label>
                         <label>
-                            Osoby odpowiedzialne:
+                            Osoby odpowiedzialne: (IMO do wyjebania - Paweł)
                             <input type="text"
-                                    name="description"/>
+                                name="description" />
+                            
                         </label>
                         <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                     </form>
+                    <h4>DODAJ AKCJE</h4>
+                    <form>
+                        <label>
+                            Pracownik:
+                            <select name="workerId" onChange={handleChange}>
+                                {workers.map((worker, id) => (
+                                    <option key={id} value={worker.id}>{worker.firstName + ' ' + worker.lastName}</option>
+                                ))}
+                            </select>
+                        </label>
+                        <label>
+                            Opis czynności:
+                            <textarea/>
+                        </label>
+                    </form>
+                    <h4>WYMIEŃ CZĘŚĆ</h4>
+                    <form></form>
                 </div>
                 <div>
-                    Osoby odpowiedzialne:
+                    Osoby odpowiedzialne: (IMO do wyjebania - Paweł)
                 </div>
                 <div>
-                    Części wymienne:
+                    Części wymienne: (IMO do wyjebania - Paweł)
                 </div>
             </div>
         </>
