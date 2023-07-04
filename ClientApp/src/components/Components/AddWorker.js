@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 export function AddWorker() {
     const [login, setLogin] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -19,10 +20,16 @@ export function AddWorker() {
 
     return (
         <>
-            <form onSubmit={handleFormSubmit}>
+            <form style="
+            border: 1px solid black;
+            padding: 20px;
+            margin-right: 800px;
+                " onSubmit={handleFormSubmit}>
                 <p className='services-title'> DODAWANIE PRACOWNIKA </p>
                 <div>
-                    <label>Login:</label>
+                    <label style=" 
+                    display: block;
+                    margin-bottom: 5px;">Login:</label>
                     <input
                         type="text"
                         value={login}
@@ -41,7 +48,9 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Nazwisko:</label>
-                    <input
+                    <input style="margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;"
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -50,7 +59,9 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Data urodzenia:</label>
-                    <input
+                    <input style="margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;"
                         type="date"
                         value={birthdate}
                         onChange={(e) => setBirthdate(e.target.value)}
@@ -59,7 +70,9 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Specjalizacja:</label>
-                    <select
+                    <select style="margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;"
                         value={specialization}
                         onChange={(e) => setSpecialization(e.target.value)}
                         required
