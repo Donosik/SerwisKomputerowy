@@ -87,7 +87,7 @@ export function Login() {
                                         <a href="/rejestracja"> Nie posiadasz konta?</a>
                                     </div>
                                     {isLoginFailed ?
-                                        <div className="login-failed d-flex justify-content-center align-items-center">Login failed</div>
+                                        <div className="login-failed d-flex justify-content-center align-items-center">Logowanie nie powiodło się<br />Login lub hasło niepoprawne</div>
                                         : null}
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
                                     </div>
