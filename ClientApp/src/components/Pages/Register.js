@@ -19,7 +19,7 @@ export function Register() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
-    const [isRegisterFailed, setIsRegisterFailed] = useState(false)
+    const [registerFailed, setRegisterFailed] = useState(false)
     
 
     const handleSubmit = async (e) => {
@@ -28,17 +28,17 @@ export function Register() {
         try {
             if (login.length >= 3 && password.length >= 3) {
 
-                const response = await axios.post('/user/register', { login, password })
+                const response = await axios.post('/user/register', { login, password, firstName, lastName })
 
                 navigate("/logowanie")
-                setIsRegisterFailed(false)
+                setRegisterFailed('')
             }
             else {
-                setIsRegisterFailed(true)
+                setRegisterFailed('Login i hasło muszą mieć minimum 3 znaki')
             }
 
         } catch (error) {
-            setIsRegisterFailed(true)
+            setRegisterFailed('Podany login już jest w bazie')
             console.log(error)
         }
     }
@@ -104,9 +104,7 @@ export function Register() {
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
                                         <a href="/logowanie"> Masz już konto?</a>
                                     </div>
-                                    {isRegisterFailed ?
-                                      <div className="login-failed d-flex justify-content-center align-items-center"><br/> Register failed</div>
-                                        : null}
+                                    <div className="login-failed d-flex justify-content-center align-items-center"><br />{ registerFailed}</div>
                                     <div className="forgot-pass d-flex justify-content-center align-items-center">
                                     </div>
                                 </fieldset>
