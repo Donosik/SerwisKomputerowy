@@ -36,7 +36,10 @@ html {
 }
 
 .navbar li:hover {
- background-color: #FA9884;
+  background-color: #FA9884;
+}
+.navbar li:active {
+  background-color: #FA9884;
 }
 
 .color1 {

@@ -57,7 +57,8 @@ export function EditUser() {
         <>
             <NavMenu />
 
-            Szukaj po Loginie:<input onChange={handleSearchQueryChange} /> <button className="button-class">Szukaj</button>
+            Szukaj po Loginie:<input onChange={handleSearchQueryChange} /> <button className="button-class">Szukaj</button> 
+            <button className="button-class">Dodaj pracownika</button>
             <table>
                 <thead>
                     <tr>
