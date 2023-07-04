@@ -18,18 +18,31 @@ export function AddWorker() {
         });
     };
 
+    // Define the styles as JavaScript objects
+    const formStyle = {
+        border: "1px solid black",
+        padding: "20px",
+        marginRight: "800px",
+    };
+
+    const inputStyle = {
+        marginBottom: "10px",
+        padding: "5px",
+        width: "100%",
+    };
+
+    const selectStyle = {
+        marginBottom: "10px",
+        padding: "5px",
+        width: "100%",
+    };
+
     return (
         <>
-            <form style="
-            border: 1px solid black;
-            padding: 20px;
-            margin-right: 800px;
-                " onSubmit={handleFormSubmit}>
+            <form style={formStyle} onSubmit={handleFormSubmit}>
                 <p className='services-title'> DODAWANIE PRACOWNIKA </p>
                 <div>
-                    <label style=" 
-                    display: block;
-                    margin-bottom: 5px;">Login:</label>
+                    <label style={{ display: "block", marginBottom: "5px" }}>Login:</label>
                     <input
                         type="text"
                         value={login}
@@ -48,9 +61,8 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Nazwisko:</label>
-                    <input style="margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;"
+                    <input
+                        style={inputStyle}
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -59,9 +71,8 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Data urodzenia:</label>
-                    <input style="margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;"
+                    <input
+                        style={inputStyle}
                         type="date"
                         value={birthdate}
                         onChange={(e) => setBirthdate(e.target.value)}
@@ -70,9 +81,8 @@ export function AddWorker() {
                 </div>
                 <div>
                     <label>Specjalizacja:</label>
-                    <select style="margin-bottom: 10px;
-    padding: 5px;
-    width: 100%;"
+                    <select
+                        style={selectStyle}
                         value={specialization}
                         onChange={(e) => setSpecialization(e.target.value)}
                         required
