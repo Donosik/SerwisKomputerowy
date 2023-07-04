@@ -35,6 +35,7 @@ function Chatbox() {
     return (
         <>
             <NavMenu />
+            <p className='services-title'> WIADOMOŚCI </p>
             <div className="chatbox-container">
                 <div className="table-container">
                     <table>

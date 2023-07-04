@@ -22,7 +22,7 @@ html {
 .navbar {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   background-color:  #FFE5CA;
   padding: 10px;
   border-radius: 10px;

@@ -57,7 +57,7 @@ export function Profile() {
     return (
         <>
             <NavMenu/>
-            <p className='services-title'> JESTEŚ ZALOGOWAY JAKO: </p>
+            <p className='services-title'> PROFIL </p>
             <div className="profile-frame">
                 <div className="profile-info">
                     <p className="color1">IMIĘ: {firstName??""}</p>
