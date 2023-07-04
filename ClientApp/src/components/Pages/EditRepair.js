@@ -128,6 +128,8 @@ export function EditRepair() {
                         </label>
                         <label>
                             Osoby odpowiedzialne:
+                            <input type="text"
+                                    name="description"/>
                         </label>
                         <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                     </form>
