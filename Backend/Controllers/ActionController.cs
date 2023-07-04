@@ -44,6 +44,15 @@ public class ActionController : ControllerBase
         return BadRequest();
     }
 
+    [HttpPut("{actionId}/{repairId}/{workerId}")]
+    public IActionResult EditActionWithIds(int actionId, int repairId, int workerId)
+    {
+        bool isActionEdited = actionService.EditActionWithIds(actionId, repairId, workerId);
+        if (isActionEdited)
+            return Ok();
+        return BadRequest();
+    }
+
     [HttpPut]
     public IActionResult EditAction(Action action)
     {
