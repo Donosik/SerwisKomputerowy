@@ -3,6 +3,7 @@
     "axios": "^1.4.0",
     "jsonwebtoken": "^9.0.0",
     "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.5.29"
+    "jspdf-autotable": "^3.5.29",
+    "react-select": "^5.7.3"
   }
 }
