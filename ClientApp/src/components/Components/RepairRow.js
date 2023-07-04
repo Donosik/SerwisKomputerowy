@@ -52,9 +52,9 @@ export function RepairRow({repair, removeFromData}) {
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={editElement}>EDYTUJ</button>}
                 <button className='button-class' onClick={detailsElement} >SZCZEGÓŁY</button>
+                {localStorage.getItem("role") > 0 && <button className='button-class'>FAKTURA PDF</button>}
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={deleteElement}>USUŃ</button>}
-                {localStorage.getItem("role") > 0 && <button className='button-class'>FAKTURA PDF</button>}
             </td>
         </tr>
     )
