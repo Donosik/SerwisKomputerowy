@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios";
 import { NavMenu } from "../Components/NavMenu";
 import "../Css/login.css"
+import  Select from 'react-select'
 
 export function EditRepair() {
 
@@ -98,6 +99,12 @@ export function EditRepair() {
                                     <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
                                 ))}
                             </select>
+                            <Select
+                                isSearchable={true}
+                                options={clients}
+                                onChange={handleChange}
+                                name="clientId"
+                            />
                         </label>
                         <label>
                             Status:
