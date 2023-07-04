@@ -38,9 +38,7 @@ html {
 .navbar li:hover {
   background-color: #FA9884;
 }
-.navbar li:active {
-  background-color: #FA9884;
-}
+
 
 .color1 {
   color: #5f2640;
