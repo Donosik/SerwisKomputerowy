@@ -51,7 +51,7 @@ public class TestController : ControllerBase
         worker.FirstName = "Admin";
         worker.LastName = "Adminowski";
         worker.BirthDate=DateTime.Now;
-        worker.Specialization = Specialization.Electronics;
+        worker.Specialization = Specialization.Elektronik;
         worker.User = admin;
         workerService.CreateWorker(worker);
 
@@ -66,7 +66,7 @@ public class TestController : ControllerBase
         worker11.FirstName = "Damian";
         worker11.LastName = "Backendowski";
         worker11.BirthDate = DateTime.Now;
-        worker11.Specialization = Specialization.Printers;
+        worker11.Specialization = Specialization.Drukarki;
         worker11.User = worker1;
         workerService.CreateWorker(worker11);
 
@@ -81,7 +81,7 @@ public class TestController : ControllerBase
         worker21.FirstName = "Paweł";
         worker21.LastName = "Frontendowski";
         worker21.BirthDate = DateTime.Now;
-        worker21.Specialization = Specialization.Printers;
+        worker21.Specialization = Specialization.Telefony;
         worker21.User = worker2;
         workerService.CreateWorker(worker21);
 
