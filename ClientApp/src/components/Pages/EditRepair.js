@@ -126,6 +126,9 @@ export function EditRepair() {
 
                             />
                         </label>
+                        <label>
+                            Osoby odpowiedzialne:
+                        </label>
                         <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                     </form>
                 </div>
