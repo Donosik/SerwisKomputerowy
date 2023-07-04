@@ -56,6 +56,7 @@ export function Register() {
                     <div className="row">
                         <div className="reg-box">
                             <h2 className="text-login">REJESTRACJA</h2>
+                            <h5 className="text-login2">Login musi być unikalny, min 3 znaki <br/> Hasło min 3 znaki</h5>
                             <form>
                                 <fieldset>
                                     <fieldset className="form-group">
