@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import axios from "axios";
 import { NavMenu } from "../Components/NavMenu";
 import "../Css/login.css"
-import  Select from 'react-select'
 
 export function EditRepair() {
 
