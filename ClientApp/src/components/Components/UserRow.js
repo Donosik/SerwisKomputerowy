@@ -27,6 +27,7 @@ export function UserRow({worker, removeFromData}) {
             isAdmin = false
         await axios.put('worker/' + worker.id + '/specialization/' + inputs.specialization)
         await axios.put('worker/' + worker.id + '/admin/' + isAdmin)
+        window.location.reload()
     }
 
     function handleChange(event) {
