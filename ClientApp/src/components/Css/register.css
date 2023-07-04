@@ -8,7 +8,7 @@ body {
 
 .reg-box {
     width: 350px;
-    height: 550px;
+    height: 600px;
     background-color: #FFE5CA;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
@@ -21,8 +21,9 @@ body {
 .text-login2{
     margin-top: 20px;
     margin-bottom: 10px;
-    text-align: center;
+    text-align: left;
     font-size: 15px;
+    margin-left: 5px;
 }
 .text-login{
     margin-top: 20px;
