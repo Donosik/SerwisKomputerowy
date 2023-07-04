@@ -30,7 +30,6 @@ export function Profile() {
     async function getUser() {
         const response = await axios.get('/user/me')
         setUser(response.data)
-        console.log(response.data.role)
         if(response.data.role===2)
             setRole("Administrator")
         else if(response.data.role===1)
