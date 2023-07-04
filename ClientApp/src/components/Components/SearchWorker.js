@@ -22,7 +22,7 @@ export function SearchWorker()
         if (searchQuery === "") {
             return repair
         }
-        else if (repair.id.toString().includes(searchQuery)) {
+        else if (repair.lastName.toString().toLowerCase().includes(searchQuery.toLowerCase())) {
             return repair
         }
     }
@@ -54,7 +54,7 @@ export function SearchWorker()
 
     return(
         <>
-            Szukaj po Loginie:<input onChange={handleSearchQueryChange} />
+            Szukaj po Nazwisku:<input onChange={handleSearchQueryChange} />
             <table>
                 <thead>
                 <tr>
