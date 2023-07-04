@@ -26,7 +26,7 @@ export function Register() {
         // Walidacja imienia i nazwiska
         const nameRegex = /^[a-zA-Z\s]*$/;
         if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
-            setRegisterFailed("Imię i nazwisko nie mogą zawierać liczb");
+            setRegisterFailed("Znaki specjalne i liczby nie są dopuszczone w imieniu i nazwisku");
             return;
         }
 
@@ -68,9 +68,10 @@ export function Register() {
                         <div className="reg-box">
                             <h2 className="text-login">REJESTRACJA</h2>
                             <h5 className="text-login2">
-                                Login musi być unikalny, min 3 znaki
+                                1. Login musi być unikalny, min 3 znaki
                                 <br />
-                                Hasło min 3 znaki
+                                2. Hasło min 3 znaki<br />
+                                3. Imie i nazwisko muszą zawierać tylko litery
                             </h5>
                             <form>
                                 <fieldset>
