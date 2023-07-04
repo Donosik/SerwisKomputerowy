@@ -1,21 +1,29 @@
 import { useState } from "react";
+import axios from "axios"
 
 export function AddWorker() {
     const [login, setLogin] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [password, setPassword] = useState("");
     const [birthdate, setBirthdate] = useState("");
-    const [specialization, setSpecialization] = useState("");
+    const [specialization, setSpecialization] = useState("0");
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log({
-            login,
+        const spec = parseInt(specialization)
+
+        await axios.post('/worker', {
             firstName,
             lastName,
             birthdate,
-            specialization,
-        });
+            "specialization": spec,
+            "user": {
+                login,
+                password,
+                "role": 1
+            }
+        })
     };
 
     // Define the styles as JavaScript objects
@@ -41,12 +49,13 @@ export function AddWorker() {
         <>
             <form style={formStyle} onSubmit={handleFormSubmit}>
                 <p className='services-title'> DODAWANIE PRACOWNIKA </p>
-                <span>1. Imię i nazwisko min 3 litery (nie dopuszcza się liczb i znaków) <br/>
-                2. Hasło i login minimum 3 znaki<br/>
-            3.Login musi być unikalny <br/><br/></span>
+                <span>1. Imię i nazwisko min 3 litery (nie dopuszcza się liczb i znaków) <br />
+                    2. Hasło i login minimum 3 znaki<br />
+                    3.Login musi być unikalny <br /><br /></span>
                 <div>
                     <label style={{ display: "block", marginBottom: "5px" }}>Login:</label>
                     <input
+                        style={inputStyle}
                         type="text"
                         value={login}
                         onChange={(e) => setLogin(e.target.value)}
@@ -54,8 +63,19 @@ export function AddWorker() {
                     />
                 </div>
                 <div>
+                    <label>Hasło:</label>
+                    <input
+                        style={inputStyle}
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
                     <label>Imię:</label>
                     <input
+                        style={inputStyle}
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -99,7 +119,7 @@ export function AddWorker() {
                         <option value="6">odzyskiwanie danych</option>
                     </select>
                 </div>
-                <br/>
+                <br />
                 <button className="button-class" type="submit">DODAJ DO BAZY</button>
             </form>
         </>
