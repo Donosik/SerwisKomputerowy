@@ -1,4 +1,5 @@
-﻿using SerwisKomputerowy.Backend.Entities;
+﻿using System.Collections;
+using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Repositories;
 
 namespace SerwisKomputerowy.Backend.Services;
@@ -43,6 +44,12 @@ public class WorkerService : IWorkerService
         }
         
         return null;
+    }
+
+    public IEnumerable<Worker> GetWorkersFromRepair(int repairId)
+    {
+        IEnumerable<Worker> workers = unitOfWork.workers.GetWorkersFromRepair(repairId);
+        return workers;
     }
 
     public bool CreateWorker(Worker worker)

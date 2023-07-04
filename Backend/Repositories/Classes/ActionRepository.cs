@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SerwisKomputerowy.Backend.DB;
+using SerwisKomputerowy.Backend.Entities;
 using Action = SerwisKomputerowy.Backend.Entities.Action;
 
 namespace SerwisKomputerowy.Backend.Repositories;
@@ -16,4 +17,5 @@ public class ActionRepository : GenericRepository<Action>, IActionRepository
             Include(a => a.Repair).
             Include(a => a.Worker);
     }
+    
 }
