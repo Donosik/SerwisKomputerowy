@@ -3,82 +3,27 @@ import { UserRow } from "../Components/UserRow"
 import "../Css/EditUser.css"
 import axios from "axios"
 import { useState, useEffect } from "react"
+import {SearchWorker} from "../Components/SearchWorker";
+import {AddWorker} from "../Components/AddWorker";
 
 export function EditUser() {
-    const [data, setData] = useState([])
-    const [role, setRole] = useState(0)
-    const [searchQuery, setSearchQuery] = useState("")
+    const [renderBool, setRenderBool] = useState(true)
 
-    const handleSearchQueryChange = (event) => {
-        setSearchQuery(event.currentTarget.value)
+    function searchHandler() {
+        setRenderBool(true)
     }
-
-    const fetchWorkers = async () => {
-        setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/worker')
-        setData(result.data)
+    function createHandler() {
+        setRenderBool(false)
     }
-
-    const filterBySearchQuery = (repair) => {
-        if (searchQuery === "") {
-            return repair
-        }
-        else if (repair.id.toString().includes(searchQuery)) {
-            return repair
-        }
-    }
-
-    const setAuthToken = token => {
-        if (token) {
-            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        }
-        else
-            delete axios.defaults.headers.common["Authorization"];
-    }
-    
-    //async function deleteWorker(workerId) {
-    //    setAuthToken(localStorage.getItem("token"))
-    //    await axios.delete('/worker/' + workerId)
-    //    window.location.reload()
-    //}
-
-    function removeFromData(index) {
-        const newData = data.filter((_, i) => i !== index)
-        setData(newData)
-        window.location.reload()
-    }
-
-    useEffect(() => {
-        fetchWorkers()
-        setRole(Number(localStorage.getItem("role")))
-    }, [])
 
     return (
         <>
             <NavMenu />
             <p className='services-title'> ZARZĄDZAJ UŻYTKOWNIKAMI </p>
-            Szukaj po Loginie:<input onChange={handleSearchQueryChange} /> <button className="button-class">Szukaj</button> 
+            <button className="button-class">Szukaj</button> 
             <button className="button-class">Dodaj pracownika</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Login</th>
-                        <th>Imię</th>
-                        <th>Nazwisko</th>
-                        <th>Aktualna Specjalizacja</th>
-                        <th>Nowa Specjalizacja</th>
-                        <th>Czy admin</th>
-                        <th>AKCJA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.filter(filterBySearchQuery).map((worker, id) => (
-                        <UserRow worker={worker} key={worker.id} removeFromData={removeFromData} />
-                    ))}
-                </tbody>
-            </table>
-            <br />
+            <br /><br />
+            {renderBool?<SearchWorker/>:<AddWorker/>}
         </>
     )
 }
