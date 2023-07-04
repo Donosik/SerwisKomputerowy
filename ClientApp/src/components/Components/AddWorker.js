@@ -41,6 +41,9 @@ export function AddWorker() {
         <>
             <form style={formStyle} onSubmit={handleFormSubmit}>
                 <p className='services-title'> DODAWANIE PRACOWNIKA </p>
+                <span>1. Imię i nazwisko min 3 litery (nie dopuszcza się liczb i znaków) <br/>
+                2. Hasło i login minimum 3 znaki<br/>
+            3.Login musi być unikalny <br/><br/></span>
                 <div>
                     <label style={{ display: "block", marginBottom: "5px" }}>Login:</label>
                     <input

@@ -26,7 +26,7 @@ export function NavMenu() {
                     light>
                 <NavbarBrand tag={Link} to="/" className="color1">SerwisKomputerowy</NavbarBrand>
                 {localStorage.getItem("role") > 1 && <NavItem>
-                    <NavLink tag={Link} className="text-dark color4" to="/edytuj">Zarządzaj użytkownikami</NavLink>
+                    <NavLink tag={Link} className="text-dark color4" to="/edytuj">Zarządzaj pracownikami</NavLink>
                 </NavItem>}
                 {localStorage.getItem("role") > 1 &&<NavItem>
                     <NavLink tag={Link} className="text-dark color4" to="/raport">Raporty</NavLink>

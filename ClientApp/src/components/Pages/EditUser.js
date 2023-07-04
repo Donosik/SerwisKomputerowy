@@ -19,7 +19,7 @@ export function EditUser() {
     return (
         <>
             <NavMenu />
-            <p className='services-title'> ZARZĄDZAJ UŻYTKOWNIKAMI </p>
+            <p className='services-title'> ZARZĄDZAJ PRACOWNIKAMI </p>
             <button className="button-class" onClick={searchHandler}>Szukaj</button> 
             <button className="button-class" onClick={createHandler}>Dodaj pracownika</button>
             <br /><br />
