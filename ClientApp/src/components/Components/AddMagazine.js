@@ -1,13 +1,15 @@
-import {useState} from "react";
+import { useState } from "react";
+import axios from "axios"
 
 export function AddMagazine()
 {
  
-        const [SerialNumber, setSerialNumber] = useState("");
-        const [PartName, setPartName] = useState("");
-        const [Cost, setCost] = useState("");
-        const [IsUsed, setIsUsed] = useState("");
-        const [CostOfWork, setCostOfWork] = useState("");
+    const [SerialNumber, setSerialNumber] = useState();
+    const [PartName, setPartName] = useState("");
+    const [Cost, setCost] = useState();
+    const [IsUsed, setIsUsed] = useState("off");
+    const [CostOfWork, setCostOfWork] = useState();
+    const [checked, setChecked] = useState(false)
             
     // Define the styles as JavaScript objects
     const formStyle = {
@@ -32,19 +34,56 @@ export function AddMagazine()
         textAlign: "center",
         color: "red",
     };
+
+    const setAuthToken = token => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        } else
+            delete axios.defaults.headers.common["Authorization"];
+    }
+    
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setAuthToken(localStorage.getItem("token"))
+        let isUsedBool = false;
+        if (IsUsed === "on")
+            isUsedBool = true
+        else
+            isUsedBool = false
+
+        const response = await axios.post("/part", {
+            SerialNumber,
+            PartName,
+            Cost,
+            CostOfWork,
+            "isUsed":isUsedBool
+        })
+    };
+
+    function handleChangeIsUsed(event) {
+        let name = event.target.name
+        let value = event.target.value
+        if (name === "isUsed") {
+            setChecked(true)
+            if (IsUsed === "on") {
+                value = "off"
+                setChecked(false)
+            }
+        }
+        setIsUsed(value)
+    }
+    
     return(
         <>
             <form style={formStyle} onSubmit={handleFormSubmit}>
                 <p className="services-title"> DODAWANIE CZĘŚCI </p>
-                
-                {errorMessage && <div style={errorStyle}>{errorMessage}</div>}
                 <div>
                     <label style={{ display: "block", marginBottom: "5px" }}>NUMER SERYJNY</label>
                     <input
                         style={inputStyle}
                         type="text"
-                        value={login}
-                        onChange={(e) => setLogin(e.target.value)}
+                        value={SerialNumber}
+                        onChange={(e) => setSerialNumber(parseInt(e.target.value))}
                         required
                     />
                 </div>
@@ -52,7 +91,7 @@ export function AddMagazine()
                     <label>NAZWA:</label>
                     <input
                         style={inputStyle}
-                        type="password"
+                        type="text"
                         value={PartName}
                         onChange={(e) => setPartName(e.target.value)}
                         required
@@ -64,7 +103,7 @@ export function AddMagazine()
                         style={inputStyle}
                         type="text"
                         value={Cost}
-                        onChange={(e) => setCost(e.target.value)}
+                        onChange={(e) => setCost(parseInt(e.target.value))}
                         required
                     />
                 </div>
@@ -74,19 +113,13 @@ export function AddMagazine()
                         style={inputStyle}
                         type="text"
                         value={CostOfWork}
-                        onChange={(e) => setCostOfWork(e.target.value)}
+                        onChange={(e) => setCostOfWork(parseInt(e.target.value))}
                         required
                     />
                 </div>
                 <div>
                     <label>CZY UŻYTA:</label>
-                    <input
-                        style={inputStyle}
-                        type="text"
-                        value={CostOfWork}
-                        onChange={(e) => setCostOfWork(e.target.value)}
-                        required
-                    />
+                    <input type="checkbox" name="isUsed" onChange={handleChangeIsUsed} checked={checked === true} />
                 </div>
                 
                 <br />
