@@ -71,15 +71,15 @@ export function RepairRow({ repair, removeFromData }) {
         doc.text(`Odbiorca faktury: ${customerName}`, 20, 70);
 
         const partsData = parts.map((part) => [
-            part ? part.partName + " zł" : '',
-            part ? part.serialNumber + " zł" : '',
-            part ? part.cost + " zł" : '',
-            part ? part.costOfWork + " zł" : '',
-            part  ? part.cost + part.costOfWork + " zł": '',
+            part ? part.partName : '',
+            part ? part.serialNumber: '',
+            part ? part.cost + " pln" : '',
+            part ? part.costOfWork + " pln" : '',
+            part  ? part.cost + part.costOfWork + " pln": '',
             
         ]);
         const priceData = parts.map((part) => [
-            parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum ,0) : ''
+            parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum ,0)+" pln" : ''
         ]);
 
         doc.autoTable({
@@ -98,7 +98,7 @@ export function RepairRow({ repair, removeFromData }) {
         });
 
 
-        doc.text("Podpis osoby upowaznionej: ....................................`", 20, 220);
+        doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
         doc.save("Faktura.pdf");
 
     };
