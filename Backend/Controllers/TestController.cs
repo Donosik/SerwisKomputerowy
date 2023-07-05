@@ -46,7 +46,7 @@ public class TestController : ControllerBase
         admin.Password = "admin";
         admin.Role = Role.Admin;
         admin.Messages = new List<Message>();
-        userService.CreateUser(admin);
+        //userService.CreateUser(admin);
         Worker worker = new Worker();
         worker.FirstName = "Admin";
         worker.LastName = "Adminowski";
@@ -61,14 +61,14 @@ public class TestController : ControllerBase
         worker1.Password = "123";
         worker1.Role = Role.Worker;
         worker1.Messages = new List<Message>();
-        userService.CreateUser(worker1);
+        //userService.CreateUser(worker1);
         Worker worker11 = new Worker();
         worker11.FirstName = "Damian";
         worker11.LastName = "Backendowski";
         worker11.BirthDate = DateTime.Now;
         worker11.Specialization = Specialization.Drukarki;
         worker11.User = worker1;
-        workerService.CreateWorker(worker1);
+        workerService.CreateWorker(worker11);
 
         //Pracownik2
         User worker2 = new User();
@@ -76,7 +76,7 @@ public class TestController : ControllerBase
         worker2.Password = "123";
         worker2.Role = Role.Worker;
         worker2.Messages = new List<Message>();
-        userService.CreateUser(worker2);
+        //userService.CreateUser(worker2);
         Worker worker21 = new Worker();
         worker21.FirstName = "Paweł";
         worker21.LastName = "Frontendowski";
@@ -90,7 +90,7 @@ public class TestController : ControllerBase
         worker3.Password = "123";
         worker3.Role = Role.Worker;
         worker3.Messages = new List<Message>();
-        userService.CreateUser(worker3);
+        //userService.CreateUser(worker3);
         Worker worker31 = new Worker();
         worker31.FirstName = "Anna";
         worker31.LastName = "Grafikowska";
@@ -105,7 +105,7 @@ public class TestController : ControllerBase
         worker4.Password = "123";
         worker4.Role = Role.Worker;
         worker4.Messages = new List<Message>();
-        userService.CreateUser(worker4);
+        //userService.CreateUser(worker4);
         Worker worker41 = new Worker();
         worker41.FirstName = "Michał";
         worker41.LastName = "Backendowski";
@@ -120,7 +120,7 @@ public class TestController : ControllerBase
         worker5.Password = "123";
         worker5.Role = Role.Worker;
         worker5.Messages = new List<Message>();
-        userService.CreateUser(worker5);
+        //userService.CreateUser(worker5);
         Worker worker51 = new Worker();
         worker51.FirstName = "Ewa";
         worker51.LastName = "Supportowska";
@@ -135,7 +135,7 @@ public class TestController : ControllerBase
         worker6.Password = "123";
         worker6.Role = Role.Worker;
         worker6.Messages = new List<Message>();
-        userService.CreateUser(worker6);
+        //userService.CreateUser(worker6);
         Worker worker61 = new Worker();
         worker61.FirstName = "Marcin";
         worker61.LastName = "Sieciowiec";
