@@ -10,7 +10,6 @@ export function DetailsRepair() {
     let { id } = useParams()
     const navigate = useNavigate()
     const [repairData, setRepairData] = useState()
-    const [clients, setClients] = useState([])
     const [workers, setWorkers] = useState([])
     const [parts, setParts] = useState([])
 
@@ -27,12 +26,6 @@ export function DetailsRepair() {
         setRepairData(result.data)
     }
 
-    async function getClients() {
-        setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/client')
-        setClients(result.data)
-    }
-
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/worker')
@@ -45,7 +38,6 @@ export function DetailsRepair() {
     }
     useEffect(() => {
         getRepair()
-        getClients()
         getWorkers()
         getPart()
     }, [])
@@ -73,27 +65,40 @@ export function DetailsRepair() {
             </table>
             <br />
             <hr />
+            <p>INFORMACJE O CZĘŚCIACH <br /></p>
+            <hr />
+            <table>
+                <tr>
+                    <th>Numer Seryjny</th>
+                    <th>Nazwa Części</th>
+                    <th>Koszt części</th>
+                    <th>Koszt robocizny</th>
+                    <th>Razem</th>
+                </tr>
+                {parts.filter(part => part.repairId === repairData.id).map(part => (
+                    <tr key={part.id}>
+                        <td>{ part.serialNumber}</td>
+                        <td>{ part.partName}</td>
+                        <td>{ part.cost}</td>
+                        <td>{part.costOfWork}</td>
+                        <td>{part.cost + part.costOfWork}</td>
+                    </tr>
+                ))}>
+            </table>
+            <br />
+            <hr />
             <p> INFORMACJE O SPRZĘCIE <br /></p>
             <hr />
             <table>
                 <tr className="table-title">
                     <th>Nazwa sprzętu</th>
                     <th>Typ sprzętu</th>
-                    <th>Numer seryjny (ID)</th>
                     <th>Data produkcji</th>
-                    <th>Data końca gwarancji</th>
-                    <th>Gwarancja</th>
-                    <th>Część do wymiany</th>
-                    <th>Nowa część</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.equipment.name : ''}</td>
                     <td>{repairData ? repairData.equipment.type : ''}</td>
-                    <td>{repairData ? repairData.equipment.serialNumber : ''}</td>
                     <td>{repairData ? repairData.equipment.productionDate : ''}</td>
-                    <td>{repairData ? repairData.equipment.warrantyEndDate : ''}</td>
-                    <td>{repairData ? repairData.equipment.warranty ? 'Tak' : 'Nie' : ''}</td>
-                    <td>{parts.cost}</td>
                 </tr>
             </table>
 
@@ -146,26 +151,6 @@ export function DetailsRepair() {
                     </tr>
                 ))}
             </table>
-            <br />
-
-            <hr />
-            <p> INFORMACJE O KOSZTACH <br /></p>
-            <hr />
-            <table>
-                <tr className="table-title">
-                    <th>Koszt części</th>
-                    <th>Koszt robocizny</th>
-                    <th>Razem</th>
-                </tr>
-                <tr>
-                    <td>{parts.cost}</td>
-                    <td>{parts.costOfWork}</td>
-                    <td>{parts.cost + parts.costOfWork}</td>
-                </tr>
-            </table>
-
-            <br />
-            <br />
         </>
     )
 }
