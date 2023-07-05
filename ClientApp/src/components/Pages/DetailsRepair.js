@@ -1,11 +1,55 @@
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react"
+import axios from "axios";
 import {NavMenu} from "../Components/NavMenu";
 import "../Css/details.css"
 
 export function DetailsRepair()
 {
-    let{id}=useParams()
-    const navigate=useNavigate()
+    const [inputs, setInputs] = useState({})
+
+    let { id } = useParams()
+    const navigate = useNavigate()
+    const [repairData, setRepairData] = useState()
+    const [clients, setClients] = useState([])
+    const [workers, setWorkers] = useState([])
+    const [parts, setParts] = useState([])
+
+    const setAuthToken = token => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        } else
+            delete axios.defaults.headers.common["Authorization"];
+    }
+
+    async function getRepair() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/repair/' + id)
+        setRepairData(result.data)
+    }
+
+    async function getClients() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/client')
+        setClients(result.data)
+    }
+
+    async function getWorkers() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/worker')
+        setWorkers(result.data)
+    }
+    async function getPart() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/part')
+        setParts(result.data)
+    }
+    useEffect(() => {
+        getRepair()
+        getClients()
+        getWorkers()
+    }, [])
+
     return(
         <>
             <NavMenu/>
@@ -19,12 +63,14 @@ export function DetailsRepair()
                     <th>Data przyjęcia</th>
                     <th>Data skończenia</th>
                     <th>Status</th>
+                    <th>Część do wymiany</th>
+                    <th>Nowa część</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>2023-07-01</td>
-                    <td>2023-07-10</td>
-                    <td>Zakończona</td>
+                    <td>{repairData ? repairData.id : ''}</td>
+                    <td>{repairData ? repairData.acceptanceTime : ''}</td>
+                    <td>{repairData ? repairData.guaranteeTime : ''}</td>
+                    <td>{repairData ? repairData.status : ''}</td>
                 </tr>
             </table>
             <br/>
@@ -41,12 +87,12 @@ export function DetailsRepair()
                     <th>Gwarancja</th>
                 </tr>
                 <tr>
-                    <td>Laptop</td>
-                    <td>Komputer</td>
-                    <td>12345</td>
-                    <td>2022-01-01</td>
-                    <td>2024-01-01</td>
-                    <td>Tak</td>
+                    <td>{repairData ? repairData.equipment.name : ''}</td>
+                    <td>{repairData ? repairData.equipment.type : ''}</td>
+                    <td>{repairData ? repairData.equipment.serialNumber : ''}</td>
+                    <td>{repairData ? repairData.equipment.productionDate : ''}</td>
+                    <td>{repairData ? repairData.equipment.warrantyEndDate : ''}</td>
+                    <td>{repairData ? repairData.equipment.warranty ? 'Tak' : 'Nie' : ''}</td>
                 </tr>
             </table>
             
@@ -62,9 +108,9 @@ export function DetailsRepair()
                     <th>Nazwisko klienta</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>Jan</td>
-                    <td>Kowalski</td>
+                    <td>{repairData ? repairData.client.id : ''}</td>
+                    <td>{repairData ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
+                    <td>{repairData ? repairData.client.lastName : ''}</td>
                 </tr>
             </table>
             
@@ -76,19 +122,30 @@ export function DetailsRepair()
                 <tr className="table-title">
                     <th>Pracownik</th>
                     <th>Rola pracowników</th>
-                    <th>Część do wymiany</th>
-                    <th>Nowa część</th>
-                    <th>Koszt części</th>
-                    <th>Koszt robocizny</th>
                 </tr>
-                <tr>
-                    <td>John Smith</td>
-                    <td>Mechanik</td>
-                    <td>Silnik</td>
-                    <td>Nowy silnik</td>
-                    <td>500 zł</td>
-                    <td>200 zł</td>
-                </tr>
+                {workers.map((worker) => (
+                    <tr key={worker.id}>
+                        <td>{worker.firstName + " " + worker.lastName}</td>
+                        <td>{(() => {
+                            switch (worker.specialization) {
+                                case 0:
+                                    return "elektronik"
+                                case 1:
+                                    return "drukarki"
+                                case 2:
+                                    return "AGD"
+                                case 3:
+                                    return "telefony"
+                                case 4:
+                                    return "oprogramowanie"
+                                case 5:
+                                    return "sieci komputerowe"
+                                case 6:
+                                    return "odzyskiwanie danych"
+                            }
+                        })()}</td>
+                    </tr>
+                ))}
             </table>
             <br/>
             
@@ -102,9 +159,9 @@ export function DetailsRepair()
                     <th>Razem</th>
                 </tr>
                 <tr>
-                    <td>800 zł</td>
-                    <td>350 zł</td>
-                    <td>1150 zł</td>
+                    <td>{parts.cost}</td>
+                    <td>{parts.costOfWork}</td>
+                    <td>{parts.cost + parts.costOfWork}</td>
                 </tr>
             </table>
             
