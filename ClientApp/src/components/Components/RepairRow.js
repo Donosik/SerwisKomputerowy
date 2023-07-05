@@ -1,6 +1,6 @@
 ﻿import axios from "axios";
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { jsPDF } from "jspdf";
 import { NavMenu } from "../Components/NavMenu";
 import "jspdf-autotable";
@@ -70,6 +70,12 @@ export function RepairRow({ repair, removeFromData }) {
                 [ "Nazwa czesci","Numer Seryjny czesci", "Cena czesci", "Cena naprawy"],
             ],
             body: partsData,
+        });
+        doc.autoTable({
+            head: [
+                ["Razem"],
+            ],
+            body: priceData,
         });
 
         doc.save("Faktura.pdf");
