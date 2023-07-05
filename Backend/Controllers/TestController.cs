@@ -269,6 +269,7 @@ public class TestController : ControllerBase
         part8.Cost = 150;
         part8.CostOfWork = 15;
         part8.IsUsed = false;
+        part8.Repair = repair1;
         partService.CreatePart(part8);
 
         Action action=new Action();

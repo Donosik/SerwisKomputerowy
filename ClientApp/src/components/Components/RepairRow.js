@@ -24,24 +24,24 @@ export function RepairRow({ repair, removeFromData }) {
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/' + repair.id)
-        setRepairData(result.data)
+        await setRepairData(result.data)
     }
 
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/worker/repair/' + repair.id)
-        setWorkers(result.data)
+        await setWorkers(result.data)
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/part/repair/' + repair.id)
-        setParts(result.data)
+        await setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/action/repair/' + repair.id)
-        setActions(result.data)
+        await setActions(result.data)
     }
 
     const handleDownloadInvoicePDF = () => {
@@ -51,7 +51,10 @@ export function RepairRow({ repair, removeFromData }) {
         getAction()
 
         const doc = new jsPDF();
-
+        
+        console.log("CYCE")
+        console.log(parts)
+        
         const partsData = parts.map((part) => [
             part  ? part.partName : '',
             part  ? part.serialNumber : '',
