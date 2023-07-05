@@ -75,9 +75,10 @@ export function EditPart() {
     return (
         <>
             <NavMenu />
-            <p className="services-title"> EDYCJA CZĘŚCI </p>
-            <div style={{ border: "2px solid black", padding: "10px", marginRight: "600px"}}>
+            
+            <div style={{ border: "1px solid black", padding: "10px", marginRight: "600px"}}>
                 <form>
+                    <p className="services-title"> EDYCJA CZĘŚCI </p>
                     <label>
                         Nazwa czesci:
                         <input
