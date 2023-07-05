@@ -29,6 +29,12 @@ public class PartService : IPartService
         return null;
     }
 
+    public IEnumerable<Part> PartsSearchedByName(String name, bool isUsed)
+    {
+        IEnumerable<Part> parts = unitOfWork.parts.PartsSearchedByName(name, isUsed);
+        return parts;
+    }
+
     public bool CreatePart(Part part)
     {
         if (part != null)

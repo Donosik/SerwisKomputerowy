@@ -14,4 +14,9 @@ public class PartRepository : GenericRepository<Part>, IPartRepository
     {
         return dbContext.Set<Part>().Include(p => p.Repair);
     }
+
+    public IEnumerable<Part> PartsSearchedByName(String name, bool isUsed)
+    {
+        return dbContext.Set<Part>().Where(p => p.IsUsed == isUsed).Where(p=>p.PartName.Contains(name)).ToList();
+    }
 }

@@ -35,6 +35,15 @@ public class PartController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("isUsed/{isUsed}/{name}")]
+    public IActionResult GetPartsSearchedByName(bool isUsed,String name )
+    {
+        IEnumerable<Part> parts = partService.PartsSearchedByName(name, isUsed);
+        if (parts != null)
+            return Ok(parts);
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreatePart(Part part)
     {
