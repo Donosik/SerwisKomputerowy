@@ -85,7 +85,7 @@ export function AddMagazine()
                         value={SerialNumber}
                         onChange={(e) => setSerialNumber(parseInt(e.target.value))}
                         required
-                    />
+                    /> 
                 </div>
                 <div>
                     <label>NAZWA:</label>

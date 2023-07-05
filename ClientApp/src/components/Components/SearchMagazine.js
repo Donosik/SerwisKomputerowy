@@ -3,9 +3,9 @@ export function SearchMagazine()
     return(
         <>
             <label>
-                Nazwa części:
-                <input type="text" />
-            </label>
+                Nazwa części :
+                <input type="text" /> <button className="button-class"> WYSZUKAJ </button>
+            </label> 
 
             <table>
                 <thead>
