@@ -6,6 +6,7 @@ import "../Css/login.css"
 
 export function EditPart() {
     const [inputs, setInputs] = useState({})
+    const [checked, setChecked] = useState(false)
 
     let { id } = useParams()
     const navigate = useNavigate()
@@ -23,6 +24,7 @@ export function EditPart() {
         part.cost = inputs.cost
         part.costOfWork = inputs.costOfWork
         part.partName = inputs.partName
+        inputs.isUsed === "on" ? part.isUsed = true : part.isUsed = false;
     }
 
     async function getPart() {
@@ -35,8 +37,22 @@ export function EditPart() {
         await axios.put('/part', part)
     }
 
+    function handleCheckboxChange(event) {
+        let name = event.target.name
+        let value = event.target.value
+        if (name === "isUsed") {
+            setChecked(true)
+            if (inputs.isUsed === "on") {
+                value = "off"
+                setChecked(false)
+            }
+        }
+        setInputs(values => ({ ...values, [name]: value }))
+    }
+
     useEffect(() => {
         getPart()
+        setInputs(values => ({ ...values, ["isUsed"]: part.isUsed === true ? "on" : "off" }))
     }, [])
 
     useEffect(() => {
@@ -119,6 +135,10 @@ export function EditPart() {
                             onChange={handleChange}
                             style={{ marginBottom: "10px", width: "100%" }}
                         />
+                    </label>
+                    <label>
+                        Czy uzyta:
+                        <input type="checkbox" name="isUsed" onChange={handleCheckboxChange} checked={checked === true} />
                     </label>
                     <button
                         className="button-class"
