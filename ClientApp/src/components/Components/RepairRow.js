@@ -1,9 +1,19 @@
 ﻿import axios from "axios";
-import {useEffect} from "react";
-import {useNavigate} from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { jsPDF } from "jspdf";
+import { NavMenu } from "../Components/NavMenu";
+import "jspdf-autotable";
 
-export function RepairRow({repair, removeFromData}) {
+export function RepairRow({ repair, removeFromData }) {
+    const [inputs, setInputs] = useState({})
+
+    let { id } = useParams()
     const navigate = useNavigate()
+    const [repairData, setRepairData] = useState()
+    const [workers, setWorkers] = useState([])
+    const [parts, setParts] = useState([])
+    const [actions, setActions] = useState([])
 
     const setAuthToken = token => {
         if (token) {
@@ -11,7 +21,59 @@ export function RepairRow({repair, removeFromData}) {
         } else
             delete axios.defaults.headers.common["Authorization"];
     }
+    async function getRepair() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/repair/' + id)
+        setRepairData(result.data)
+    }
 
+    async function getWorkers() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/worker/repair/' + id)
+        setWorkers(result.data)
+    }
+    async function getPart() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/part/repair' + id)
+        setParts(result.data)
+    }
+
+    async function getAction() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/action/repair' + id)
+        setActions(result.data)
+    }
+    useEffect(() => {
+        getRepair()
+        getWorkers()
+        getPart()
+        getAction()
+    }, [])
+
+    const handleDownloadInvoicePDF = () => {
+        const doc = new jsPDF();
+
+        const partsData = parts.map((part) => [
+            part  ? part.partName : '',
+            part  ? part.serialNumber : '',
+            part  ? part.cost : '',
+            part  ? part.costOfWork : '',
+            part  ? part.cost + part.costOfWork : '',
+            
+        ]);
+        const priceData = parts.map((part) => [
+            parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum) : ''
+        ]);
+
+        doc.autoTable({
+            head: [
+                [ "Nazwa czesci","Numer Seryjny czesci", "Cena czesci", "Cena naprawy"],
+            ],
+            body: partsData,
+        });
+
+        doc.save("Faktura.pdf");
+    };
     function editElement() {
         navigate('/naprawy/edycja/' + repair.id)
     }
@@ -52,7 +114,7 @@ export function RepairRow({repair, removeFromData}) {
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={editElement}>EDYTUJ</button>}
                 <button className='button-class' onClick={detailsElement} >SZCZEGÓŁY</button>
-                {localStorage.getItem("role") > 0 && <button className='button-class'>FAKTURA PDF</button>}
+                {localStorage.getItem("role") > 0 && <button className='button-class' onClick={handleDownloadInvoicePDF}>FAKTURA PDF</button>}
                 {localStorage.getItem("role") > 0 &&
                     <button className='button-class' onClick={deleteElement}>USUŃ</button>}
             </td>
