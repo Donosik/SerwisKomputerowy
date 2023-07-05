@@ -1,12 +1,56 @@
+import { useState } from "react";
+import axios from "axios";
+
 export function SearchMagazine()
 {
+    const [checked, setChecked] = useState(false)
+    const [searchString, setSearchString] = useState("")
+    
+    function handleCheck()
+    {
+        if(checked===true)
+            setChecked(false)
+        else 
+            setChecked(true)
+    }
+
+    const setAuthToken = token => {
+        if (token) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        }
+        else
+            delete axios.defaults.headers.common["Authorization"];
+    }
+
+    const handleSearchQueryChange = (event) => {
+        setSearchString(event.currentTarget.value)
+    }
+
+    const handleSubmit = async () => {
+        let isUsed
+        if (checked) {
+            isUsed = true
+        } else {
+            isUsed = false
+        }
+
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/repair/table')
+        setData(result.data)
+        
+    }
+    
     return(
         <>
             <label>
                 Nazwa części :
-                <input type="text" /> <button className="button-class"> WYSZUKAJ </button>
+                <input type="text" onChange={handleSearchQueryChange} />
             </label> 
-
+            <label>
+                Czy użyta:
+                <input type="checkbox" name="isUsed" onChange={handleCheck} checked={checked === true} />
+                <button className="button-class" onClick={handleSubmit}> WYSZUKAJ </button>
+            </label>
             <table>
                 <thead>
                 <tr>
