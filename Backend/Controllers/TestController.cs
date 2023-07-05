@@ -301,7 +301,7 @@ public class TestController : ControllerBase
         var parts=partService.GetParts();
         foreach(var part in parts)
         {
-            partService.DeletePart(part.SerialNumber);
+            partService.DeletePart(part.Id);
         }
         var actions = actionService.GetActions();
         foreach (var action in actions)

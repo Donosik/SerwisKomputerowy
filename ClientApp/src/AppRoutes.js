@@ -8,6 +8,7 @@ import {Profile} from "./components/Pages/Profile";
 import {Magazine} from "./components/Pages/Magazine";
 import {EditUser} from "./components/Pages/EditUser";
 import {DetailsRepair} from "./components/Pages/DetailsRepair";
+import {EditPart} from "./components/Pages/EditPart";
 
 
 const AppRoutes = [
@@ -50,6 +51,10 @@ const AppRoutes = [
     {
         path: '/magazyn',
         element: <Magazine/>
+    },
+    {
+      path: '/magazyn/edycja/:id',
+      element: <EditPart/>  
     },
     {
         path: '/edytuj',

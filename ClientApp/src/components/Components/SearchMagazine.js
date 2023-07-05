@@ -1,66 +1,74 @@
 import { useState } from "react";
 import axios from "axios";
-import {PartRow } from "./PartRow"
+import { PartRow } from "./PartRow";
 
-export function SearchMagazine()
-{
-    const [checked, setChecked] = useState(false)
-    const [searchString, setSearchString] = useState("")
-    const [parts, setParts] = useState([])
-    
-    function handleCheck()
-    {
-        if(checked===true)
-            setChecked(false)
-        else 
-            setChecked(true)
+export function SearchMagazine() {
+    const [checked, setChecked] = useState(false);
+    const [searchString, setSearchString] = useState("");
+    const [parts, setParts] = useState([]);
+
+    function handleCheck() {
+        setChecked(!checked);
     }
 
-    const setAuthToken = token => {
+    const setAuthToken = (token) => {
         if (token) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        }
-        else
+        } else {
             delete axios.defaults.headers.common["Authorization"];
-    }
+        }
+    };
 
     const handleSearchQueryChange = (event) => {
-        setSearchString(event.currentTarget.value)
-    }
+        setSearchString(event.currentTarget.value);
+    };
 
     const handleSubmit = async () => {
-        let isUsed
-        if (checked) {
-            isUsed = true
-        } else {
-            isUsed = false
-        }
+        let isUsed = checked ? true : false;
 
-        setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/part/isUsed/' + isUsed + '/' + searchString)
-        setParts(result.data)
-        console.log(result.data)
-        
-    }
+        setAuthToken(localStorage.getItem("token"));
+        const result = await axios.get(
+            "/part/isUsed/" + isUsed + "/" + searchString
+        );
+        setParts(result.data);
+        console.log(result.data);
+    };
 
     function removeFromData(index) {
-        const newData = parts.filter((_, i) => i !== index)
-        setParts(newData)
-        window.location.reload()
+        const newData = parts.filter((_, i) => i !== index);
+        setParts(newData);
+        window.location.reload();
     }
-    
-    return(
+
+    return (
         <>
             <p className="services-title"> WYSZUKIWANIE CZĘŚCI </p>
-            <label>
-                Nazwa części :
-                <input type="text" onChange={handleSearchQueryChange} />
-            </label> 
-            <label>
-                Czy użyta:
-                <input type="checkbox" name="isUsed" onChange={handleCheck} checked={checked === true} />
-                <button className="button-class" onClick={handleSubmit}> WYSZUKAJ </button>
-            </label>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <label>
+                    Nazwa części:
+                    <input
+                        type="text"
+                        onChange={handleSearchQueryChange}
+                        style={{ width: "200px" }}
+                    />
+                </label>
+                <label>
+                    Czy użyta:
+                    <input
+                        type="checkbox"
+                        name="isUsed"
+                        onChange={handleCheck}
+                        checked={checked === true}
+                    />
+                </label>
+                <button
+                    className="button-class"
+                    onClick={handleSubmit}
+                    style={{ marginLeft: "10px" }}
+                >
+                    WYSZUKAJ
+                </button>
+            </div>
             <table>
                 <thead>
                 <tr>
@@ -74,11 +82,11 @@ export function SearchMagazine()
                 </tr>
                 </thead>
                 <tbody>
-                    {parts.map((part, id) => (
-                        <PartRow part={part} key={part.id} removeFromData={removeFromData} />
-                    ))}
+                {parts.map((part, id) => (
+                    <PartRow part={part} key={part.id} removeFromData={removeFromData} />
+                ))}
                 </tbody>
             </table>
         </>
-    )
+    );
 }

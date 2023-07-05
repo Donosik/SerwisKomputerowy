@@ -52,7 +52,7 @@ public class PartService : IPartService
     {
         if (part != null)
         {
-            Part oldPart = unitOfWork.parts.Get(part.SerialNumber);
+            Part oldPart = unitOfWork.parts.Get(part.Id);
             if (oldPart != null)
             {
                 oldPart.Update(part);
