@@ -141,7 +141,7 @@ export function EditPart() {
                         />
                     </label>
                     <label>
-                        Czy uzyta:
+                        Czy użyta: <br/>
                         <input type="checkbox" name="isUsed" onChange={handleCheckboxChange} checked={checked === true} />
                     </label>
                     <button
