@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 import axios from "axios";
-import {NavMenu} from "../Components/NavMenu";
+import { NavMenu } from "../Components/NavMenu";
 import "../Css/details.css"
 
-export function DetailsRepair()
-{
+export function DetailsRepair() {
     const [inputs, setInputs] = useState({})
 
     let { id } = useParams()
@@ -51,13 +50,13 @@ export function DetailsRepair()
         getPart()
     }, [])
 
-    return(
+    return (
         <>
-            <NavMenu/>
-            <br/>
-            <hr/>
-            <p>INFORMACJE O NAPRAWIE <br/></p>
-            <hr/>
+            <NavMenu />
+            <br />
+            <hr />
+            <p>INFORMACJE O NAPRAWIE <br /></p>
+            <hr />
             <table>
                 <tr>
                     <th>ID naprawy</th>
@@ -72,10 +71,10 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.status : ''}</td>
                 </tr>
             </table>
-            <br/>
-            <hr/>
-            <p> INFORMACJE O SPRZĘCIE <br/></p>
-            <hr/>
+            <br />
+            <hr />
+            <p> INFORMACJE O SPRZĘCIE <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Nazwa sprzętu</th>
@@ -97,11 +96,11 @@ export function DetailsRepair()
                     <td>{parts.cost}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <hr/>
-            <p> INFORMACJE O KLIENCIE <br/></p>
-            <hr/>
+
+            <br />
+            <hr />
+            <p> INFORMACJE O KLIENCIE <br /></p>
+            <hr />
 
             <table>
                 <tr className="table-title">
@@ -113,11 +112,11 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <hr/>
-            <p> INFORMACJE O PRACOWNIKACH <br/></p>
-            <hr/>
+
+            <br />
+            <hr />
+            <p> INFORMACJE O PRACOWNIKACH <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Pracownik</th>
@@ -147,11 +146,11 @@ export function DetailsRepair()
                     </tr>
                 ))}
             </table>
-            <br/>
-            
-            <hr/>
-            <p> INFORMACJE O KOSZTACH <br/></p>
-            <hr/>
+            <br />
+
+            <hr />
+            <p> INFORMACJE O KOSZTACH <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Koszt części</th>
@@ -164,9 +163,9 @@ export function DetailsRepair()
                     <td>{parts.cost + parts.costOfWork}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <br/>
+
+            <br />
+            <br />
         </>
     )
 }
