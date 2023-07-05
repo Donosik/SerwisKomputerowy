@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react"
+import {useNavigate, useParams} from "react-router-dom";
+import {useState, useEffect} from "react"
 import axios from "axios";
-import { NavMenu } from "../Components/NavMenu";
+import {NavMenu} from "../Components/NavMenu";
 import "../Css/details.css"
 
 export function DetailsRepair() {
     const [inputs, setInputs] = useState({})
 
-    let { id } = useParams()
+    let {id} = useParams()
     const navigate = useNavigate()
     const [repairData, setRepairData] = useState([])
     const [workers, setWorkers] = useState([])
@@ -25,7 +25,6 @@ export function DetailsRepair() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/' + id)
         await setRepairData(result.data)
-        console.log(result.data)
     }
 
     async function getWorkers() {
@@ -33,6 +32,7 @@ export function DetailsRepair() {
         const result = await axios.get('/worker/repair/' + id)
         await setWorkers(result.data)
     }
+
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/part/repair/' + id)
@@ -42,8 +42,10 @@ export function DetailsRepair() {
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/action/repair/' + id)
+        console.log(result.data)
         await setActions(result.data)
     }
+
     useEffect(() => {
         getRepair()
         getWorkers()
@@ -63,11 +65,11 @@ export function DetailsRepair() {
 
     return (
         <>
-            <NavMenu />
-            <br />
-            <hr />
-            <p>INFORMACJE O NAPRAWIE <br /></p>
-            <hr />
+            <NavMenu/>
+            <br/>
+            <hr/>
+            <p>INFORMACJE O NAPRAWIE <br/></p>
+            <hr/>
             <table>
                 <thead>
                 <tr>
@@ -77,7 +79,7 @@ export function DetailsRepair() {
                     <th>Status</th>
                     <th>Czy gwarancja</th>
                     <th>Data gwarancji</th>
-                    </tr>
+                </tr>
                 </thead>
                 <tbody>
                 <tr>
@@ -87,32 +89,41 @@ export function DetailsRepair() {
                     <td>{castToString(repairData.status)}</td>
                     <td>{repairData ? (repairData.isGuarantee === true ? "tak" : "nie") : ''}</td>
                     <td>{repairData ? repairData.guaranteeTime : '-'}</td>
-                    </tr>
+                </tr>
                 </tbody>
             </table>
-            <br />
-            <hr />
-            <p>OPIS NAPRAWY <br /></p>
-            <hr />
+            <br/>
+            <hr/>
+            <p>OPIS NAPRAWY <br/></p>
+            <hr/>
             <table>
+                <thead>
                 <tr>
                     <th>Czynności</th>
                 </tr>
-                <tr>
-                    <td>{actions ? actions.description : ''}</td>
-               </tr> 
+                </thead>
+                <tbody>
+                {actions.map((action)=>(
+                    <tr key={action.id}>
+                        <td>{action ? action.description : ''}</td>
+                    </tr>
+                ))}
+                </tbody>
             </table>
-            <br />
-            <hr />
-            <p>INFORMACJE O CZĘŚCIACH <br /></p>
-            <hr />
+            <br/>
+            <hr/>
+            <p>INFORMACJE O CZĘŚCIACH <br/></p>
+            <hr/>
             <table>
+                <thead>
                 <tr>
                     <th>Numer Seryjny</th>
                     <th>Nazwa Części</th>
                     <th>Koszt części</th>
                     <th>Koszt robocizny</th>
                 </tr>
+                </thead>
+                <tbody>
                 {parts.map((part) => (
                     <tr key={part.id}>
                         <td>{part ? part.serialNumber : ''}</td>
@@ -123,51 +134,63 @@ export function DetailsRepair() {
                     </tr>
                 ))}
                 <tr>
-                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum,0) : ''}</td>
+                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum, 0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum, 0) : ''}</td>
                 </tr>
+                </tbody>
             </table>
-            <br />
-            <hr />
-            <p> INFORMACJE O SPRZĘCIE <br /></p>
-            <hr />
+            <br/>
+            <hr/>
+            <p> INFORMACJE O SPRZĘCIE <br/></p>
+            <hr/>
             <table>
+                <thead>
                 <tr className="table-title">
                     <th>Nazwa sprzętu</th>
                     <th>Typ sprzętu</th>
                     <th>Data produkcji</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>{repairData.equipment ? repairData.equipment.name : ''}</td>
                     <td>{repairData.equipment ? repairData.equipment.type : ''}</td>
                     <td>{repairData.equipment ? repairData.equipment.productionDate : ''}</td>
                 </tr>
+                </tbody>
             </table>
 
-            <br />
-            <hr />
-            <p> INFORMACJE O KLIENCIE <br /></p>
-            <hr />
+            <br/>
+            <hr/>
+            <p> INFORMACJE O KLIENCIE <br/></p>
+            <hr/>
 
             <table>
+                <thead>
                 <tr className="table-title">
                     <th>ID klienta</th>
                     <th>Klient</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>{repairData.client ? repairData.client.id : ''}</td>
                     <td>{repairData.client ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
                 </tr>
+                </tbody>
             </table>
 
-            <br />
-            <hr />
-            <p> INFORMACJE O PRACOWNIKACH <br /></p>
-            <hr />
+            <br/>
+            <hr/>
+            <p> INFORMACJE O PRACOWNIKACH <br/></p>
+            <hr/>
             <table>
+                <thead>
                 <tr className="table-title">
                     <th>Pracownik</th>
                     <th>Rola pracowników</th>
                 </tr>
+                </thead>
+                <tbody>
                 {workers.map((worker) => (
                     <tr key={worker.id}>
                         <td>{worker.firstName + " " + worker.lastName}</td>
@@ -191,6 +214,7 @@ export function DetailsRepair() {
                         })()}</td>
                     </tr>
                 ))}
+                </tbody>
             </table>
         </>
     )
