@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
 import axios from "axios";
-import {NavMenu} from "../Components/NavMenu";
+import { NavMenu } from "../Components/NavMenu";
 import "../Css/details.css"
 
-export function DetailsRepair()
-{
+export function DetailsRepair() {
     const [inputs, setInputs] = useState({})
 
     let { id } = useParams()
@@ -48,23 +47,22 @@ export function DetailsRepair()
         getRepair()
         getClients()
         getWorkers()
+        getPart()
     }, [])
 
-    return(
+    return (
         <>
-            <NavMenu/>
-            <br/>
-            <hr/>
-            <p>INFORMACJE O NAPRAWIE <br/></p>
-            <hr/>
+            <NavMenu />
+            <br />
+            <hr />
+            <p>INFORMACJE O NAPRAWIE <br /></p>
+            <hr />
             <table>
                 <tr>
                     <th>ID naprawy</th>
                     <th>Data przyjęcia</th>
                     <th>Data skończenia</th>
                     <th>Status</th>
-                    <th>Część do wymiany</th>
-                    <th>Nowa część</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.id : ''}</td>
@@ -73,10 +71,10 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.status : ''}</td>
                 </tr>
             </table>
-            <br/>
-            <hr/>
-            <p> INFORMACJE O SPRZĘCIE <br/></p>
-            <hr/>
+            <br />
+            <hr />
+            <p> INFORMACJE O SPRZĘCIE <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Nazwa sprzętu</th>
@@ -85,6 +83,8 @@ export function DetailsRepair()
                     <th>Data produkcji</th>
                     <th>Data końca gwarancji</th>
                     <th>Gwarancja</th>
+                    <th>Część do wymiany</th>
+                    <th>Nowa część</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.equipment.name : ''}</td>
@@ -93,13 +93,14 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.equipment.productionDate : ''}</td>
                     <td>{repairData ? repairData.equipment.warrantyEndDate : ''}</td>
                     <td>{repairData ? repairData.equipment.warranty ? 'Tak' : 'Nie' : ''}</td>
+                    <td>{parts.cost}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <hr/>
-            <p> INFORMACJE O KLIENCIE <br/></p>
-            <hr/>
+
+            <br />
+            <hr />
+            <p> INFORMACJE O KLIENCIE <br /></p>
+            <hr />
 
             <table>
                 <tr className="table-title">
@@ -111,11 +112,11 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <hr/>
-            <p> INFORMACJE O PRACOWNIKACH <br/></p>
-            <hr/>
+
+            <br />
+            <hr />
+            <p> INFORMACJE O PRACOWNIKACH <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Pracownik</th>
@@ -145,11 +146,11 @@ export function DetailsRepair()
                     </tr>
                 ))}
             </table>
-            <br/>
-            
-            <hr/>
-            <p> INFORMACJE O KOSZTACH <br/></p>
-            <hr/>
+            <br />
+
+            <hr />
+            <p> INFORMACJE O KOSZTACH <br /></p>
+            <hr />
             <table>
                 <tr className="table-title">
                     <th>Koszt części</th>
@@ -162,9 +163,9 @@ export function DetailsRepair()
                     <td>{parts.cost + parts.costOfWork}</td>
                 </tr>
             </table>
-            
-            <br/>
-            <br/>
+
+            <br />
+            <br />
         </>
     )
 }
