@@ -5,7 +5,6 @@ import { NavMenu } from "../Components/NavMenu";
 import "../Css/login.css"
 
 export function EditPart() {
-
     const [inputs, setInputs] = useState({})
 
     let { id } = useParams()
@@ -33,9 +32,7 @@ export function EditPart() {
     }
 
     async function editPart() {
-        await axios.put('/part', part) //??????
-        //repairData.client = null;
-        //await axios.put('/repair', repairData)
+        await axios.put('/part', part)
     }
 
     useEffect(() => {
@@ -78,49 +75,58 @@ export function EditPart() {
     return (
         <>
             <NavMenu />
-            <div>
-                <div>
-                    <form>
-                        <label>
-                            Nazwa czesci:
-                            <input
-                                type="text"
-                                name="partName"
-                                value={inputs.partName || ""}
-                                onChange={handleChange}
+            <p className="services-title"> EDYCJA CZĘŚCI </p>
+            <div style={{ border: "2px solid black", padding: "10px", marginRight: "600px"}}>
+                <form>
+                    <label>
+                        Nazwa czesci:
+                        <input
+                            type="text"
+                            name="partName"
+                            value={inputs.partName || ""}
+                            onChange={handleChange}
+                            style={{ marginBottom: "10px", width: "100%" }}
+                        />
+                    </label>
+                    <label>
+                        Koszt czesci:
+                        <input
+                            type="number"
+                            name="cost"
+                            value={inputs.cost || ""}
+                            onChange={handleChange}
+                            style={{ marginBottom: "10px", width: "100%" }}
+                        />
+                    </label>
+                    <label>
+                        Koszt robocizny:
+                        <input
+                            type="number"
+                            name="costOfWork"
+                            value={inputs.costOfWork || ""}
+                            onChange={handleChange}
+                            style={{ marginBottom: "10px", width: "100%" }}
+                        />
+                    </label>
 
-                            />
-                        </label>
-                        <label>
-                            Koszt czesci:
-                            <input
-                                type="number"
-                                name="cost"
-                                value={inputs.cost || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Koszt robocizny:
-                            <input
-                                type="number"
-                                name="costOfWork"
-                                value={inputs.costOfWork || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <label>
-                            Numer seryjny:
-                            <input
-                                type="number"
-                                name="serialNumber"
-                                value={inputs.serialNumber || ""}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
-                    </form>
-                </div>
+                    <label>
+                        Numer seryjny:
+                        <input
+                            type="number"
+                            name="serialNumber"
+                            value={inputs.serialNumber || ""}
+                            onChange={handleChange}
+                            style={{ marginBottom: "10px", width: "100%" }}
+                        />
+                    </label>
+                    <button
+                        className="button-class"
+                        onClick={handleSubmit}
+                        style={{ width: "100%" }}
+                    >
+                        Zapisz zmiany
+                    </button>
+                </form>
             </div>
         </>
     )
