@@ -52,7 +52,7 @@ export function EditPart() {
 
     useEffect(() => {
         getPart()
-        setInputs(values => ({ ...values, ["isUsed"]: part.isUsed === true ? "on" : "off" }))
+        //setInputs(values => ({ ...values, ["isUsed"]: part.isUsed === true ? "on" : "off" }))
     }, [])
 
     useEffect(() => {
@@ -70,6 +70,10 @@ export function EditPart() {
         const name4 = "serialNumber"
         const value4 = part.serialNumber
         setInputs(values => ({ ...values, [name4]: value4 }))
+        const name5 = "isUsed"
+        const value5 = part.isUsed
+        setInputs(values => ({ ...values, [name5]: value5 === true ? "on" : "off" }))
+        setChecked(value5)
     }, [part])
 
     const handleSubmit = (event) => {
