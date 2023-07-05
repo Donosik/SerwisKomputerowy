@@ -34,13 +34,13 @@ export function DetailsRepair() {
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/part/repair' + id)
+        const result = await axios.get('/part/repair/' + id)
         setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/action/repair' + id)
+        const result = await axios.get('/action/repair/' + id)
         setActions(result.data)
     }
     useEffect(() => {
@@ -104,7 +104,7 @@ export function DetailsRepair() {
                     </tr>
                 ))}
                 <tr>
-                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum) : ''}</td>
+                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum,0) : ''}</td>
                 </tr>
             </table>
             <br />

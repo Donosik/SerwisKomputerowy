@@ -34,13 +34,13 @@ export function RepairRow({ repair, removeFromData }) {
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/part/repair' + id)
+        const result = await axios.get('/part/repair/' + id)
         setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/action/repair' + id)
+        const result = await axios.get('/action/repair/' + id)
         setActions(result.data)
     }
     useEffect(() => {
