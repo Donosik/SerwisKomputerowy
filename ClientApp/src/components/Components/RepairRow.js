@@ -24,24 +24,24 @@ export function RepairRow({ repair, removeFromData }) {
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/' + repair.id)
-        setRepairData(result.data)
+        await setRepairData(result.data)
     }
 
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/worker/repair/' + repair.id)
-        setWorkers(result.data)
+        await setWorkers(result.data)
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/part/repair/' + repair.id)
-        setParts(result.data)
+        await setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/action/repair/' + repair.id)
-        setActions(result.data)
+        await setActions(result.data)
     }
 
     const handleDownloadInvoicePDF = () => {
@@ -49,8 +49,26 @@ export function RepairRow({ repair, removeFromData }) {
         getWorkers()
         getPart()
         getAction()
+        // Aktualna data
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+
+        // Informacje o firmie
+        const companyName = "SerwisKomputerowy";
+        const companyAddress = "ul. Kwiatowa 3, Chorzów";
+        const companyNIP = "1234567890"; // Wymyślany numer NIP dla firmy
+
+        // Informacje o kliencie
+        const customerName = repairData.client.firstName + " " + repairData.client.lastName;
 
         const doc = new jsPDF();
+
+        doc.text(`Data: ${formattedDate}`, 20, 20);
+        doc.text("Miejsce: Chorzów", 20, 30);
+        doc.text(`Wystawca faktury: ${companyName}`, 20, 40);
+        doc.text(`Adres: ${companyAddress}`, 20, 50);
+        doc.text(`NIP: ${companyNIP}`, 20, 60);
+        doc.text(`Odbiorca faktury: ${customerName}`, 20, 70);
 
         const partsData = parts.map((part) => [
             part  ? part.partName : '',
