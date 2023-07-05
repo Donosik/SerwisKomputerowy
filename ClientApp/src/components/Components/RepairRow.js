@@ -23,24 +23,24 @@ export function RepairRow({ repair, removeFromData }) {
     }
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/repair/' + id)
+        const result = await axios.get('/repair/' + repair.id)
         setRepairData(result.data)
     }
 
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/worker/repair/' + id)
+        const result = await axios.get('/worker/repair/' + repair.id)
         setWorkers(result.data)
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/part/repair/' + id)
+        const result = await axios.get('/part/repair/' + repair.id)
         setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/action/repair/' + id)
+        const result = await axios.get('/action/repair/' + repair.id)
         setActions(result.data)
     }
 
