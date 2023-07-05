@@ -140,13 +140,77 @@ public class TestController : ControllerBase
         repair1.Actions = new List<Action>();
         repairService.CreateRepair(repair1);
 
-        // Part1 for repair1
+        // Part1
         Part part1 = new Part();
-        part1.PartName = "czesc1";
-        part1.Cost = 100;
-        part1.CostOfWork = 10;
-        part1.Repair = repair1;
+        part1.PartName = "Procesor Intel Core i9-10900K";
+        part1.SerialNumber = 3428909;
+        part1.Cost = 500;
+        part1.CostOfWork = 50;
+        part1.IsUsed = false;
         partService.CreatePart(part1);
+
+// Part2
+        Part part2 = new Part();
+        part2.PartName = "Karta graficzna NVIDIA GeForce RTX 3080";
+        part2.SerialNumber = 9837452;
+        part2.Cost = 800;
+        part2.CostOfWork = 80;
+        part2.IsUsed = false;
+        partService.CreatePart(part2);
+
+// Part3
+        Part part3 = new Part();
+        part3.PartName = "Pamięć RAM DDR4 16GB";
+        part3.SerialNumber = 5678921;
+        part3.Cost = 100;
+        part3.CostOfWork = 10;
+        part3.IsUsed = false;
+        partService.CreatePart(part3);
+
+// Part4
+        Part part4 = new Part();
+        part4.PartName = "Dysk SSD 1TB";
+        part4.SerialNumber = 3782956;
+        part4.Cost = 200;
+        part4.CostOfWork = 20;
+        part4.IsUsed = false;
+        partService.CreatePart(part4);
+
+// Part5
+        Part part5 = new Part();
+        part5.PartName = "Zasilacz 750W";
+        part5.SerialNumber =1357924;
+        part5.Cost = 150;
+        part5.CostOfWork = 15;
+        part5.IsUsed = false;
+        partService.CreatePart(part5);
+
+// Part6
+        Part part6 = new Part();
+        part6.PartName = "Płyta główna ASUS ROG Strix Z590-E Gaming";
+        part6.SerialNumber = 6849203;
+        part6.Cost = 300;
+        part6.CostOfWork = 30;
+        part6.IsUsed = false;
+        partService.CreatePart(part6);
+
+// Part7
+        Part part7 = new Part();
+        part7.PartName = "Chłodzenie wodne NZXT Kraken X73";
+        part7.SerialNumber = 2574906;
+        part7.Cost = 250;
+        part7.CostOfWork = 25;
+        part7.IsUsed = false;
+        partService.CreatePart(part7);
+
+// Part8
+        Part part8 = new Part();
+        part8.PartName = "Obudowa Corsair iCUE 5000X RGB";
+        part8.SerialNumber = 6093184;
+        part8.Cost = 150;
+        part8.CostOfWork = 15;
+        part8.IsUsed = false;
+        partService.CreatePart(part8);
 
         Action action=new Action();
         action.Description = "TEST";
