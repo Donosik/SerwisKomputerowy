@@ -49,12 +49,27 @@ export function RepairRow({ repair, removeFromData }) {
         getWorkers()
         getPart()
         getAction()
+        // Aktualna data
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+
+        // Informacje o firmie
+        const companyName = "SerwisKomputerowy";
+        const companyAddress = "ul. Kwiatowa 3, Chorzów";
+        const companyNIP = "1234567890"; // Wymyślany numer NIP dla firmy
+
+        // Informacje o kliencie
+        const customerName = repairData.client.firstName + " " + repairData.client.lastName;
 
         const doc = new jsPDF();
-        
-        console.log("CYCE")
-        console.log(parts)
-        
+
+        doc.text(`Data: ${formattedDate}`, 20, 20);
+        doc.text("Miejsce: Chorzów", 20, 30);
+        doc.text(`Wystawca faktury: ${companyName}`, 20, 40);
+        doc.text(`Adres: ${companyAddress}`, 20, 50);
+        doc.text(`NIP: ${companyNIP}`, 20, 60);
+        doc.text(`Odbiorca faktury: ${customerName}`, 20, 70);
+
         const partsData = parts.map((part) => [
             part  ? part.partName : '',
             part  ? part.serialNumber : '',
