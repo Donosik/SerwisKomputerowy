@@ -62,7 +62,7 @@ export function RepairRow({ repair, removeFromData }) {
         const customerName = repairData.client.firstName + " " + repairData.client.lastName;
 
         const doc = new jsPDF();
-
+        doc.setFontSize(12);
         doc.text(`Data: ${formattedDate}`, 20, 20);
         doc.text("Miejsce: Chorzów", 20, 30);
         doc.text(`Wystawca faktury: ${companyName}`, 20, 40);
@@ -98,7 +98,7 @@ export function RepairRow({ repair, removeFromData }) {
         });
 
 
-        doc.text(`Podpis osoby upoważnionej: ....................................`, 20, 220);
+        doc.text("Podpis osoby upowaznionej: ....................................`", 20, 220);
         doc.save("Faktura.pdf");
 
     };
