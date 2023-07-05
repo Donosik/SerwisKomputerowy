@@ -96,15 +96,15 @@ export function DetailsRepair() {
                 </tr>
                 {parts.map((part) => (
                     <tr key={part.id}>
-                        <td>{ part.serialNumber}</td>
-                        <td>{ part.partName}</td>
-                        <td>{ part.cost}</td>
-                        <td>{ part.costOfWork}</td>
-                        <td>{ part.cost + part.costOfWork}</td>
+                        <td>{part ? part.serialNumber : ''}</td>
+                        <td>{part ? part.partName : ''}</td>
+                        <td>{part ? part.cost : ''}</td>
+                        <td>{part ? part.costOfWork : ''}</td>
+                        <td>{part ? part.cost + part.costOfWork : ''}</td>
                     </tr>
                 ))}
                 <tr>
-                    <td>RAZEM: {parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum)}</td>
+                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum) : ''}</td>
                 </tr>
             </table>
             <br />
