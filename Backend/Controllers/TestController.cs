@@ -68,7 +68,7 @@ public class TestController : ControllerBase
         worker11.BirthDate = DateTime.Now;
         worker11.Specialization = Specialization.Drukarki;
         worker11.User = worker1;
-        workerService.CreateWorker(worker11);
+        workerService.CreateWorker(worker1);
 
         //Pracownik2
         User worker2 = new User();
@@ -84,7 +84,66 @@ public class TestController : ControllerBase
         worker21.Specialization = Specialization.Telefony;
         worker21.User = worker2;
         workerService.CreateWorker(worker21);
+// Pracownik3
+        User worker3 = new User();
+        worker3.Login = "worker3";
+        worker3.Password = "123";
+        worker3.Role = Role.Worker;
+        worker3.Messages = new List<Message>();
+        userService.CreateUser(worker3);
+        Worker worker31 = new Worker();
+        worker31.FirstName = "Anna";
+        worker31.LastName = "Grafikowska";
+        worker31.BirthDate = DateTime.Now;
+        worker31.Specialization = Specialization.Drukarki;
+        worker31.User = worker3;
+        workerService.CreateWorker(worker31);
 
+// Pracownik4
+        User worker4 = new User();
+        worker4.Login = "worker4";
+        worker4.Password = "123";
+        worker4.Role = Role.Worker;
+        worker4.Messages = new List<Message>();
+        userService.CreateUser(worker4);
+        Worker worker41 = new Worker();
+        worker41.FirstName = "Michał";
+        worker41.LastName = "Backendowski";
+        worker41.BirthDate = DateTime.Now;
+        worker41.Specialization = Specialization.OdzyskiwanieDanych;
+        worker41.User = worker4;
+        workerService.CreateWorker(worker41);
+
+// Pracownik5
+        User worker5 = new User();
+        worker5.Login = "worker5";
+        worker5.Password = "123";
+        worker5.Role = Role.Worker;
+        worker5.Messages = new List<Message>();
+        userService.CreateUser(worker5);
+        Worker worker51 = new Worker();
+        worker51.FirstName = "Ewa";
+        worker51.LastName = "Supportowska";
+        worker51.BirthDate = DateTime.Now;
+        worker51.Specialization = Specialization.AGD;
+        worker51.User = worker5;
+        workerService.CreateWorker(worker51);
+
+// Pracownik6
+        User worker6 = new User();
+        worker6.Login = "worker6";
+        worker6.Password = "123";
+        worker6.Role = Role.Worker;
+        worker6.Messages = new List<Message>();
+        userService.CreateUser(worker6);
+        Worker worker61 = new Worker();
+        worker61.FirstName = "Marcin";
+        worker61.LastName = "Sieciowiec";
+        worker61.BirthDate = DateTime.Now;
+        worker61.Specialization = Specialization.Telefony;
+        worker61.User = worker6;
+        workerService.CreateWorker(worker61);
+       
         //User1
         User user1 = new User();
         user1.Login = "user1";
