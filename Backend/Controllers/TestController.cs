@@ -68,7 +68,7 @@ public class TestController : ControllerBase
         worker11.BirthDate = DateTime.Now;
         worker11.Specialization = Specialization.Drukarki;
         worker11.User = worker1;
-        workerService.CreateWorker(worker11);
+        workerService.CreateWorker(worker1);
 
         //Pracownik2
         User worker2 = new User();
@@ -84,7 +84,66 @@ public class TestController : ControllerBase
         worker21.Specialization = Specialization.Telefony;
         worker21.User = worker2;
         workerService.CreateWorker(worker21);
+// Pracownik3
+        User worker3 = new User();
+        worker3.Login = "worker3";
+        worker3.Password = "123";
+        worker3.Role = Role.Worker;
+        worker3.Messages = new List<Message>();
+        userService.CreateUser(worker3);
+        Worker worker31 = new Worker();
+        worker31.FirstName = "Anna";
+        worker31.LastName = "Grafikowska";
+        worker31.BirthDate = DateTime.Now;
+        worker31.Specialization = Specialization.Drukarki;
+        worker31.User = worker3;
+        workerService.CreateWorker(worker31);
 
+// Pracownik4
+        User worker4 = new User();
+        worker4.Login = "worker4";
+        worker4.Password = "123";
+        worker4.Role = Role.Worker;
+        worker4.Messages = new List<Message>();
+        userService.CreateUser(worker4);
+        Worker worker41 = new Worker();
+        worker41.FirstName = "Michał";
+        worker41.LastName = "Backendowski";
+        worker41.BirthDate = DateTime.Now;
+        worker41.Specialization = Specialization.OdzyskiwanieDanych;
+        worker41.User = worker4;
+        workerService.CreateWorker(worker41);
+
+// Pracownik5
+        User worker5 = new User();
+        worker5.Login = "worker5";
+        worker5.Password = "123";
+        worker5.Role = Role.Worker;
+        worker5.Messages = new List<Message>();
+        userService.CreateUser(worker5);
+        Worker worker51 = new Worker();
+        worker51.FirstName = "Ewa";
+        worker51.LastName = "Supportowska";
+        worker51.BirthDate = DateTime.Now;
+        worker51.Specialization = Specialization.AGD;
+        worker51.User = worker5;
+        workerService.CreateWorker(worker51);
+
+// Pracownik6
+        User worker6 = new User();
+        worker6.Login = "worker6";
+        worker6.Password = "123";
+        worker6.Role = Role.Worker;
+        worker6.Messages = new List<Message>();
+        userService.CreateUser(worker6);
+        Worker worker61 = new Worker();
+        worker61.FirstName = "Marcin";
+        worker61.LastName = "Sieciowiec";
+        worker61.BirthDate = DateTime.Now;
+        worker61.Specialization = Specialization.Telefony;
+        worker61.User = worker6;
+        workerService.CreateWorker(worker61);
+       
         //User1
         User user1 = new User();
         user1.Login = "user1";
@@ -140,13 +199,77 @@ public class TestController : ControllerBase
         repair1.Actions = new List<Action>();
         repairService.CreateRepair(repair1);
 
-        // Part1 for repair1
+        // Part1
         Part part1 = new Part();
-        part1.PartName = "czesc1";
-        part1.Cost = 100;
-        part1.CostOfWork = 10;
-        part1.Repair = repair1;
+        part1.PartName = "Procesor Intel Core i9-10900K";
+        part1.SerialNumber = 3428909;
+        part1.Cost = 500;
+        part1.CostOfWork = 50;
+        part1.IsUsed = false;
         partService.CreatePart(part1);
+
+// Part2
+        Part part2 = new Part();
+        part2.PartName = "Karta graficzna NVIDIA GeForce RTX 3080";
+        part2.SerialNumber = 9837452;
+        part2.Cost = 800;
+        part2.CostOfWork = 80;
+        part2.IsUsed = false;
+        partService.CreatePart(part2);
+
+// Part3
+        Part part3 = new Part();
+        part3.PartName = "Pamięć RAM DDR4 16GB";
+        part3.SerialNumber = 5678921;
+        part3.Cost = 100;
+        part3.CostOfWork = 10;
+        part3.IsUsed = false;
+        partService.CreatePart(part3);
+
+// Part4
+        Part part4 = new Part();
+        part4.PartName = "Dysk SSD 1TB";
+        part4.SerialNumber = 3782956;
+        part4.Cost = 200;
+        part4.CostOfWork = 20;
+        part4.IsUsed = false;
+        partService.CreatePart(part4);
+
+// Part5
+        Part part5 = new Part();
+        part5.PartName = "Zasilacz 750W";
+        part5.SerialNumber =1357924;
+        part5.Cost = 150;
+        part5.CostOfWork = 15;
+        part5.IsUsed = false;
+        partService.CreatePart(part5);
+
+// Part6
+        Part part6 = new Part();
+        part6.PartName = "Płyta główna ASUS ROG Strix Z590-E Gaming";
+        part6.SerialNumber = 6849203;
+        part6.Cost = 300;
+        part6.CostOfWork = 30;
+        part6.IsUsed = false;
+        partService.CreatePart(part6);
+
+// Part7
+        Part part7 = new Part();
+        part7.PartName = "Chłodzenie wodne NZXT Kraken X73";
+        part7.SerialNumber = 2574906;
+        part7.Cost = 250;
+        part7.CostOfWork = 25;
+        part7.IsUsed = false;
+        partService.CreatePart(part7);
+
+// Part8
+        Part part8 = new Part();
+        part8.PartName = "Obudowa Corsair iCUE 5000X RGB";
+        part8.SerialNumber = 6093184;
+        part8.Cost = 150;
+        part8.CostOfWork = 15;
+        part8.IsUsed = false;
+        partService.CreatePart(part8);
 
         Action action=new Action();
         action.Description = "TEST";

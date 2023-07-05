@@ -104,13 +104,11 @@ export function DetailsRepair()
             <table>
                 <tr className="table-title">
                     <th>ID klienta</th>
-                    <th>Imię klienta</th>
-                    <th>Nazwisko klienta</th>
+                    <th>Klient</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.client.id : ''}</td>
                     <td>{repairData ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
-                    <td>{repairData ? repairData.client.lastName : ''}</td>
                 </tr>
             </table>
             
