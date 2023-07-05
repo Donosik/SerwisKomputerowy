@@ -61,7 +61,7 @@ export function RepairRow({ repair, removeFromData }) {
             
         ]);
         const priceData = parts.map((part) => [
-            parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum) : ''
+            parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum ,0) : ''
         ]);
 
         doc.autoTable({
