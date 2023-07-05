@@ -9,7 +9,7 @@ export function DetailsRepair() {
 
     let { id } = useParams()
     const navigate = useNavigate()
-    const [repairData, setRepairData] = useState()
+    const [repairData, setRepairData] = useState([])
     const [workers, setWorkers] = useState([])
     const [parts, setParts] = useState([])
     const [actions, setActions] = useState([])
@@ -24,24 +24,25 @@ export function DetailsRepair() {
     async function getRepair() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/repair/' + id)
-        setRepairData(result.data)
+        await setRepairData(result.data)
+        console.log(result.data)
     }
 
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/worker/repair/' + id)
-        setWorkers(result.data)
+        await setWorkers(result.data)
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/part/repair/' + id)
-        setParts(result.data)
+        await setParts(result.data)
     }
 
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/action/repair/' + id)
-        setActions(result.data)
+        await setActions(result.data)
     }
     useEffect(() => {
         getRepair()
@@ -49,6 +50,16 @@ export function DetailsRepair() {
         getPart()
         getAction()
     }, [])
+
+    function castToString(status) {
+        if (status === 0) {
+            return 'skonczone'
+        } else if (status === 1) {
+            return 'przyjete'
+        }
+        //TODO: dorobic statusy
+        // Pamietac ze na backendzie tez sa te wartosci
+    }
 
     return (
         <>
@@ -58,18 +69,26 @@ export function DetailsRepair() {
             <p>INFORMACJE O NAPRAWIE <br /></p>
             <hr />
             <table>
+                <thead>
                 <tr>
                     <th>ID naprawy</th>
                     <th>Data przyjęcia</th>
                     <th>Data skończenia</th>
                     <th>Status</th>
-                </tr>
+                    <th>Czy gwarancja</th>
+                    <th>Data gwarancji</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>{repairData ? repairData.id : ''}</td>
                     <td>{repairData ? repairData.acceptanceTime : ''}</td>
-                    <td>{repairData ? repairData.guaranteeTime : ''}</td>
-                    <td>{repairData ? repairData.status : ''}</td>
-                </tr>
+                    <td>{repairData ? repairData.returnTime : ''}</td>
+                    <td>{castToString(repairData.status)}</td>
+                    <td>{repairData ? (repairData.isGuarantee === true ? "tak" : "nie") : ''}</td>
+                    <td>{repairData ? repairData.guaranteeTime : '-'}</td>
+                    </tr>
+                </tbody>
             </table>
             <br />
             <hr />
@@ -118,9 +137,9 @@ export function DetailsRepair() {
                     <th>Data produkcji</th>
                 </tr>
                 <tr>
-                    <td>{repairData ? repairData.equipment.name : ''}</td>
-                    <td>{repairData ? repairData.equipment.type : ''}</td>
-                    <td>{repairData ? repairData.equipment.productionDate : ''}</td>
+                    <td>{repairData.equipment ? repairData.equipment.name : ''}</td>
+                    <td>{repairData.equipment ? repairData.equipment.type : ''}</td>
+                    <td>{repairData.equipment ? repairData.equipment.productionDate : ''}</td>
                 </tr>
             </table>
 
@@ -135,8 +154,8 @@ export function DetailsRepair() {
                     <th>Klient</th>
                 </tr>
                 <tr>
-                    <td>{repairData ? repairData.client.id : ''}</td>
-                    <td>{repairData ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
+                    <td>{repairData.client ? repairData.client.id : ''}</td>
+                    <td>{repairData.client ? repairData.client.firstName + " " + repairData.client.lastName : ''}</td>
                 </tr>
             </table>
 

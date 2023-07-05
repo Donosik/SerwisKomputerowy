@@ -57,9 +57,9 @@ public class RepairController : ControllerBase
     }
 
     [HttpGet("client/{clientId}")]
-    public IActionResult GetRepairsOfClient(int cliendId)
+    public IActionResult GetRepairsOfClient(int clientId)
     {
-        IEnumerable<Repair> repairs = repairService.GetRepairsOfClient(cliendId);
+        IEnumerable<Repair> repairs = repairService.GetRepairsOfClient(clientId);
         if (repairs != null)
             return Ok(repairs);
         return NotFound();

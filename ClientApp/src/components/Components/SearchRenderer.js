@@ -24,7 +24,6 @@ export function SearchRenderer() {
         else {
             const me=await axios.get('/user/me')
             const myId=me.data.id
-            console.log(myId)
             result=await axios.get('/repair/client/'+myId)
         }
         setData(result.data)

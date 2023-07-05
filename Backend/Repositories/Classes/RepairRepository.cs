@@ -32,7 +32,8 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
             {
                 Id=r.Client.Id,
                 FirstName = r.Client.FirstName,
-                LastName = r.Client.LastName
+                LastName = r.Client.LastName,
+                User=r.Client.User
             },
             Equipment = new Equipment
             {
@@ -43,7 +44,7 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
 
     public IEnumerable<Repair> GetAllRepairsForTable()
     {
-        return GetRepairsForTable().ToList();
+        return GetRepairsForTable().Where(r=>r.Status==Status.Przyjete).ToList();
     }
 
     public IEnumerable<Message> GetMessages(int id)
@@ -51,8 +52,8 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
         return dbContext.Set<Repair>().Find(id).Messages;
     }
 
-    public IEnumerable<Repair> GetRepairsOfClient(int cliendId)
+    public IEnumerable<Repair> GetRepairsOfClient(int clientId)
     {
-        return GetRepairsForTable().Where(r => r.Client.Id == cliendId).ToList();
+        return GetRepairsForTable().Where(r => r.Client.User.Id == clientId).ToList();
     }
 }
