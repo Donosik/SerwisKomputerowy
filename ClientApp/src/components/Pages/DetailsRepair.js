@@ -12,6 +12,7 @@ export function DetailsRepair() {
     const [repairData, setRepairData] = useState()
     const [workers, setWorkers] = useState([])
     const [parts, setParts] = useState([])
+    const [actions, setActions] = useState([])
 
     const setAuthToken = token => {
         if (token) {
@@ -28,18 +29,25 @@ export function DetailsRepair() {
 
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/worker')
+        const result = await axios.get('/worker/repair/' + id)
         setWorkers(result.data)
     }
     async function getPart() {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/part')
+        const result = await axios.get('/part/repair' + id)
         setParts(result.data)
+    }
+
+    async function getAction() {
+        setAuthToken(localStorage.getItem("token"))
+        const result = await axios.get('/action/repair' + id)
+        setActions(result.data)
     }
     useEffect(() => {
         getRepair()
         getWorkers()
         getPart()
+        getAction()
     }, [])
 
     return (
@@ -65,6 +73,18 @@ export function DetailsRepair() {
             </table>
             <br />
             <hr />
+            <p>OPIS NAPRAWY <br /></p>
+            <hr />
+            <table>
+                <tr>
+                    <th>Czynności</th>
+                </tr>
+                <tr>
+                    <td>{actions ? actions.description : ''}</td>
+               </tr> 
+            </table>
+            <br />
+            <hr />
             <p>INFORMACJE O CZĘŚCIACH <br /></p>
             <hr />
             <table>
@@ -73,17 +93,19 @@ export function DetailsRepair() {
                     <th>Nazwa Części</th>
                     <th>Koszt części</th>
                     <th>Koszt robocizny</th>
-                    <th>Razem</th>
                 </tr>
-                {parts.filter(part => part.repairId === repairData.id).map(part => (
+                {parts.map((part) => (
                     <tr key={part.id}>
                         <td>{ part.serialNumber}</td>
                         <td>{ part.partName}</td>
                         <td>{ part.cost}</td>
-                        <td>{part.costOfWork}</td>
-                        <td>{part.cost + part.costOfWork}</td>
+                        <td>{ part.costOfWork}</td>
+                        <td>{ part.cost + part.costOfWork}</td>
                     </tr>
-                ))}>
+                ))}
+                <tr>
+                    <td>RAZEM: {parts.map(part => part.cost).reduce((cost, sum) => cost + sum) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum)}</td>
+                </tr>
             </table>
             <br />
             <hr />
