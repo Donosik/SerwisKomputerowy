@@ -36,7 +36,7 @@ public class RepairController : ControllerBase
             return Ok(repair);
         return NotFound();
     }
-    
+
     [HttpGet("table")]
     public IActionResult GetRepairsForTable()
     {
@@ -45,17 +45,28 @@ public class RepairController : ControllerBase
             return Ok(repairs);
         return NotFound();
     }
-    
+
     [HttpGet("{id}/messages")]
     public IActionResult GetMessagesOfRepair(int id)
     {
         IEnumerable<Message> messages = repairService.GetMessagesOfRepair(id);
         if (messages != null)
             return Ok(messages);
-        
+
         return NotFound();
     }
 
+    [HttpGet("client/{clientId}")]
+    public IActionResult GetRepairsOfClient(int cliendId)
+    {
+        IEnumerable<Repair> repairs = repairService.GetRepairsOfClient(cliendId);
+        if (repairs != null)
+            return Ok(repairs);
+        return NotFound();
+    }
+    
+    
+    
     [HttpPost]
     public IActionResult CreateRepair(Repair repair)
     {
@@ -66,18 +77,18 @@ public class RepairController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult EditRepair([FromBody]Repair repair)
+    public IActionResult EditRepair([FromBody] Repair repair)
     {
         bool isRepairEdited = repairService.EditRepair(repair);
         if (isRepairEdited)
             return Ok();
         return BadRequest();
     }
-    
+
     [HttpPut("{idrepair}/{idclient}")]
-    public IActionResult EditClientId(int idrepair,int idclient)
+    public IActionResult EditClientId(int idrepair, int idclient)
     {
-        bool isRepairEdited = repairService.EditClientId(idrepair,idclient);
+        bool isRepairEdited = repairService.EditClientId(idrepair, idclient);
         if (isRepairEdited)
             return Ok();
         return NotFound();
