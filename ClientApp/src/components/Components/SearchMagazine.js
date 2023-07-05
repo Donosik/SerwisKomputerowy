@@ -2,6 +2,7 @@ export function SearchMagazine()
 {
     return(
         <>
+            <p className="services-title"> WYSZUKIWANIE CZĘŚCI </p>
             <label>
                 Nazwa części :
                 <input type="text" /> <button className="button-class"> WYSZUKAJ </button>
