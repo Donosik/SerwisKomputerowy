@@ -48,6 +48,7 @@ export function DetailsRepair()
         getRepair()
         getClients()
         getWorkers()
+        getPart()
     }, [])
 
     return(
@@ -63,8 +64,6 @@ export function DetailsRepair()
                     <th>Data przyjęcia</th>
                     <th>Data skończenia</th>
                     <th>Status</th>
-                    <th>Część do wymiany</th>
-                    <th>Nowa część</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.id : ''}</td>
@@ -85,6 +84,8 @@ export function DetailsRepair()
                     <th>Data produkcji</th>
                     <th>Data końca gwarancji</th>
                     <th>Gwarancja</th>
+                    <th>Część do wymiany</th>
+                    <th>Nowa część</th>
                 </tr>
                 <tr>
                     <td>{repairData ? repairData.equipment.name : ''}</td>
@@ -93,6 +94,7 @@ export function DetailsRepair()
                     <td>{repairData ? repairData.equipment.productionDate : ''}</td>
                     <td>{repairData ? repairData.equipment.warrantyEndDate : ''}</td>
                     <td>{repairData ? repairData.equipment.warranty ? 'Tak' : 'Nie' : ''}</td>
+                    <td>{parts.cost}</td>
                 </tr>
             </table>
             
