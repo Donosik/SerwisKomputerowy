@@ -13,7 +13,7 @@ export function PartRow({ part, removeFromData }) {
     }
 
     function editElement() {
-        navigate('/???/???/' + part.id)
+        navigate('/magazyn/edycja/' + part.id)
     }
 
     async function deleteElement() {

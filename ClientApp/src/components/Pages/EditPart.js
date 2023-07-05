@@ -20,52 +20,52 @@ export function EditPart() {
     }
 
     function inputsToPartData() {
-        part.acceptanceTime = inputs.acceptanceTime
-        part.guaranteeTime = inputs.guaranteeTime
+        part.serialNumber = inputs.serialNumber
+        part.cost = inputs.cost
+        part.costOfWork = inputs.costOfWork
+        part.partName = inputs.partName
     }
 
-    async function getRepair() {
+    async function getPart() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/part/' + id)
-        setRepairData(result.data)
+        setPart(result.data)
     }
 
-    async function editRepair() {
-        await axios.put('/repair/' + repairData.id + '/' + inputs.clientId)
-        repairData.client = null;
-        await axios.put('/repair', repairData)
+    async function editPart() {
+        await axios.put('/part', part) //??????
+        //repairData.client = null;
+        //await axios.put('/repair', repairData)
     }
 
     useEffect(() => {
-        getRepair()
-        getClients()
-        getWorkers()
+        getPart()
     }, [])
 
     useEffect(() => {
-        if (repairData === undefined)
+        if (part === undefined)
             return
-        const name1 = "clientId"
-        const value1 = repairData.client.id
+        const name1 = "partName"
+        const value1 = part.partName
         setInputs(values => ({ ...values, [name1]: value1 }))
-        const name2 = "status"
-        const value2 = repairData.status
+        const name2 = "cost"
+        const value2 = part.cost
         setInputs(values => ({ ...values, [name2]: value2 }))
-        const name3 = "acceptanceTime"
-        const value3 = repairData.acceptanceTime.substring(0, 10)
+        const name3 = "costOfWork"
+        const value3 = part.costOfWork
         setInputs(values => ({ ...values, [name3]: value3 }))
-        const name4 = "guaranteeTime"
-        const value4 = repairData.guaranteeTime.substring(0, 10)
+        const name4 = "serialNumber"
+        const value4 = part.serialNumber
         setInputs(values => ({ ...values, [name4]: value4 }))
-    }, [repairData])
+    }, [part])
 
     const handleSubmit = (event) => {
         event.preventDefault()
         const fun = async () => {
-            await editRepair()
-            navigate('/naprawy')
+            await editPart()
+            navigate('/magazyn')
         }
-        inputsToRepairData()
+        inputsToPartData()
         fun()
     }
 
@@ -82,71 +82,44 @@ export function EditPart() {
                 <div>
                     <form>
                         <label>
-                            Klient:
-                            <select name="clientId" value={inputs.clientId || ""} onChange={handleChange}>
-                                {clients.map((client, id) => (
-                                    <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
-                                ))}
-                            </select>
-                        </label>
-                        <label>
-                            Status:
-                            <select name="status" value={inputs.status || ""} onChange={handleChange}>
-                                <option value="0">skonczone</option>
-                                <option value="1">przyjete</option>
-                            </select>
-                        </label>
-                        <label>
-                            Data przyjêcia:
+                            Nazwa czesci:
                             <input
-                                type="date"
-                                name="acceptanceTime"
-                                value={inputs.acceptanceTime || ""}
+                                type="text"
+                                name="partName"
+                                value={inputs.partName || ""}
                                 onChange={handleChange}
 
                             />
                         </label>
                         <label>
-                            Koniec gwarancji:
+                            Koszt czesci:
                             <input
-                                type="date"
-                                name="guaranteeTime"
-                                value={inputs.guaranteeTime || ""}
+                                type="number"
+                                name="cost"
+                                value={inputs.cost || ""}
                                 onChange={handleChange}
-
                             />
                         </label>
                         <label>
-                            Osoby odpowiedzialne: (IMO do wyjebania - Pawe³)
-                            <input type="text"
-                                name="description" />
-
+                            Koszt robocizny:
+                            <input
+                                type="number"
+                                name="costOfWork"
+                                value={inputs.costOfWork || ""}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <label>
+                            Numer seryjny:
+                            <input
+                                type="number"
+                                name="serialNumber"
+                                value={inputs.serialNumber || ""}
+                                onChange={handleChange}
+                            />
                         </label>
                         <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                     </form>
-                    <h4>DODAJ AKCJE</h4>
-                    <form>
-                        <label>
-                            Pracownik:
-                            <select name="workerId" onChange={handleChange}>
-                                {workers.map((worker, id) => (
-                                    <option key={id} value={worker.id}>{worker.firstName + ' ' + worker.lastName}</option>
-                                ))}
-                            </select>
-                        </label>
-                        <label>
-                            Opis czynnoœci:
-                            <textarea />
-                        </label>
-                    </form>
-                    <h4>WYMIEÑ CZÊŒÆ</h4>
-                    <form></form>
-                </div>
-                <div>
-                    Osoby odpowiedzialne: (IMO do wyjebania - Pawe³)
-                </div>
-                <div>
-                    Czêœci wymienne: (IMO do wyjebania - Pawe³)
                 </div>
             </div>
         </>
