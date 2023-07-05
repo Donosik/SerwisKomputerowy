@@ -43,14 +43,13 @@ export function RepairRow({ repair, removeFromData }) {
         const result = await axios.get('/action/repair/' + id)
         setActions(result.data)
     }
-    useEffect(() => {
+
+    const handleDownloadInvoicePDF = () => {
         getRepair()
         getWorkers()
         getPart()
         getAction()
-    }, [])
 
-    const handleDownloadInvoicePDF = () => {
         const doc = new jsPDF();
 
         const partsData = parts.map((part) => [
