@@ -71,11 +71,11 @@ export function RepairRow({ repair, removeFromData }) {
         doc.text(`Odbiorca faktury: ${customerName}`, 20, 70);
 
         const partsData = parts.map((part) => [
-            part  ? part.partName : '',
-            part  ? part.serialNumber : '',
-            part  ? part.cost : '',
-            part  ? part.costOfWork : '',
-            part  ? part.cost + part.costOfWork : '',
+            part ? part.partName + " zł" : '',
+            part ? part.serialNumber + " zł" : '',
+            part ? part.cost + " zł" : '',
+            part ? part.costOfWork + " zł" : '',
+            part  ? part.cost + part.costOfWork + " zł": '',
             
         ]);
         const priceData = parts.map((part) => [
@@ -83,19 +83,24 @@ export function RepairRow({ repair, removeFromData }) {
         ]);
 
         doc.autoTable({
+            startY: 100,
             head: [
                 [ "Nazwa czesci","Numer Seryjny czesci", "Cena czesci", "Cena naprawy"],
             ],
             body: partsData,
         });
         doc.autoTable({
+            startY: 200,
             head: [
                 ["Razem"],
             ],
             body: priceData,
         });
 
+
+        doc.text(`Podpis osoby upoważnionej: ....................................`, 20, 220);
         doc.save("Faktura.pdf");
+
     };
     function editElement() {
         navigate('/naprawy/edycja/' + repair.id)
