@@ -62,6 +62,13 @@ export function CreateRenderer() {
     return (
         <>
             <form>
+                <p>INFORMACJE O SPRZĘCIE <br/></p>
+                Typ sprzętu: ma być listą <br/>
+                Nazwa sprzętu: do wpisania<br/>
+                Rok produkcji sprzętu: <br/> <br/>
+                
+                <p>INFORMACJE O NAPRAWIE <br/></p>
+                //TODO:notatka o naprawie
                 <label>
                     Typ naprawy:
                     <select name="type" value={inputs.type || ""} onChange={handleChange}>
@@ -74,7 +81,7 @@ export function CreateRenderer() {
                     <input type="checkbox" name="isGuarantee" onChange={handleChange}/>
                 </label>
                 <label>
-                    Data gwarancjii:
+                    Data gwarancjii udzielonej po naprawie:
                     <input
                         type="date"
                         name="guaranteeTime"
@@ -111,6 +118,7 @@ export function CreateRenderer() {
                     </select>
                 </label>
                 <label>
+                    //TODO: wyświetlić w nawiasie koło imienia i nazwiska NICK!!!
                     Wybierz klienta:
                     <select name="clientId" value={choosenClient || ""} onChange={changeClient}>
                         {clients.map((client, id) => (
