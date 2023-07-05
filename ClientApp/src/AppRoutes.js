@@ -52,6 +52,10 @@ const AppRoutes = [
         element: <Magazine/>
     },
     {
+      path: '/magazyn/edycja/:id',
+      element: <EditPart/>  
+    },
+    {
         path: '/edytuj',
         element: <EditUser/>
     }
