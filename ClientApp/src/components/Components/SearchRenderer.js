@@ -22,8 +22,9 @@ export function SearchRenderer() {
         if(localStorage.getItem("role") > 0)
             result=await axios.get('/repair/table')
         else {
-            const myId=await axios.get('/user/me')
-            
+            const me=await axios.get('/user/me')
+            const myId=me.data.id
+            console.log(myId)
             result=await axios.get('/repair/client/'+myId)
         }
         setData(result.data)
