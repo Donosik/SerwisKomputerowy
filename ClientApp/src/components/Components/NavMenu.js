@@ -24,7 +24,7 @@ export function NavMenu() {
         <header>
             <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container
                     light>
-                <NavbarBrand tag={Link} to="/" className="color1">SerwisKomputerowy</NavbarBrand>
+                <NavbarBrand className="color1">KOMPUTEROWO.PL</NavbarBrand>
                 {localStorage.getItem("role") > 1 && <NavItem>
                     <NavLink tag={Link} className="text-dark color4" to="/edytuj">Zarządzaj pracownikami</NavLink>
                 </NavItem>}

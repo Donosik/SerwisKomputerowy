@@ -42,6 +42,7 @@ export function SearchMagazine()
     
     return(
         <>
+            <p className="services-title"> WYSZUKIWANIE CZĘŚCI </p>
             <label>
                 Nazwa części :
                 <input type="text" onChange={handleSearchQueryChange} />
