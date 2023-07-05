@@ -1,4 +1,5 @@
-﻿using SerwisKomputerowy.Backend.Entities;
+﻿using System.Collections;
+using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Repositories;
 
 namespace SerwisKomputerowy.Backend.Services;
@@ -32,6 +33,12 @@ public class PartService : IPartService
     public IEnumerable<Part> PartsSearchedByName(String name, bool isUsed)
     {
         IEnumerable<Part> parts = unitOfWork.parts.PartsSearchedByName(name, isUsed);
+        return parts;
+    }
+
+    public IEnumerable<Part> GetPartsFromRepair(int repairId)
+    {
+        IEnumerable<Part> parts = unitOfWork.parts.GetPartsFromRepair(repairId);
         return parts;
     }
 

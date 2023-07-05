@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
@@ -39,6 +40,15 @@ public class PartController : ControllerBase
     public IActionResult GetPartsSearchedByName(bool isUsed,String name )
     {
         IEnumerable<Part> parts = partService.PartsSearchedByName(name, isUsed);
+        if (parts != null)
+            return Ok(parts);
+        return NotFound();
+    }
+
+    [HttpGet("repair/{repairId}")]
+    public IActionResult GetPartsFromRepair(int repairId)
+    {
+        IEnumerable<Part> parts = partService.GetPartsFromRepair(repairId);
         if (parts != null)
             return Ok(parts);
         return NotFound();

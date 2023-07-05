@@ -36,6 +36,15 @@ public class ActionController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("repair/{repairId}")]
+    public IActionResult GetActionsFromRepair(int repairId)
+    {
+        IEnumerable<Action> actions = actionService.GetActionsFromRepair(repairId);
+        if (actions != null)
+            return Ok(actions);
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreateAction(Action action)
     {

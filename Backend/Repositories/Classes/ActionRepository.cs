@@ -17,5 +17,12 @@ public class ActionRepository : GenericRepository<Action>, IActionRepository
             Include(a => a.Repair).
             Include(a => a.Worker);
     }
+
+    public IEnumerable<Action> GetActionsFromRepair(int repaidId)
+    {
+        IEnumerable<Action> actions = dbContext.Set<Action>().Include(a => a.Worker).Where(a => a.Repair.Id == repaidId)
+            .ToList();
+        return actions;
+    }
     
 }
