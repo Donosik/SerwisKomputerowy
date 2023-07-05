@@ -83,12 +83,14 @@ export function RepairRow({ repair, removeFromData }) {
         ]);
 
         doc.autoTable({
+            startY:100,
             head: [
                 [ "Nazwa czesci","Numer Seryjny czesci", "Cena czesci", "Cena naprawy"],
             ],
             body: partsData,
         });
         doc.autoTable({
+            startY:200,
             head: [
                 ["Razem"],
             ],
