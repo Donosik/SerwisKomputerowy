@@ -7,7 +7,7 @@ export function SearchRenderer() {
     const [data, setData] = useState([])
     const [searchQuery, setSearchQuery] = useState("")
     const [role, setRole] = useState(0)
-
+    const [checked,setChecked]= useState(false)
     const setAuthToken = token => {
         if (token) {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -20,7 +20,7 @@ export function SearchRenderer() {
         setAuthToken(localStorage.getItem("token"))
         let result
         if(localStorage.getItem("role") > 0)
-            result=await axios.get('/repair/table')
+            result=await axios.get('/repair/table/'+checked)
         else {
             const me=await axios.get('/user/me')
             const myId=me.data.id
@@ -40,7 +40,7 @@ export function SearchRenderer() {
         fetchRepairs()
         setRole(Number(localStorage.getItem("role")))
     }
-        , [])
+        , [checked])
 
 
 
@@ -56,6 +56,14 @@ export function SearchRenderer() {
             return repair
         }
     }
+    
+    function checkedChange(e)
+    {
+        if(checked)
+            setChecked(false)
+        else 
+            setChecked(true)
+    }
 
     return (
         <>
@@ -66,6 +74,9 @@ export function SearchRenderer() {
                     <label>
                         Numer naprawy:
                         <input type="text" onChange={handleSearchQueryChange} />
+                        <br />
+                        Pokaż wszystkie naprawy:
+                        <input type="checkbox" onChange={checkedChange}/>
                     </label>
                 </form>
                 <table>
