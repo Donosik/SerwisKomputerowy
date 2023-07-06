@@ -80,6 +80,8 @@ public class PartService : IPartService
         if (repair != null)
         {
             Part part = unitOfWork.parts.GetBySN(partSN);
+            if (part.IsUsed)
+                return false;
             part.Repair = repair;
             part.IsUsed = true;
             unitOfWork.parts.Update(part);
