@@ -54,7 +54,7 @@ export function SearchWorker()
 
     return(
         <>
-            Szukaj po Nazwisku:<input onChange={handleSearchQueryChange} />
+            <p>WYSZUKIWARKA PRACOWNIKÓW <br/></p>            Szukaj po Nazwisku:<input onChange={handleSearchQueryChange} />
             <table>
                 <thead>
                 <tr>

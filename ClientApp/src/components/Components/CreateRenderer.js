@@ -18,13 +18,13 @@ export function CreateRenderer(callback) {
     useEffect(() => {
             setInputs(values => ({...values, ["type"]: "0"}))
             setInputs(values => ({...values, ["isGuarantee"]: "off"}))
-            setInputs(values => ({...values, ["guaranteeTime"]: "2000-01-01"}))
-            setInputs(values => ({...values, ["acceptanceTime"]: "2000-01-01"}))
-            setInputs(values => ({...values, ["returnTime"]: "2000-01-01"}))
+            setInputs(values => ({...values, ["guaranteeTime"]: "2023-07-07"}))
+            setInputs(values => ({...values, ["acceptanceTime"]: "2023-07-07"}))
+            setInputs(values => ({...values, ["returnTime"]: "2023-07-07"}))
         setInputs(values => ({ ...values, ["status"]: "1" }))
         setInputs(values => ({ ...values, ["partType"]:"" }))
         setInputs(values => ({ ...values, ["name"]: "" }))
-        setInputs(values => ({ ...values, ["productionDate"]: "2000-01-01" }))
+        setInputs(values => ({ ...values, ["productionDate"]: "2023-07-07" }))
 
             getClients()
         }
@@ -87,15 +87,18 @@ export function CreateRenderer(callback) {
 
     //TODO: Pamietac że tu też są typy napraw i statusy
     return (
-        <>
+        <><p>DODAWANIE NAPRAWY <br/></p>
+            <div style={{ border: "1px solid black", marginRight: "700px" }}>
+
+                <div style={{ marginLeft: "20px" }}>
             <form>
-                <p>INFORMACJE O SPRZĘCIE <br/></p>
+                <br/><p>INFORMACJE O SPRZĘCIE <br/></p>
                 <label>
                     Typ sprzętu: <input
                         type="text"
                         name="partType"
                         value={inputs.partType || ""}
-                        onChange={handleChange}
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }}
 
                     />
                 </label>
@@ -104,7 +107,7 @@ export function CreateRenderer(callback) {
                         type="text"
                         name="name"
                         value={inputs.name || ""}
-                        onChange={handleChange} />
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }} />
                 </label>
                 <label>
                     Data produkcji sprzętu:
@@ -112,22 +115,22 @@ export function CreateRenderer(callback) {
                         type="date"
                         name="productionDate"
                         value={inputs.productionDate || ""}
-                        onChange={handleChange}
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }}
 
                     />
                 </label>
-                
-                <p>INFORMACJE O NAPRAWIE <br/></p>
+
+                <br/> <p>INFORMACJE O NAPRAWIE </p>
                 <label>
                     Typ naprawy:
-                    <select name="type" value={inputs.type || ""} onChange={handleChange}>
+                    <select style={{ display: "block", marginBottom: "10px" }} name="type" value={inputs.type || ""} onChange={handleChange}>
                         <option value="0">zwykła</option>
                         <option value="1">ekspresowa</option>
                     </select>
                 </label>
                 <label>
                     Czy jest gwarancja:
-                    <input type="checkbox" name="isGuarantee" onChange={handleChange}/>
+                    <input type="checkbox" name="isGuarantee" onChange={handleChange} style={{ display: "block", marginBottom: "10px" }} />
                 </label>
                 <label>
                     Data gwarancjii udzielonej po naprawie:
@@ -135,7 +138,7 @@ export function CreateRenderer(callback) {
                         type="date"
                         name="guaranteeTime"
                         value={inputs.guaranteeTime || ""}
-                        onChange={handleChange}
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }}
 
                     />
                 </label>
@@ -145,7 +148,7 @@ export function CreateRenderer(callback) {
                         type="date"
                         name="acceptanceTime"
                         value={inputs.acceptanceTime || ""}
-                        onChange={handleChange}
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }}
 
                     />
                 </label>
@@ -155,20 +158,20 @@ export function CreateRenderer(callback) {
                         type="date"
                         name="returnTime"
                         value={inputs.returnTime || ""}
-                        onChange={handleChange}
+                        onChange={handleChange} style={{ display: "block", marginBottom: "10px" }}
 
                     />
                 </label>
                 <label>
                     Status:
-                    <select name="status" value={inputs.status || ""} onChange={handleChange}>
+                    <select style={{ display: "block", marginBottom: "10px" }}  name="status" value={inputs.status || ""} onChange={handleChange}>
                         <option value="0">skonczone</option>
                         <option value="1">przyjete</option>
                     </select>
                 </label>
                 <label>
                     Wybierz klienta:
-                    <select name="clientId" value={choosenClient || ""} onChange={changeClient}>
+                    <select style={{ display: "block", marginBottom: "10px" }} name="clientId" value={choosenClient || ""} onChange={changeClient}>
                         {clients.map((client, id) => (
                             <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName + ' ('+client.user.login+')'}</option>
                         ))}
@@ -176,6 +179,8 @@ export function CreateRenderer(callback) {
                 </label>
                 <button className="button-class" onClick={handleSubmit}>Stwórz naprawę</button>
             </form>
+                </div>
+            </div>
         </>
     )
 }

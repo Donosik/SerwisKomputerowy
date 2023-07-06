@@ -88,29 +88,22 @@ export function DetailsRepair() {
                     <td>{castToString(repairData.status)}</td>
                     <td>{repairData ? (repairData.isGuarantee === true ? "tak" : "nie") : ''}</td>
                     <td>{repairData && repairData.guaranteeTime ? repairData.guaranteeTime.slice(0, 10) : '-'} </td>
-                   
                 </tr>
                 </tbody>
             </table>
-            <br/>
-            <hr/>
-            <p>OPIS NAPRAWY <br/></p>
-            <hr/>
+            <br />
+            <hr />
+            <p> INFORMACJE O PRACOWNIKACH <br /></p>
+            <hr />
             <table>
-                <thead>
-                <tr>
+                <tr className="table-title">
                     <th>Pracownik</th>
                     <th>Rola pracowników</th>
-                    <th>Czynności</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
                 {workers.map((worker) => (
-                        <td key = {worker.id}>{worker.firstName + " " + worker.lastName}</td>
-                ))}
-                    {workers.map((worker) => (
-                        <td key = {worker.id}>{(() => {
+                    <tr key={worker.id}>
+                        <td>{worker.firstName + " " + worker.lastName}</td>
+                        <td>{(() => {
                             switch (worker.specialization) {
                                 case 0:
                                     return "elektronik"
@@ -128,13 +121,26 @@ export function DetailsRepair() {
                                     return "odzyskiwanie danych"
                             }
                         })()}</td>
-                    ))}
-                {actions.map((action)=>(
-                    <td key={action.id}>
-                        {action ? action.description : ''}
-                    </td>
+                    </tr>
                 ))}
+            </table>
+            <br/>
+            <hr/>
+            <p>OPIS NAPRAWY <br/></p>
+            <hr/>
+            <table>
+                <thead>
+                <tr>
+                    <th>Pracownik</th>
                 </tr>
+                </thead>
+                <tbody>
+
+                    {actions.map((action)=>(
+                            <tr key={action.id}>
+                                <td> {action ? action.description : ''}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
             <br/>
