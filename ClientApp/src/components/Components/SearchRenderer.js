@@ -59,8 +59,9 @@ export function SearchRenderer() {
 
     return (
         <>
-
+            <p>WYSZUKIWARKA NAPRAW <br/></p>
             <div>
+                
                 <form>
                     <label>
                         Numer naprawy:
