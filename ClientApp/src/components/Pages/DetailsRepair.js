@@ -183,7 +183,7 @@ export function DetailsRepair() {
                 <tr>
                     <td>{repairData.equipment ? repairData.equipment.name : ''}</td>
                     <td>{repairData.equipment ? repairData.equipment.type : ''}</td>
-                    <td>{repairData && repairData.equipment.productionDate ? repairData.equipment.productionDate.slice(0, 10) : ''} </td>
+                    <td>{repairData.equipment && repairData.equipment.productionDate ? repairData.equipment.productionDate.slice(0, 10) : ''} </td>
                 </tr>
                 </tbody>
             </table>

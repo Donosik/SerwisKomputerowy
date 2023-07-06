@@ -44,11 +44,11 @@ export function RepairRow({ repair, removeFromData }) {
         await setActions(result.data)
     }
 
-    const handleDownloadInvoicePDF = () => {
-        getRepair()
-        getWorkers()
-        getPart()
-        getAction()
+    const handleDownloadInvoicePDF = async () => {
+        await getRepair()
+        await getWorkers()
+        await getPart()
+        await getAction()
         // Aktualna data
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
@@ -58,8 +58,9 @@ export function RepairRow({ repair, removeFromData }) {
         const companyAddress = "ul. Kwiatowa 3, Chorzów";
         const companyNIP = "1234567890"; // Wymyślany numer NIP dla firmy
 
+        console.log(repairData)
         // Informacje o kliencie
-        const customerName = repairData.client.firstName + " " + repairData.client.lastName;
+        const customerName = (repairData.client ? repairData.client.firstName + " " + repairData.client.lastName : '')
 
         const doc = new jsPDF();
         doc.setFontSize(12);
