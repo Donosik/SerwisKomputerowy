@@ -42,7 +42,6 @@ export function DetailsRepair() {
     async function getAction() {
         setAuthToken(localStorage.getItem("token"))
         const result = await axios.get('/action/repair/' + id)
-        console.log(result.data)
         await setActions(result.data)
     }
 
