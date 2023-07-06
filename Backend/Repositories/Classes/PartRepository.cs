@@ -24,4 +24,9 @@ public class PartRepository : GenericRepository<Part>, IPartRepository
     {
         return dbContext.Set<Part>().Where(p => p.Repair.Id == repairId).ToList();
     }
+
+    public Part GetBySN(int partSN)
+    {
+        return dbContext.Set<Part>().Where(p => p.SerialNumber == partSN).FirstOrDefault();
+    }
 }
