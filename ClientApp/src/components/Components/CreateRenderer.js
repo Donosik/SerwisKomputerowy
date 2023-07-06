@@ -49,8 +49,21 @@ export function CreateRenderer() {
 
     async function createRepair()
     {
-        console.log(inputs)
-        const response= await axios.post('/repair',{inputs})
+        const type=parseInt(inputs.type)
+        const status=parseInt(inputs.status)
+        let isGuarantee
+        if(inputs.isGuarantee==="off")
+            isGuarantee=false
+        else 
+            isGuarantee=true
+        const response= await axios.post('/repair',{
+            "type":type,
+            "isGuarantee":isGuarantee,
+            "guaranteeTime":inputs.guaranteeTime,
+            "acceptanceTime":inputs.acceptanceTime,
+            "returnTime":inputs.returnTime,
+            "status":status
+        })
         await axios.put('/repair/'+response.data+'/'+choosenClient)
     }
     function handleSubmit(event) {
