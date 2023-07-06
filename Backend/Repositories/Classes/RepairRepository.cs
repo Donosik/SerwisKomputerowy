@@ -52,7 +52,7 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
 
     public IEnumerable<Message> GetMessages(int id)
     {
-        return dbContext.Set<Repair>().Find(id).Messages;
+        return dbContext.Set<Message>().Where(m => m.Repair.Id == id).ToList();
     }
 
     public IEnumerable<Repair> GetRepairsOfClient(int clientId)
