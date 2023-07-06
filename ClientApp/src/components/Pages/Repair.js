@@ -31,7 +31,7 @@ export function Repair() {
 
 
             <br /><br />
-            {renderBool ? <SearchRenderer /> : <CreateRenderer />}
+            {renderBool ? <SearchRenderer /> : <CreateRenderer callback={searchHandler} />}
         </>
     
     );

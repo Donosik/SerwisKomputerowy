@@ -2,7 +2,7 @@
 import {useEffect, useState} from "react";
 import axios, {get} from "axios";
 
-export function CreateRenderer() {
+export function CreateRenderer(callback) {
     
     const [inputs, setInputs] = useState({})
     const [clients, setClients] = useState([])
@@ -60,7 +60,6 @@ export function CreateRenderer() {
             "productionDate": inputs.productionDate
         })
         const eqId = responseEquipment.data
-        console.log(responseEquipment)
 
         const type=parseInt(inputs.type)
         const status=parseInt(inputs.status)
@@ -83,6 +82,7 @@ export function CreateRenderer() {
     function handleSubmit(event) {
         event.preventDefault()
         createRepair()
+        callback.callback()
     }
 
     //TODO: Pamietac że tu też są typy napraw i statusy

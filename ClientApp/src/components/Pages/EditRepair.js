@@ -49,7 +49,10 @@ export function EditRepair() {
     async function getWorkers() {
         setAuthToken(localStorage.getItem("token"));
         const result = await axios.get("/worker");
-        setWorkers(result.data);
+        await setWorkers(result.data);
+        const name = "workerId";
+        const value = result.data[0].id
+        setInputs((values) => ({ ...values, [name]: value }));
     }
 
     async function editRepair() {
