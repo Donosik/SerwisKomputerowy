@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import { NavMenu } from "../Components/NavMenu";
 import "../Css/EditUser.css"
 import { jsPDF } from "jspdf";
@@ -15,18 +15,20 @@ const setAuthToken = token => {
 }
 
 export function Raport() {
+    
+    const [inputs, setInputs] = useState({});
     const [reportData, setReportData] = useState([]);
     const [workers, setWorkers] = useState([]);
     const [repairIDs, setRepairIDs] = useState([]);
     const [clientIDs, setClientIDs] = useState([]);
-
+   
     useEffect(() => {
         const fetchData = async () => {
             try {
 
                 // Pobierz pracowników z bazy danych
-                const workersResponse = await axios.get("/worker");
-                setWorkers(workersResponse.data);
+                const workersIDsResponse = await axios.get("/worker");
+                setWorkers(workersIDsResponse.data);
 
                 // Pobierz ID napraw z bazy danych
                 const repairIDsResponse = await axios.get("/repair");
@@ -42,15 +44,20 @@ export function Raport() {
 
         fetchData();
     }, []);
-
+    
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
+    }
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const startDate = e.target.elements.startDate.value;
-        const endDate = e.target.elements.endDate.value;
-        const workerID = e.target.elements.workerID.value;
-        const repairID = e.target.elements.repairID.value;
-        const clientID = e.target.elements.clientID.value;
+        const startDate = inputs.startDate;
+        const endDate   = inputs.endDate;
+        const workerID  = inputs.workerID;
+        const repairID  = inputs.repairID;
+        const clientID  = inputs.clientID;
 
         try {
             const response = await axios.get("/raport", {
@@ -62,30 +69,28 @@ export function Raport() {
                     clientID: clientID,
                 },
             });
-            setReportData(response.data);
+            await setReportData(response.data);
+            console.log(response.data)
         } catch (error) {
             console.log(error);
         }
     };
-
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
-
+        doc.setFontSize(12);
         const tableData = reportData.map((row) => [
-            row.worker,
-            row.repairId,
-            row.client,
-            row.startDate,
-            row.endDate,
-            row.repairedParts,
-            row.repairCost,
+            row.worker.firstName + " " + row.worker.lastName,
+            row.repair.id,
+            row.repair.client.firstName + " " + row.repair.client.lastName,
+            row.repair.acceptanceTime.substring(0,10),
+            row.repair.returnTime.substring(0,10),
         ]);
 
         doc.autoTable({
             head: [
-                ["Pracownik", "ID naprawy", "Imie i nazwisko klienta", "Data przyjecia", "Data skonczenia", "Czesci naprawione", "Cena naprawy"],
+                ["Pracownik", "ID naprawy", "Imie i nazwisko klienta", "Data przyjecia", "Data skonczenia"],
             ],
-            body: tableData,
+            body: tableData
         });
 
         doc.save("Raport.pdf");
@@ -97,17 +102,17 @@ export function Raport() {
             <NavMenu />
             <div>
                 <p className="services-title">RAPORTY</p>
-                <form onSubmit={handleFormSubmit}>
+                <form>
                     <label>
                         Data od:
-                        <input type="date" name="startDate" />
+                        <input type="date" name="startDate" onChange={handleChange} />
                     </label>
                     <label>
                         Data do:
-                        <input type="date" name="endDate" />
+                        <input type="date" name="endDate" onChange={handleChange}/>
                     </label>
                     Wybierz pracownika:
-                    <select name="workerID">
+                    <select name="workerID" onChange={handleChange}>
                         <option value="-1">Wszyscy</option>
                         {workers.map((worker,id) => (
                             <option key={worker.id} value={worker.id}>
@@ -116,7 +121,7 @@ export function Raport() {
                         ))}
                     </select>
                     ID naprawy:
-                    <select name="repairID">
+                    <select name="repairID" onChange={handleChange}>
                         <option value="-1">Wszystkie</option>
                         {repairIDs.map((repair,id) => (
                             <option key={repair.id} value={repair.id}>
@@ -125,7 +130,7 @@ export function Raport() {
                         ))}
                     </select>
                     ID klienta / Imię + Nazwisko:
-                    <select name="clientID">
+                    <select name="clientID" onChange={handleChange}>
                         <option value="-1">Wszyscy</option>
                         {clientIDs.map((client,id) => (
                             <option key={client.id} value={client.id}>
@@ -143,29 +148,26 @@ export function Raport() {
                             <th>Imię i nazwisko klienta</th>
                             <th>Data przyjęcia</th>
                             <th>Data skończenia</th>
-                            <th>Części naprawione</th>
-                            <th>Cena naprawy</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {reportData.map((row) => (
-                            <tr key={row.id}>
-                                <td>{row.worker}</td>
-                                <td>{row.repairId}</td>
-                                <td>{row.client}</td>
-                                <td>{row.startDate}</td>
-                                <td>{row.endDate}</td>
-                                <td>{row.repairedParts}</td>
-                                <td>{row.repairCost}</td>
-                            </tr>
-                        ))}
+                    {reportData.map((row) => (
+                        <tr>
+                            <td>{row.worker ? row.worker.firstName + " " + row.worker.lastName: ""}</td>
+                            <td>{row.repair ? row.repair.id: ""}</td>
+                            <td>{row.repair && row.repair.client ? row.repair.client.firstName + " " + row.repair.client.lastName: ""}</td>
+                            <td>{row.repair ? row.repair.acceptanceTime: ""}</td>
+                            <td>{row.repair ? row.repair.returnTime: ""}</td>
+                            
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
                 <br />
                 <button className="button-class" onClick={handleDownloadPDF}>
                     Pobierz PDF
                 </button>
-                <button type="submit" className="button-class">
+                <button className="button-class" onClick={handleFormSubmit}>
                     Wyświetl raport
                 </button>
             </div>

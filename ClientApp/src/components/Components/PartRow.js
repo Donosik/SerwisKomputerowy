@@ -28,7 +28,7 @@ export function PartRow({ part, removeFromData }) {
             <td>{part.serialNumber}</td>
             <td>{part.cost}</td>
             <td>{part.costOfWork}</td>
-            <td>DUPAAAA</td>
+            <td>{part.repair ? part.repair.id : "-"}</td>
             <td>{part.isUsed === true ? "Tak" : "Nie"}</td>
             <td>
                 <button className='button-class' onClick={editElement}>EDYTUJ</button>

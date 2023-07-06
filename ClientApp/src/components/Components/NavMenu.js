@@ -11,9 +11,8 @@ export function NavMenu() {
         if (localStorage.getItem("token") === null)
             navigate('/')
     }
-
-    //TODO: zakomentowane, żeby inni bez bazy dali rade coś tu robić xD
-    //useEffect(checkIfLogged,[])
+    
+    useEffect(checkIfLogged,[])
     function logoutHandler() {
         delete axios.defaults.headers.common["Authorization"];
         localStorage.removeItem("token")

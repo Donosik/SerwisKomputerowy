@@ -22,7 +22,7 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
             Include(r=>r.Actions);
     }
 
-    public IEnumerable<Repair> GetRepairsForTable()
+    public IQueryable<Repair> GetRepairsForTable()
     {
         return dbContext.Set<Repair>().Select(r => new Repair
         {
@@ -30,18 +30,30 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
             Status = r.Status,
             Client = new Client
             {
+                Id=r.Client.Id,
                 FirstName = r.Client.FirstName,
-                LastName = r.Client.LastName
+                LastName = r.Client.LastName,
+                User=r.Client.User
             },
             Equipment = new Equipment
             {
                 Name = r.Equipment.Name
             }
-        }).ToList();
+        });
+    }
+
+    public IEnumerable<Repair> GetAllRepairsForTable()
+    {
+        return GetRepairsForTable().Where(r=>r.Status==Status.Przyjete).ToList();
     }
 
     public IEnumerable<Message> GetMessages(int id)
     {
         return dbContext.Set<Repair>().Find(id).Messages;
+    }
+
+    public IEnumerable<Repair> GetRepairsOfClient(int clientId)
+    {
+        return GetRepairsForTable().Where(r => r.Client.User.Id == clientId).ToList();
     }
 }

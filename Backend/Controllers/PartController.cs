@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SerwisKomputerowy.Backend.Entities;
 using SerwisKomputerowy.Backend.Services;
@@ -44,6 +45,15 @@ public class PartController : ControllerBase
         return NotFound();
     }
 
+    [HttpGet("repair/{repairId}")]
+    public IActionResult GetPartsFromRepair(int repairId)
+    {
+        IEnumerable<Part> parts = partService.GetPartsFromRepair(repairId);
+        if (parts != null)
+            return Ok(parts);
+        return NotFound();
+    }
+
     [HttpPost]
     public IActionResult CreatePart(Part part)
     {
@@ -62,6 +72,15 @@ public class PartController : ControllerBase
         return BadRequest();
     }
 
+    [HttpPut("{partSN}/toRepair/{repairId}")]
+    public IActionResult EditPartToRepair(int partSN, int repairId)
+    {
+        bool isPartEdited = partService.EditPartToRepair(partSN, repairId);
+        if (isPartEdited)
+            return Ok();
+        return BadRequest();
+    }
+    
     [HttpDelete("{id}")]
     public IActionResult DeletePart(int id)
     {

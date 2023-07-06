@@ -32,6 +32,12 @@ public class ActionService : IActionService
         return null;
     }
 
+    public IEnumerable<Action> GetActionsFromRepair(int repaidId)
+    {
+        IEnumerable<Action> actions = unitOfWork.actions.GetActionsFromRepair(repaidId);
+        return actions;
+    }
+
     public bool CreateAction(Action action)
     {
         if (action != null)

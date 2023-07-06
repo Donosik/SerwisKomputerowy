@@ -95,7 +95,7 @@ public class RepairService : IRepairService
 
     public IEnumerable<Repair> GetRepairsForTable()
     {
-        IEnumerable<Repair> repairs = unitOfWork.repairs.GetRepairsForTable();
+        IEnumerable<Repair> repairs = unitOfWork.repairs.GetAllRepairsForTable();
         return repairs;
     }
     
@@ -103,5 +103,11 @@ public class RepairService : IRepairService
     {
         IEnumerable<Message> messages = unitOfWork.repairs.GetMessages(id);
         return messages;
+    }
+
+    public IEnumerable<Repair> GetRepairsOfClient(int clientId)
+    {
+        IEnumerable<Repair> repairs = unitOfWork.repairs.GetRepairsOfClient(clientId);
+        return repairs;
     }
 }

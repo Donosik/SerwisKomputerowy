@@ -4,6 +4,8 @@ namespace SerwisKomputerowy.Backend.Repositories;
 
 public interface IRepairRepository : IGenericRepository<Repair>
 {
-    IEnumerable<Repair> GetRepairsForTable();
+    IQueryable<Repair> GetRepairsForTable();
+    IEnumerable<Repair> GetAllRepairsForTable();
     IEnumerable<Message> GetMessages(int id);
+    IEnumerable<Repair> GetRepairsOfClient(int clientId);
 }

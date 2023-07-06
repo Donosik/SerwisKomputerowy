@@ -11,6 +11,7 @@ export function EditRepair() {
     let { id } = useParams()
     const navigate = useNavigate()
     const [repairData, setRepairData] = useState()
+    const [actionData, setActionData] = useState()
     const [clients, setClients] = useState([])
     const [workers, setWorkers] = useState([])
 
@@ -28,6 +29,11 @@ export function EditRepair() {
         }
         repairData.acceptanceTime = inputs.acceptanceTime
         repairData.guaranteeTime = inputs.guaranteeTime
+    }
+
+    function inputsToActionData() {
+        actionData.description = inputs.description
+        actionData.workerId = inputs.worker.id
     }
 
     async function getRepair() {
@@ -87,6 +93,25 @@ export function EditRepair() {
         fun()
     }
 
+    const handleActionSubmit = (event) => {
+        event.preventDefault()
+        const fun = async () => {
+            const desc = inputs.description
+            const response = await axios.post('/action', { "description":desc })
+            await axios.put('action/' + response.data + '/' + id + '/' + inputs.workerId)
+            navigate('/naprawy')
+        }
+        //inputsToActionData()
+        fun()
+    }
+    const handlePartSubmit = (event) => {
+        event.preventDefault()
+        const fun = async () => {
+            await axios.put('part/' + inputs.serialNumber + '/toRepair/' + id)
+            navigate('/naprawy')
+        }
+        fun()
+    }
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -134,12 +159,6 @@ export function EditRepair() {
 
                             />
                         </label>
-                        <label>
-                            Osoby odpowiedzialne: (IMO do wyjebania - Paweł)
-                            <input type="text"
-                                name="description" />
-                            
-                        </label>
                         <button className="button-class" onClick={handleSubmit}>Zapisz zmiany</button>
                     </form>
                     <h4>DODAJ AKCJE</h4>
@@ -154,17 +173,23 @@ export function EditRepair() {
                         </label>
                         <label>
                             Opis czynności:
-                            <textarea/>
+                            <textarea name="description" onChange={handleChange} />
                         </label>
+                        <button className="button-class" onClick={handleActionSubmit}>Dodaj</button>
                     </form>
                     <h4>WYMIEŃ CZĘŚĆ</h4>
-                    <form></form>
-                </div>
-                <div>
-                    Osoby odpowiedzialne: (IMO do wyjebania - Paweł)
-                </div>
-                <div>
-                    Części wymienne: (IMO do wyjebania - Paweł)
+                    <form>
+                        <label>
+                            Numer Seryjny części:
+                            <input
+                                type="text"
+                                name="serialNumber"
+                                value={inputs.serialNumber || ""}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <button className="button-class" onClick={handlePartSubmit}>Wymień</button>
+                    </form>
                 </div>
             </div>
         </>

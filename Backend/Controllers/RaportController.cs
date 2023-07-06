@@ -22,15 +22,16 @@ public class RaportController : ControllerBase
 
     [HttpGet]
     public IActionResult GetReport(
-    [FromQuery(Name = "startDate")] DateTime startDate,
-    [FromQuery(Name = "endDate")] DateTime endDate,
-    [FromQuery(Name = "workerID")] int workerID = -1,
-    [FromQuery(Name = "repairID")] int repairID = -1,
-    [FromQuery(Name = "clientID")] int clientID = -1)
+        [FromQuery(Name = "startDate")] DateTime startDate,
+        [FromQuery(Name = "endDate")] DateTime endDate,
+        [FromQuery(Name = "workerID")] int workerID = -1,
+        [FromQuery(Name = "repairID")] int repairID = -1,
+        [FromQuery(Name = "clientID")] int clientID = -1)
     {
-
-        IEnumerable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetAll();
-
+        IQueryable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetQuery();
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Client);
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Parts);
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Equipment);
 
         // Dodaj warunek na daty początkową i końcową
         repairQuery = repairQuery.Where(r => r.Repair.ReturnTime >= startDate && r.Repair.ReturnTime <= endDate);
@@ -53,7 +54,7 @@ public class RaportController : ControllerBase
             repairQuery = repairQuery.Where(r => r.Repair.Client.Id == clientID);
         }
 
-        List<Backend.Entities.Action> reportData = repairQuery.ToList();
+        IEnumerable<Backend.Entities.Action> reportData = repairQuery.ToList();
 
         return Ok(reportData);
     }

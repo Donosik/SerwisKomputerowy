@@ -13,4 +13,5 @@ public interface IRepairService
     bool DeleteRepair(int id);
     IEnumerable<Repair> GetRepairsForTable();
     IEnumerable<Message> GetMessagesOfRepair(int id);
+    IEnumerable<Repair> GetRepairsOfClient(int clientId);
 }

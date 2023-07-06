@@ -18,7 +18,14 @@ export function SearchRenderer() {
 
     const fetchRepairs = async () => {
         setAuthToken(localStorage.getItem("token"))
-        const result = await axios.get('/repair/table')
+        let result
+        if(localStorage.getItem("role") > 0)
+            result=await axios.get('/repair/table')
+        else {
+            const me=await axios.get('/user/me')
+            const myId=me.data.id
+            result=await axios.get('/repair/client/'+myId)
+        }
         setData(result.data)
     }
 

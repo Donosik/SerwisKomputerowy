@@ -268,7 +268,8 @@ public class TestController : ControllerBase
         part8.SerialNumber = 6093184;
         part8.Cost = 150;
         part8.CostOfWork = 15;
-        part8.IsUsed = false;
+        part8.IsUsed = true;
+        part8.Repair = repair1;
         partService.CreatePart(part8);
 
         Action action=new Action();
