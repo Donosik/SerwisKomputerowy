@@ -21,7 +21,11 @@ export function CreateRenderer() {
             setInputs(values => ({...values, ["guaranteeTime"]: "2000-01-01"}))
             setInputs(values => ({...values, ["acceptanceTime"]: "2000-01-01"}))
             setInputs(values => ({...values, ["returnTime"]: "2000-01-01"}))
-            setInputs(values => ({...values, ["status"]: "1"}))
+        setInputs(values => ({ ...values, ["status"]: "1" }))
+        setInputs(values => ({ ...values, ["partType"]:"" }))
+        setInputs(values => ({ ...values, ["name"]: "" }))
+        setInputs(values => ({ ...values, ["productionDate"]: "2000-01-01" }))
+
             getClients()
         }
         , [])
@@ -49,6 +53,14 @@ export function CreateRenderer() {
 
     async function createRepair()
     {
+
+        const responseEquipment = axios.post('/equipment', {
+            "type": inputs.partType,
+            "name": inputs.name,
+            "productionDate": inputs.productionDate
+        })
+        const eqId = responseEquipment.data
+        
         const type=parseInt(inputs.type)
         const status=parseInt(inputs.status)
         let isGuarantee
@@ -76,9 +88,32 @@ export function CreateRenderer() {
         <>
             <form>
                 <p>INFORMACJE O SPRZĘCIE <br/></p>
-                Typ sprzętu: ma być listą <br/>
-                Nazwa sprzętu: do wpisania<br/>
-                Rok produkcji sprzętu: <br/> <br/>
+                <label>
+                    Typ sprzętu: <input
+                        type="text"
+                        name="partType"
+                        value={inputs.partType || ""}
+                        onChange={handleChange}
+
+                    />
+                </label>
+                <label>
+                    Nazwa sprzętu: <input
+                        type="text"
+                        name="name"
+                        value={inputs.name || ""}
+                        onChange={handleChange} />
+                </label>
+                <label>
+                    Data produkcji sprzętu:
+                    <input
+                        type="date"
+                        name="productionDate"
+                        value={inputs.productionDate || ""}
+                        onChange={handleChange}
+
+                    />
+                </label>
                 
                 <p>INFORMACJE O NAPRAWIE <br/></p>
                 <label>
