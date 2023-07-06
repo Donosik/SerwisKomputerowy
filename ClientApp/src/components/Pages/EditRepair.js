@@ -104,7 +104,14 @@ export function EditRepair() {
         //inputsToActionData()
         fun()
     }
-    
+    const handlePartSubmit = (event) => {
+        event.preventDefault()
+        const fun = async () => {
+            await axios.put('part/' + inputs.serialNumber + '/toRepair/' + id)
+            navigate('/naprawy')
+        }
+        fun()
+    }
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -171,7 +178,18 @@ export function EditRepair() {
                         <button className="button-class" onClick={handleActionSubmit}>Dodaj</button>
                     </form>
                     <h4>WYMIEŃ CZĘŚĆ</h4>
-                    <form></form>
+                    <form>
+                        <label>
+                            Numer Seryjny części:
+                            <input
+                                type="text"
+                                name="serialNumber"
+                                value={inputs.serialNumber || ""}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <button className="button-class" onClick={handlePartSubmit}>Wymień</button>
+                    </form>
                 </div>
             </div>
         </>
