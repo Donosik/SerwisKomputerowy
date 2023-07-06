@@ -60,19 +60,32 @@ function Chatbox() {
     };
 
     const handleSendMessage = () => {
+
         if (inputValue.trim() !== '') {
+            const currentDate = new Date();
             const newMessage = {
-                id: messages.length + 1,
-                text: inputValue,
+              //  id: messages.length + 1,
+                content: inputValue,
+                date: currentDate,
             };
 
-            setMessages([...messages, newMessage]);
-            setInputValue('');
+            axios.post('/message', newMessage)
+                .then(response => {
+                    const createdMessage = response.data;
+                    setMessages([...messages, newMessage]);
+                    setInputValue('');
+                })
+                .catch(error => {
+                    console.log('Error sending message: ', error);
+                });
+
         }
     };
 
+
+
     const handleRowButtonClick = (rowId) => {
-        axios.get(`/message/${rowId}`)
+        axios.get(`/repair/${rowId}/messages`)
             .then(response => {
                 setMessages(response.data);
             })
@@ -88,7 +101,7 @@ function Chatbox() {
                 <div className="messages">
                     {messages.map((message) => (
                         <div key={message.id} className="message">
-                            {message.text}
+                            {message.userId + ": " + message.content}
                         </div>
                     ))}
                 </div>
