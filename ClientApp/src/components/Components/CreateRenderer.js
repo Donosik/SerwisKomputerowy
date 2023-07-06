@@ -18,13 +18,13 @@ export function CreateRenderer() {
     useEffect(() => {
             setInputs(values => ({...values, ["type"]: "0"}))
             setInputs(values => ({...values, ["isGuarantee"]: "off"}))
-            setInputs(values => ({...values, ["guaranteeTime"]: "2000-01-01"}))
-            setInputs(values => ({...values, ["acceptanceTime"]: "2000-01-01"}))
-            setInputs(values => ({...values, ["returnTime"]: "2000-01-01"}))
+            setInputs(values => ({...values, ["guaranteeTime"]: "2023-07-07"}))
+            setInputs(values => ({...values, ["acceptanceTime"]: "2023-07-07"}))
+            setInputs(values => ({...values, ["returnTime"]: "2023-07-07"}))
         setInputs(values => ({ ...values, ["status"]: "1" }))
         setInputs(values => ({ ...values, ["partType"]:"" }))
         setInputs(values => ({ ...values, ["name"]: "" }))
-        setInputs(values => ({ ...values, ["productionDate"]: "2000-01-01" }))
+        setInputs(values => ({ ...values, ["productionDate"]: "2023-07-07" }))
 
             getClients()
         }
