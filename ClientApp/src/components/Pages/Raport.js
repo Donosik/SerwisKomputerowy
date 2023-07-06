@@ -125,7 +125,7 @@ export function Raport() {
                         <option value="-1">Wszystkie</option>
                         {repairIDs.map((repair,id) => (
                             <option key={repair.id} value={repair.id}>
-                                {id}
+                                {id+1}
                             </option>
                         ))}
                     </select>

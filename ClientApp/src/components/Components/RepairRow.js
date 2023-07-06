@@ -78,10 +78,10 @@ export function RepairRow({ repair, removeFromData }) {
             part  ? part.cost + part.costOfWork + " pln": '',
             
         ]);
-        const priceData = parts.map((part) => [
+        const priceData = parts.map(() => [
             parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum,0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum ,0)+" pln" : ''
         ]);
-
+        const firstElement = priceData[0];
         doc.autoTable({
             startY: 100,
             head: [
@@ -89,19 +89,14 @@ export function RepairRow({ repair, removeFromData }) {
             ],
             body: partsData,
         });
-
-        let isTableGenerated = false; 
-        if (!isTableGenerated) {
             doc.autoTable({
                 startY: 200,
                 head: [
                     ["Razem"],
                 ],
-                body: priceData,
+                body: [firstElement],
             });
-        }
-            isTableGenerated = true;
-            
+
             doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
         doc.save("Faktura.pdf");
 
