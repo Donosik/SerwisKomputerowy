@@ -12,6 +12,9 @@ const RepairTable = ({ onRowButtonClick }) => {
             .then(response => {
                 setData(response.data);
             })
+            .catch(error => {
+                console.log('Error retrieving repair data: ', error);
+            });
     }, []);
 
     return (
@@ -47,7 +50,7 @@ const RepairTable = ({ onRowButtonClick }) => {
         </>
     );
     }
-
+   
 function Chatbox() {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
@@ -69,14 +72,14 @@ function Chatbox() {
     };
 
     const handleRowButtonClick = (rowId) => {
-        axios.get('/message')
+        axios.get(`/message/${rowId}`)
             .then(response => {
-            setMessages(response.data);
-        })
+                setMessages(response.data);
+            })
             .catch(error => {
                 console.log('Error retrieving messages:', error);
             });
-    }
+    };
 
     return (
         <>
