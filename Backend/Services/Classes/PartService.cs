@@ -12,6 +12,7 @@ public class PartService : IPartService
     {
         this.unitOfWork = unitOfWork;
     }
+
     public IEnumerable<Part> GetParts()
     {
         IEnumerable<Part> parts = unitOfWork.parts.GetAll();
@@ -68,6 +69,23 @@ public class PartService : IPartService
                 if (result > 0)
                     return true;
             }
+        }
+
+        return false;
+    }
+
+    public bool EditPartToRepair(int partSN, int repairId)
+    {
+        Repair repair = unitOfWork.repairs.Get(repairId);
+        if (repair != null)
+        {
+            Part part = unitOfWork.parts.GetBySN(partSN);
+            part.Repair = repair;
+            part.IsUsed = true;
+            unitOfWork.parts.Update(part);
+            int result = unitOfWork.Save();
+            if (result > 0)
+                return true;
         }
 
         return false;

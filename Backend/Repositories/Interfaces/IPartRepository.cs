@@ -6,4 +6,5 @@ public interface IPartRepository : IGenericRepository<Part>
 {
     IEnumerable<Part> PartsSearchedByName(String name, bool isUsed);
     IEnumerable<Part> GetPartsFromRepair(int repairId);
+    Part GetBySN(int partSN);
 }
