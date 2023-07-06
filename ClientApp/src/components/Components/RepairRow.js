@@ -100,7 +100,7 @@ export function RepairRow({ repair, removeFromData }) {
                 ],
                 body: priceData,
             });
-
+        }
             isTableGenerated = true;
             
             doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
@@ -153,5 +153,4 @@ export function RepairRow({ repair, removeFromData }) {
             </td>
         </tr>
     )
-}
 }
