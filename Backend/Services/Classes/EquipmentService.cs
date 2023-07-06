@@ -62,6 +62,25 @@ public class EquipmentService : IEquipmentService
         return false;
     }
 
+    public bool EditRepairToEquipment(int eqId, int repairId)
+    {
+        Equipment eq = unitOfWork.equipments.Get(eqId);
+        if (eq != null)
+        {
+            Repair repair = unitOfWork.repairs.Get(repairId);
+            if (repair != null)
+            {
+                repair.Equipment = eq;
+                unitOfWork.repairs.Update(repair);
+                int result = unitOfWork.Save();
+                if (result > 0)
+                    return true;
+            }
+        }
+        
+        return false;
+    }
+
     public bool DeleteEquipment(int id)
     {
         if (id > 0)

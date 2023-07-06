@@ -60,7 +60,7 @@ export function CreateRenderer() {
             "productionDate": inputs.productionDate
         })
         const eqId = responseEquipment.data
-        
+
         const type=parseInt(inputs.type)
         const status=parseInt(inputs.status)
         let isGuarantee
@@ -76,7 +76,8 @@ export function CreateRenderer() {
             "returnTime":inputs.returnTime,
             "status":status
         })
-        await axios.put('/repair/'+response.data+'/'+choosenClient)
+        await axios.put('/repair/' + response.data + '/' + choosenClient)
+        await axios.put('/equipment/' + eqId + '/repair/' + response.data)
     }
     function handleSubmit(event) {
         event.preventDefault()

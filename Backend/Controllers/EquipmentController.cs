@@ -53,6 +53,15 @@ public class EquipmentController : ControllerBase
         return BadRequest();
     }
 
+    [HttpPut("{eqId}/repair/{repairId}")]
+    public IActionResult EditRepairToEquipment(int eqId, int repairId)
+    {
+        bool isEquipmentEdited = equipmentService.EditRepairToEquipment(eqId, repairId);
+        if (isEquipmentEdited)
+            return Ok();
+        return BadRequest();
+    }
+
     [HttpDelete("{id}")]
     public IActionResult DeleteEquipment(int id)
     {
@@ -61,5 +70,4 @@ public class EquipmentController : ControllerBase
             return Ok();
         return NotFound();
     }
-    
 }
