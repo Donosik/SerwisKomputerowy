@@ -22,39 +22,38 @@ public class RaportController : ControllerBase
 
     [HttpGet]
     public IActionResult GetReport(
-    [FromQuery(Name = "startDate")] DateTime startDate,
-    [FromQuery(Name = "endDate")] DateTime endDate,
-    [FromQuery(Name = "workerID")] int workerID = -1,
-    [FromQuery(Name = "repairID")] int repairID = -1,
-    [FromQuery(Name = "clientID")] int clientID = -1)
+        [FromQuery(Name = "startDate")] DateTime startDate,
+        [FromQuery(Name = "endDate")] DateTime endDate,
+        [FromQuery(Name = "workerID")] int workerID = -1,
+        [FromQuery(Name = "repairID")] int repairID = -1,
+        [FromQuery(Name = "clientID")] int clientID = -1)
     {
-
         IQueryable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetQuery();
-        repairQuery.Include(a => a.Repair.Client);
-        repairQuery.Include(a => a.Repair.Parts);
-        repairQuery.Include(a => a.Repair.Equipment);
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Client);
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Parts);
+        repairQuery = repairQuery.Include(a => a.Repair).ThenInclude(a => a!.Equipment);
 
         // Dodaj warunek na daty początkową i końcową
-        repairQuery.Where(r => r.Repair.ReturnTime >= startDate && r.Repair.ReturnTime <= endDate);
+        repairQuery = repairQuery.Where(r => r.Repair.ReturnTime >= startDate && r.Repair.ReturnTime <= endDate);
 
         // Dodaj warunek na numer pracownika
         if (workerID != -1)
         {
-            repairQuery.Where(r => r.Worker.Id == workerID);
+            repairQuery = repairQuery.Where(r => r.Worker.Id == workerID);
         }
 
         // Dodaj warunek na numer naprawy
         if (repairID != -1)
         {
-            repairQuery.Where(r => r.Repair.Id == repairID);
+            repairQuery = repairQuery.Where(r => r.Repair.Id == repairID);
         }
 
         // Dodaj warunek na numer klienta
         if (clientID != -1)
         {
-            repairQuery.Where(r => r.Repair.Client.Id == clientID);
+            repairQuery = repairQuery.Where(r => r.Repair.Client.Id == clientID);
         }
-    
+
         IEnumerable<Backend.Entities.Action> reportData = repairQuery.ToList();
 
         return Ok(reportData);

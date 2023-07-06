@@ -82,8 +82,8 @@ export function Raport() {
             row.worker.firstName + " " + row.worker.lastName,
             row.repair.id,
             row.repair.client.firstName + " " + row.repair.client.lastName,
-            row.repair.startDate,
-            row.repair.endDate,
+            row.repair.acceptanceTime,
+            row.repair.returnTime,
         ]);
 
         doc.autoTable({
@@ -156,8 +156,8 @@ export function Raport() {
                             <td>{row.worker ? row.worker.firstName + " " + row.worker.lastName: ""}</td>
                             <td>{row.repair ? row.repair.id: ""}</td>
                             <td>{row.repair && row.repair.client ? row.repair.client.firstName + " " + row.repair.client.lastName: ""}</td>
-                            <td>{row.repair ? row.repair.startDate: ""}</td>
-                            <td>{row.repair ? row.repair.endDate: ""}</td>
+                            <td>{row.repair ? row.repair.acceptanceTime: ""}</td>
+                            <td>{row.repair ? row.repair.returnTime: ""}</td>
                             
                         </tr>
                     ))}
