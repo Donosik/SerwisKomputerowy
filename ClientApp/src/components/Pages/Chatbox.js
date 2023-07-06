@@ -69,11 +69,14 @@ function Chatbox() {
                 date: currentDate,
             };
 
+            let msgId
             axios.post('/message', newMessage)
                 .then(response => {
                     const createdMessage = response.data;
                     setMessages([...messages, newMessage]);
                     setInputValue('');
+
+                    msgId=createdMessage
                 })
                 .catch(error => {
                     console.log('Error sending message: ', error);
