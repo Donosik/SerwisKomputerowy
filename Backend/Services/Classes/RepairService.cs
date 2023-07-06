@@ -93,9 +93,9 @@ public class RepairService : IRepairService
         return false;
     }
 
-    public IEnumerable<Repair> GetRepairsForTable()
+    public IEnumerable<Repair> GetRepairsForTable(bool all)
     {
-        IEnumerable<Repair> repairs = unitOfWork.repairs.GetAllRepairsForTable();
+        IEnumerable<Repair> repairs = unitOfWork.repairs.GetAllRepairsForTable(all);
         return repairs;
     }
     

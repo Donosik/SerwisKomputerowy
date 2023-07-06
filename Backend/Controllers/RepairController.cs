@@ -37,10 +37,10 @@ public class RepairController : ControllerBase
         return NotFound();
     }
 
-    [HttpGet("table")]
-    public IActionResult GetRepairsForTable()
+    [HttpGet("table/{all}")]
+    public IActionResult GetRepairsForTable(bool all)
     {
-        IEnumerable<Repair> repairs = repairService.GetRepairsForTable();
+        IEnumerable<Repair> repairs = repairService.GetRepairsForTable(all);
         if (repairs != null)
             return Ok(repairs);
         return NotFound();

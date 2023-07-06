@@ -42,9 +42,12 @@ public class RepairRepository : GenericRepository<Repair>, IRepairRepository
         });
     }
 
-    public IEnumerable<Repair> GetAllRepairsForTable()
+    public IEnumerable<Repair> GetAllRepairsForTable(bool all)
     {
-        return GetRepairsForTable().Where(r=>r.Status==Status.Przyjete).ToList();
+        if(all)
+            return GetRepairsForTable().ToList();
+        else 
+            return GetRepairsForTable().Where(r=>r.Status==Status.Przyjete).ToList();
     }
 
     public IEnumerable<Message> GetMessages(int id)

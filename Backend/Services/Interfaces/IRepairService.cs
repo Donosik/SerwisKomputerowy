@@ -11,7 +11,7 @@ public interface IRepairService
     bool EditRepair(Repair repair);
     bool EditClientId(int idrepair,int idclient);
     bool DeleteRepair(int id);
-    IEnumerable<Repair> GetRepairsForTable();
+    IEnumerable<Repair> GetRepairsForTable(bool all);
     IEnumerable<Message> GetMessagesOfRepair(int id);
     IEnumerable<Repair> GetRepairsOfClient(int clientId);
 }
