@@ -83,11 +83,12 @@ export function DetailsRepair() {
                 <tbody>
                 <tr>
                     <td>{repairData ? repairData.id : ''}</td>
-                    <td>{repairData ? repairData.acceptanceTime : ''}</td>
-                    <td>{repairData ? repairData.returnTime : ''}</td>
+                    <td>{repairData && repairData.acceptanceTime ? repairData.acceptanceTime.slice(0, 10) : ''} </td>
+                    <td>{repairData && repairData.returnTime ? repairData.returnTime.slice(0, 10) : ''} </td>
                     <td>{castToString(repairData.status)}</td>
                     <td>{repairData ? (repairData.isGuarantee === true ? "tak" : "nie") : ''}</td>
-                    <td>{repairData ? repairData.guaranteeTime : '-'}</td>
+                    <td>{repairData && repairData.guaranteeTime ? repairData.guaranteeTime.slice(0, 10) : '-'} </td>
+                   
                 </tr>
                 </tbody>
             </table>
@@ -182,7 +183,7 @@ export function DetailsRepair() {
                 <tr>
                     <td>{repairData.equipment ? repairData.equipment.name : ''}</td>
                     <td>{repairData.equipment ? repairData.equipment.type : ''}</td>
-                    <td>{repairData.equipment ? repairData.equipment.productionDate : ''}</td>
+                    <td>{repairData && repairData.equipment.productionDate ? repairData.equipment.productionDate.slice(0, 10) : ''} </td>
                 </tr>
                 </tbody>
             </table>
