@@ -101,8 +101,9 @@ export function DetailsRepair() {
                     <th>Rola pracowników</th>
                 </tr>
                 {workers.map((worker) => (
+                    worker?
                     <tr key={worker.id}>
-                        <td>{worker.firstName + " " + worker.lastName}</td>
+                        <td>{ worker.firstName + " " + worker.lastName}</td>
                         <td>{(() => {
                             switch (worker.specialization) {
                                 case 0:
@@ -121,7 +122,8 @@ export function DetailsRepair() {
                                     return "odzyskiwanie danych"
                             }
                         })()}</td>
-                    </tr>
+                    </tr>:
+                        <tr><td>Pracownik nie istnieje</td></tr>
                 ))}
             </table>
             <br/>
