@@ -31,7 +31,6 @@ export function SearchMagazine() {
             "/part/isUsed/" + isUsed + "/" + searchString
         );
         setParts(result.data);
-        console.log(result.data);
     };
 
     function removeFromData(index) {
