@@ -4,7 +4,7 @@ import '../Css/EditUser.css';
 import { NavMenu } from "../Components/NavMenu";
 import axios from 'axios';
 
-const RepairTable = () => {
+const RepairTable = ({ onRowButtonClick }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -12,6 +12,9 @@ const RepairTable = () => {
             .then(response => {
                 setData(response.data);
             })
+            .catch(error => {
+                console.log('Error retrieving repair data: ', error);
+            });
     }, []);
 
     return (
@@ -36,7 +39,7 @@ const RepairTable = () => {
                                     <td>{item.client.firstName}</td>
                                     <td>{item.client.lastName}</td>
                                     <td>
-                                       
+                                        <button onClick={() => onRowButtonClick(item.id)}>Otwórz czat</button> 
                                     </td>
                                 </tr>
                             ))}
@@ -47,7 +50,7 @@ const RepairTable = () => {
         </>
     );
     }
-
+   
 function Chatbox() {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
@@ -69,12 +72,18 @@ function Chatbox() {
     };
 
     const handleRowButtonClick = (rowId) => {
-        console.log('Button pressed for ID: ', rowId);
-    }
+        axios.get(`/message/${rowId}`)
+            .then(response => {
+                setMessages(response.data);
+            })
+            .catch(error => {
+                console.log('Error retrieving messages:', error);
+            });
+    };
 
     return (
         <>
-            <RepairTable/>
+            <RepairTable onRowButtonClick={handleRowButtonClick} />
             <div className="chatbox">
                 <div className="messages">
                     {messages.map((message) => (
