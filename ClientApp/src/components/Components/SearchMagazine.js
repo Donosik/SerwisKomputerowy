@@ -31,13 +31,12 @@ export function SearchMagazine() {
             "/part/isUsed/" + isUsed + "/" + searchString
         );
         setParts(result.data);
-        console.log(result.data);
     };
 
     function removeFromData(index) {
         const newData = parts.filter((_, i) => i !== index);
         setParts(newData);
-        window.location.reload();
+        window.location.reload()
     }
 
     return (
