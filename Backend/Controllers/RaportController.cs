@@ -29,31 +29,33 @@ public class RaportController : ControllerBase
     [FromQuery(Name = "clientID")] int clientID = -1)
     {
 
-        IEnumerable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetAll();
-
+        IQueryable<Backend.Entities.Action> repairQuery = unitOfWork.actions.GetQuery();
+        repairQuery.Include(a => a.Repair.Client);
+        repairQuery.Include(a => a.Repair.Parts);
+        repairQuery.Include(a => a.Repair.Equipment);
 
         // Dodaj warunek na daty początkową i końcową
-        repairQuery = repairQuery.Where(r => r.Repair.ReturnTime >= startDate && r.Repair.ReturnTime <= endDate);
+        repairQuery.Where(r => r.Repair.ReturnTime >= startDate && r.Repair.ReturnTime <= endDate);
 
         // Dodaj warunek na numer pracownika
         if (workerID != -1)
         {
-            repairQuery = repairQuery.Where(r => r.Worker.Id == workerID);
+            repairQuery.Where(r => r.Worker.Id == workerID);
         }
 
         // Dodaj warunek na numer naprawy
         if (repairID != -1)
         {
-            repairQuery = repairQuery.Where(r => r.Repair.Id == repairID);
+            repairQuery.Where(r => r.Repair.Id == repairID);
         }
 
         // Dodaj warunek na numer klienta
         if (clientID != -1)
         {
-            repairQuery = repairQuery.Where(r => r.Repair.Client.Id == clientID);
+            repairQuery.Where(r => r.Repair.Client.Id == clientID);
         }
-
-        List<Backend.Entities.Action> reportData = repairQuery.ToList();
+    
+        IEnumerable<Backend.Entities.Action> reportData = repairQuery.ToList();
 
         return Ok(reportData);
     }
