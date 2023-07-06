@@ -92,6 +92,18 @@ export function EditRepair() {
         inputsToRepairData()
         fun()
     }
+
+    const handleActionSubmit = (event) => {
+        event.preventDefault()
+        const fun = async () => {
+            const desc = inputs.description
+            const response = await axios.post('/action', { "description":desc })
+            await axios.put('action/' + response.data + '/' + id + '/' + inputs.workerId)
+            navigate('/naprawy')
+        }
+        //inputsToActionData()
+        fun()
+    }
     const handlePartSubmit = (event) => {
         event.preventDefault()
         const fun = async () => {
@@ -106,7 +118,6 @@ export function EditRepair() {
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    return (
     return (
         <>
             <NavMenu />
@@ -166,10 +177,21 @@ export function EditRepair() {
                         </label>
                         <button className="button-class" onClick={handleActionSubmit}>Dodaj</button>
                     </form>
+                    <h4>WYMIEŃ CZĘŚĆ</h4>
+                    <form>
+                        <label>
+                            Numer Seryjny części:
+                            <input
+                                type="text"
+                                name="serialNumber"
+                                value={inputs.serialNumber || ""}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <button className="button-class" onClick={handlePartSubmit}>Wymień</button>
                     </form>
                 </div>
             </div>
         </>
     )
-}
 }
