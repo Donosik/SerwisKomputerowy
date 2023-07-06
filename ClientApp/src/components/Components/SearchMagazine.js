@@ -37,7 +37,7 @@ export function SearchMagazine() {
     function removeFromData(index) {
         const newData = parts.filter((_, i) => i !== index);
         setParts(newData);
-        window.location.reload();
+        window.location.reload()
     }
 
     return (

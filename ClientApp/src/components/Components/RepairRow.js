@@ -57,8 +57,7 @@ export function RepairRow({ repair, removeFromData }) {
         const companyName = "SerwisKomputerowy";
         const companyAddress = "ul. Kwiatowa 3, Chorzów";
         const companyNIP = "1234567890"; // Wymyślany numer NIP dla firmy
-
-        console.log(repairData)
+        
         // Informacje o kliencie
         const customerName = (repairData.client ? repairData.client.firstName + " " + repairData.client.lastName : '')
 
@@ -136,6 +135,10 @@ export function RepairRow({ repair, removeFromData }) {
         // Pamietac ze na backendzie tez sa te wartosci
     }
 
+    useEffect(()=>{
+        console.log(repair)
+    },[])
+    
     return (
         <tr>
             <td>{repair.id}</td>

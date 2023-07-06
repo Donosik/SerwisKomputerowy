@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import axios, {get} from "axios";
 
 export function CreateRenderer() {
-
+    
     const [inputs, setInputs] = useState({})
     const [clients, setClients] = useState([])
     const [choosenClient, setChoosenClient] = useState("")
@@ -54,12 +54,13 @@ export function CreateRenderer() {
     async function createRepair()
     {
 
-        const responseEquipment = axios.post('/equipment', {
+        const responseEquipment = await axios.post('/equipment', {
             "type": inputs.partType,
             "name": inputs.name,
             "productionDate": inputs.productionDate
         })
         const eqId = responseEquipment.data
+        console.log(responseEquipment)
 
         const type=parseInt(inputs.type)
         const status=parseInt(inputs.status)
