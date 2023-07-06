@@ -91,7 +91,9 @@ export function RepairRow({ repair, removeFromData }) {
             body: partsData,
         });
 
-        let isTableGenerated = false; 
+        let isTableGenerated = false; // Dodaj zmienną logiczną dla sprawdzenia, czy tabela została już wygenerowana
+
+// Sprawdź warunek, czy tabela została już wygenerowana
         if (!isTableGenerated) {
             doc.autoTable({
                 startY: 200,
@@ -102,8 +104,10 @@ export function RepairRow({ repair, removeFromData }) {
             });
 
             isTableGenerated = true;
+
+
             doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
-            doc.save("Faktura.pdf");
+        doc.save("Faktura.pdf");
 
     };
     function editElement() {
@@ -152,4 +156,5 @@ export function RepairRow({ repair, removeFromData }) {
             </td>
         </tr>
     )
+}
 }
