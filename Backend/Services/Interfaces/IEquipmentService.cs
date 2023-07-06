@@ -8,5 +8,6 @@ public interface IEquipmentService
     Equipment GetEquipment(int id);
     bool CreateEquipment(Equipment equipment);
     bool EditEquipment(Equipment equipment);
+    bool EditRepairToEquipment(int eqId, int repairId);
     bool DeleteEquipment(int id);
 }
