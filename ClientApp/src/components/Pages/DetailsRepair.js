@@ -98,15 +98,42 @@ export function DetailsRepair() {
             <table>
                 <thead>
                 <tr>
+                    <th>Pracownik</th>
+                    <th>Rola pracowników</th>
                     <th>Czynności</th>
                 </tr>
                 </thead>
                 <tbody>
-                {actions.map((action)=>(
-                    <tr key={action.id}>
-                        <td>{action ? action.description : ''}</td>
-                    </tr>
+                <tr>
+                {workers.map((worker) => (
+                        <td key = {worker.id}>{worker.firstName + " " + worker.lastName}</td>
                 ))}
+                    {workers.map((worker) => (
+                        <td key = {worker.id}>{(() => {
+                            switch (worker.specialization) {
+                                case 0:
+                                    return "elektronik"
+                                case 1:
+                                    return "drukarki"
+                                case 2:
+                                    return "AGD"
+                                case 3:
+                                    return "telefony"
+                                case 4:
+                                    return "oprogramowanie"
+                                case 5:
+                                    return "sieci komputerowe"
+                                case 6:
+                                    return "odzyskiwanie danych"
+                            }
+                        })()}</td>
+                    ))}
+                {actions.map((action)=>(
+                    <td key={action.id}>
+                        {action ? action.description : ''}
+                    </td>
+                ))}
+                </tr>
                 </tbody>
             </table>
             <br/>
@@ -127,13 +154,15 @@ export function DetailsRepair() {
                     <tr key={part.id}>
                         <td>{part ? part.serialNumber : ''}</td>
                         <td>{part ? part.partName : ''}</td>
-                        <td>{part ? part.cost : ''}</td>
-                        <td>{part ? part.costOfWork : ''}</td>
-                        <td>{part ? part.cost + part.costOfWork : ''}</td>
+                        <td>{part ? part.cost + " PLN": ''}</td>
+                        <td>{part ? part.costOfWork + " PLN": ''}</td>
                     </tr>
                 ))}
                 <tr>
-                    <td>RAZEM: {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum, 0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum, 0) : ''}</td>
+                    <td></td>
+                    <td></td>
+                    <td>RAZEM:</td>
+                    <td> {parts ? parts.map(part => part.cost).reduce((cost, sum) => cost + sum, 0) + parts.map(part => part.costOfWork).reduce((costOfWork, sum) => costOfWork + sum, 0) + " PLN" : ''}</td>
                 </tr>
                 </tbody>
             </table>
@@ -177,44 +206,7 @@ export function DetailsRepair() {
                 </tr>
                 </tbody>
             </table>
-
             <br/>
-            <hr/>
-            <p> INFORMACJE O PRACOWNIKACH <br/></p>
-            <hr/>
-            <table>
-                <thead>
-                <tr className="table-title">
-                    <th>Pracownik</th>
-                    <th>Rola pracowników</th>
-                </tr>
-                </thead>
-                <tbody>
-                {workers.map((worker) => (
-                    <tr key={worker.id}>
-                        <td>{worker.firstName + " " + worker.lastName}</td>
-                        <td>{(() => {
-                            switch (worker.specialization) {
-                                case 0:
-                                    return "elektronik"
-                                case 1:
-                                    return "drukarki"
-                                case 2:
-                                    return "AGD"
-                                case 3:
-                                    return "telefony"
-                                case 4:
-                                    return "oprogramowanie"
-                                case 5:
-                                    return "sieci komputerowe"
-                                case 6:
-                                    return "odzyskiwanie danych"
-                            }
-                        })()}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
         </>
     )
 }

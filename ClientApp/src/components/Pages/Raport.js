@@ -77,13 +77,13 @@ export function Raport() {
     };
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
-
+        doc.setFontSize(12);
         const tableData = reportData.map((row) => [
             row.worker.firstName + " " + row.worker.lastName,
             row.repair.id,
             row.repair.client.firstName + " " + row.repair.client.lastName,
-            row.repair.acceptanceTime,
-            row.repair.returnTime,
+            row.repair.acceptanceTime.substring(0,10),
+            row.repair.returnTime.substring(0,10),
         ]);
 
         doc.autoTable({
