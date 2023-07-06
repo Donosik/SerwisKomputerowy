@@ -27,7 +27,6 @@ export function SearchRenderer() {
             result=await axios.get('/repair/client/'+myId)
         }
         await setData(result.data)
-        console.log(data)
     }
 
     function removeFromData(index)

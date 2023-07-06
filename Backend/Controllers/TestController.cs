@@ -277,14 +277,16 @@ public class TestController : ControllerBase
         message1.Content = "tresc wiadomosc1";
         message1.Date = DateTime.Now;
         message1.User = user1;
-        //messageService.CreateMessage(message1);
+        message1.Repair = repair1;
+        messageService.CreateMessage(message1);
 
         //test message2
         Message message2 = new Message();
-        message1.Content = "wiadomka2";
-        message1.Date = DateTime.Now;
-        message1.User = user2;
-        //messageService.CreateMessage(message2);
+        message2.Content = "wiadomka2";
+        message2.Date = DateTime.Now;
+        message2.User = user1;
+        message2.Repair = repair1;
+        messageService.CreateMessage(message2);
 
         Action action=new Action();
         action.Description = "TEST";

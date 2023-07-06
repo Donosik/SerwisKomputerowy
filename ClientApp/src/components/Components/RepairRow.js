@@ -134,10 +134,6 @@ export function RepairRow({ repair, removeFromData }) {
         //TODO: dorobic statusy
         // Pamietac ze na backendzie tez sa te wartosci
     }
-
-    useEffect(()=>{
-        console.log(repair)
-    },[])
     
     return (
         <tr>

@@ -84,8 +84,8 @@ function Chatbox() {
 
 
 
-    const handleRowButtonClick = (rowId) => {
-        axios.get(`/repair/${rowId}/messages`)
+    const handleRowButtonClick = (RepairId) => {
+        axios.get(`/repair/${RepairId}/messages`)
             .then(response => {
                 setMessages(response.data);
             })
