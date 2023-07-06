@@ -81,7 +81,6 @@ export function CreateRenderer() {
                 Rok produkcji sprzętu: <br/> <br/>
                 
                 <p>INFORMACJE O NAPRAWIE <br/></p>
-                //TODO:notatka o naprawie
                 <label>
                     Typ naprawy:
                     <select name="type" value={inputs.type || ""} onChange={handleChange}>
