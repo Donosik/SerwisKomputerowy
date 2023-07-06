@@ -90,17 +90,20 @@ export function RepairRow({ repair, removeFromData }) {
             ],
             body: partsData,
         });
-        doc.autoTable({
-            startY: 200,
-            head: [
-                ["Razem"],
-            ],
-            body: priceData,
-        });
 
+        let isTableGenerated = false; 
+        if (!isTableGenerated) {
+            doc.autoTable({
+                startY: 200,
+                head: [
+                    ["Razem"],
+                ],
+                body: priceData,
+            });
 
-        doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
-        doc.save("Faktura.pdf");
+            isTableGenerated = true;
+            doc.text("Podpis osoby upowaznionej: ....................................", 20, 240);
+            doc.save("Faktura.pdf");
 
     };
     function editElement() {
