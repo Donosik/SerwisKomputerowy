@@ -49,8 +49,21 @@ export function CreateRenderer() {
 
     async function createRepair()
     {
-        console.log(inputs)
-        const response= await axios.post('/repair',{inputs})
+        const type=parseInt(inputs.type)
+        const status=parseInt(inputs.status)
+        let isGuarantee
+        if(inputs.isGuarantee==="off")
+            isGuarantee=false
+        else 
+            isGuarantee=true
+        const response= await axios.post('/repair',{
+            "type":type,
+            "isGuarantee":isGuarantee,
+            "guaranteeTime":inputs.guaranteeTime,
+            "acceptanceTime":inputs.acceptanceTime,
+            "returnTime":inputs.returnTime,
+            "status":status
+        })
         await axios.put('/repair/'+response.data+'/'+choosenClient)
     }
     function handleSubmit(event) {
@@ -68,7 +81,6 @@ export function CreateRenderer() {
                 Rok produkcji sprzętu: <br/> <br/>
                 
                 <p>INFORMACJE O NAPRAWIE <br/></p>
-                //TODO:notatka o naprawie
                 <label>
                     Typ naprawy:
                     <select name="type" value={inputs.type || ""} onChange={handleChange}>
@@ -118,11 +130,10 @@ export function CreateRenderer() {
                     </select>
                 </label>
                 <label>
-                    //TODO: wyświetlić w nawiasie koło imienia i nazwiska NICK!!!
                     Wybierz klienta:
                     <select name="clientId" value={choosenClient || ""} onChange={changeClient}>
                         {clients.map((client, id) => (
-                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
+                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName + ' ('+client.user.login+')'}</option>
                         ))}
                     </select>
                 </label>

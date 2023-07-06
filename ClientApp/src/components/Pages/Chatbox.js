@@ -12,6 +12,9 @@ const RepairTable = ({ onRowButtonClick }) => {
             .then(response => {
                 setData(response.data);
             })
+            .catch(error => {
+                console.log('Error retrieving repair data: ', error);
+            });
     }, []);
 
     return (
@@ -47,7 +50,7 @@ const RepairTable = ({ onRowButtonClick }) => {
         </>
     );
     }
-
+   
 function Chatbox() {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
@@ -57,26 +60,39 @@ function Chatbox() {
     };
 
     const handleSendMessage = () => {
+
         if (inputValue.trim() !== '') {
+            const currentDate = new Date();
             const newMessage = {
-                id: messages.length + 1,
-                text: inputValue,
+              //  id: messages.length + 1,
+                content: inputValue,
+                date: currentDate,
             };
 
-            setMessages([...messages, newMessage]);
-            setInputValue('');
+            axios.post('/message', newMessage)
+                .then(response => {
+                    const createdMessage = response.data;
+                    setMessages([...messages, newMessage]);
+                    setInputValue('');
+                })
+                .catch(error => {
+                    console.log('Error sending message: ', error);
+                });
+
         }
     };
 
+
+
     const handleRowButtonClick = (rowId) => {
-        axios.get('/message')
+        axios.get(`/repair/${rowId}/messages`)
             .then(response => {
-            setMessages(response.data);
-        })
+                setMessages(response.data);
+            })
             .catch(error => {
                 console.log('Error retrieving messages:', error);
             });
-    }
+    };
 
     return (
         <>
@@ -85,7 +101,7 @@ function Chatbox() {
                 <div className="messages">
                     {messages.map((message) => (
                         <div key={message.id} className="message">
-                            {message.text}
+                            {message.userId + ": " + message.content}
                         </div>
                     ))}
                 </div>
