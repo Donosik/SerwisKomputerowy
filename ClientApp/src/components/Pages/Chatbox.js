@@ -4,7 +4,7 @@ import '../Css/EditUser.css';
 import { NavMenu } from "../Components/NavMenu";
 import axios from 'axios';
 
-const RepairTable = () => {
+const RepairTable = ({ onRowButtonClick }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const RepairTable = () => {
                                     <td>{item.client.firstName}</td>
                                     <td>{item.client.lastName}</td>
                                     <td>
-                                       
+                                        <button onClick={() => onRowButtonClick(item.id)}>Otwórz czat</button> 
                                     </td>
                                 </tr>
                             ))}
@@ -69,12 +69,18 @@ function Chatbox() {
     };
 
     const handleRowButtonClick = (rowId) => {
-        console.log('Button pressed for ID: ', rowId);
+        axios.get('/message')
+            .then(response => {
+            setMessages(response.data);
+        })
+            .catch(error => {
+                console.log('Error retrieving messages:', error);
+            });
     }
 
     return (
         <>
-            <RepairTable/>
+            <RepairTable onRowButtonClick={handleRowButtonClick} />
             <div className="chatbox">
                 <div className="messages">
                     {messages.map((message) => (
