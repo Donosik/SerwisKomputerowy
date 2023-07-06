@@ -99,8 +99,8 @@ function Chatbox() {
             <RepairTable onRowButtonClick={handleRowButtonClick} />
             <div className="chatbox">
                 <div className="messages">
-                    {messages.map((message) => (
-                        <div key={message.id} className="message">
+                    {messages.map((message, index) => (
+                        <div key={index} className="message">
                             {message.userId + ": " + message.content}
                         </div>
                     ))}
