@@ -6,7 +6,7 @@ namespace SerwisKomputerowy.Backend.Entities;
 public enum RepairType
 {
     Zwykla,
-    Niezwykla
+    Ekspresowa
 }
 
 //TODO: Napisać statusy naprawy

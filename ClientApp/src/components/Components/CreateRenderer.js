@@ -122,7 +122,7 @@ export function CreateRenderer() {
                     Typ naprawy:
                     <select name="type" value={inputs.type || ""} onChange={handleChange}>
                         <option value="0">zwykła</option>
-                        <option value="1">niezwykła</option>
+                        <option value="1">ekspresowa</option>
                     </select>
                 </label>
                 <label>
