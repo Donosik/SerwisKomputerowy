@@ -131,11 +131,10 @@ export function CreateRenderer() {
                     </select>
                 </label>
                 <label>
-                    //TODO: wyświetlić w nawiasie koło imienia i nazwiska NICK!!!
                     Wybierz klienta:
                     <select name="clientId" value={choosenClient || ""} onChange={changeClient}>
                         {clients.map((client, id) => (
-                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName}</option>
+                            <option key={id} value={client.id}>{client.firstName + ' ' + client.lastName + ' ('+client.user.login+')'}</option>
                         ))}
                     </select>
                 </label>
